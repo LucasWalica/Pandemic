@@ -19,7 +19,6 @@ export class Ciudad{
         this.eAmarillo=eAmarillo;
      }
 
-
      isInfected(){
         if(this.eAmarillo==0 || this.eAzul==0 || this.eRojo==0 || this.eVerde==0){
             return false;
@@ -41,5 +40,31 @@ export class Ciudad{
             }
         }
         return true;
+     }
+
+     communicateWith(c:Ciudad){
+        if(this.centroInvestigacion && c.centroInvestigacion){
+            return true;
+        }
+        for(var ciudad of this.listCiudadesColindandes){
+            if(c==ciudad){
+                return true;
+            }
+        }
+        return false;
+     }
+
+
+     quitarPersonaje(p:Personaje){
+        var count = 0;
+        for(var personaje of this.listPersonajes){
+            if(p==personaje){
+                delete this.listPersonajes[count];
+            }
+            count++;
+        }
+     }
+     aniadiPersonaje(p:Personaje){
+        this.listPersonajes.push(p);
      }
 }   
