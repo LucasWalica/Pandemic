@@ -1,3 +1,5 @@
+import { Personaje } from "./personaje.model";
+
 export class Ciudad{
     listCiudadesColindandes:Ciudad[];
     centroInvestigacion:boolean=false;
@@ -18,11 +20,23 @@ export class Ciudad{
      }
 
 
-     isInfected(){}
-     isInfectedTotally(){}
+     isInfected(){
+        if(this.eAmarillo==0 || this.eAzul==0 || this.eRojo==0 || this.eVerde==0){
+            return false;
+        }
+        return true;
+     }
+
+     isInfectedTotally(){
+        if(this.eAmarillo==4 || this.eAzul==4 || this.eRojo==4 || this.eVerde==4){
+            return true;
+        }
+        return false;
+     }
+     
      allCitiesAreInfected(){
-        for(Ciudad c:this.listCiudadesColindandes){
-            if(!c.isInfected()){
+        for(var city of this.listCiudadesColindandes){
+            if(!city.isInfected()){
                 return false;
             }
         }
