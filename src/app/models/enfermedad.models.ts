@@ -11,6 +11,9 @@ export class Enfermedad{
         this.infeccionAColindandes=infeccionAColindandes;
     }
 
+
+    // para estos dos metodos hace falta establecer una forma de aumentar el numero en las ciudades de una determinada enfermedad o
+    // en cada enfermedad guardar todas las ciudades infectadas con su numero de infeccion (a mi parecer)
     transmitirse(cInicio:Ciudad , cExpansion:Ciudad){
 
     }
@@ -18,4 +21,10 @@ export class Enfermedad{
     aumentarEnCiudad(ciudad:Ciudad){
         
     }
+
+    // posible refactorizacion
+    curacion(curado:number){
+        this.turnosParaCurar-=curado;
+    }
+    
 }

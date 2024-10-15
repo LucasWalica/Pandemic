@@ -2,21 +2,27 @@ import { Personaje } from "./personaje.model";
 
 export class Ciudad{
     listCiudadesColindandes:Ciudad[];
-    centroInvestigacion:boolean=false;
     listPersonajes:Personaje[]=[] as Personaje[];
+    centroInvestigacion:boolean=false;
+    coordenadasX:number;
+    coordenadasY:number;
     eVerde:number=0;
     eRojo:number=0;
     eAzul:number=0;
     eAmarillo:number=0;
 
     constructor(listCiudadesColindantes:Ciudad[], centroInvestigacion:boolean,
-     listPersonajes:Personaje[], eVerde:number,eRojo:number,eAzul:number,eAmarillo:number){
+        listPersonajes:Personaje[], eVerde:number,eRojo:number,eAzul:number,eAmarillo:number,
+        coordenadasX:number, coordenadasY:number){
         this.listCiudadesColindandes=listCiudadesColindantes;
         this.centroInvestigacion=centroInvestigacion;
         this.listPersonajes=listPersonajes;
         this.eVerde=eVerde;
         this.eRojo=eRojo;
         this.eAmarillo=eAmarillo;
+        this.eAzul=eAzul;
+        this.coordenadasX=coordenadasX;
+        this.coordenadasY=coordenadasY;
      }
 
      isInfected(){
