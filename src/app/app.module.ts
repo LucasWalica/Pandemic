@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GamePandemicComponent } from './components/game-pandemic/game-pandemic.component';
 import { LogInPandemicComponent } from './components/log-in-pandemic/log-in-pandemic.component';
-import { InicioComponent } from './componets/inicio/inicio.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
