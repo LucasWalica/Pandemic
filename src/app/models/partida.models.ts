@@ -16,6 +16,9 @@ export class Partida{
         if(cInicio.communicateWith(cFinal)){
             cInicio.quitarPersonaje(p);
             cFinal.aniadiPersonaje(p);
+            p.movido=true;
         }
-    }      
+    }  
+    
+    // implementar pasar turno y resetar todo al hacerlo 
 }

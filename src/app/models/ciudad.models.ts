@@ -73,4 +73,16 @@ export class Ciudad{
      aniadiPersonaje(p:Personaje){
         this.listPersonajes.push(p);
      }
+
+     especialistaEnCuarentenasEstaPresente(){
+        for(var personaje of this.listPersonajes){
+            if(personaje.id==1){
+                return true;
+            }
+        }
+        return false;
+     }
+
+     
+
 }   
