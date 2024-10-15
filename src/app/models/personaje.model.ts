@@ -14,7 +14,6 @@ export class Personaje{
         this.specialSkill=specialSkill;
         this.movido=movido;
     }
-
     // no se le puede pasar partida
     getCiudadActual(p:Partida):Ciudad|null{
         for(var ciudad of p.listCiudades){
@@ -26,7 +25,6 @@ export class Personaje{
         }
         return null;
     }
-
 }
 // id = 1
 export class EspecialistaEnCuarentena extends Personaje{
