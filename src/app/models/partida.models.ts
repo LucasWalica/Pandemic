@@ -20,7 +20,7 @@ export class Partida{
             this.jugadas-=1;
         }
     }  
-     
+    
 
     // testear
     pasarTurno(){        

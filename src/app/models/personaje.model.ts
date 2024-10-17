@@ -14,7 +14,6 @@ export class Personaje{
         this.specialSkill=specialSkill;
         this.movido=movido;
     }
-    // no se le puede pasar partida
     getCiudadActual(p:Partida):Ciudad|null{
         for(var ciudad of p.listCiudades){
             for(var personaje of ciudad.listPersonajes){
@@ -39,9 +38,8 @@ export class EspecialistaEnCuarentena extends Personaje{
 // id = 2
 export class Medico extends Personaje{
     turnoComienzo:number=0;
-    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number){
+    constructor(id:number, name:string, specialSkill:string, movido:boolean){
         super(id, name, specialSkill, movido);
-        this.turnoComienzo=turnoComienzo;
     }
     // funcion asincrona?
     override reducirACeroEnfermedad(c:Ciudad, p:Partida){
@@ -67,14 +65,12 @@ export class Medico extends Personaje{
     }
 }
 // id = 3
-// bloquear X turnos
 export class BobElConstructor extends Personaje{
 
     turnoComienzo:number=0;
 
-    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number){
+    constructor(id:number, name:string, specialSkill:string, movido:boolean){
         super(id, name, specialSkill, movido);
-        this.turnoComienzo=turnoComienzo;
     }
 
     override construirCentroInvestigacion(c:Ciudad, p:Partida){
