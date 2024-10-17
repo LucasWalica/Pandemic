@@ -26,6 +26,7 @@ export class Personaje{
     }
     reducirACeroEnfermedad(c:Ciudad, p:Partida):boolean|void{}
     construirCentroInvestigacion(c:Ciudad, p:Partida):boolean|void{}
+    investigar(e:Enfermedad, p:Partida){}
     
 }
 // id = 1
@@ -100,7 +101,7 @@ export class Investigador extends Personaje{
     constructor(id:number, name:string, specialSkill:string, movido:boolean){
         super(id, name, specialSkill, movido);
     }
-    investigar(e:Enfermedad, p:Partida){
+    override investigar(e:Enfermedad, p:Partida){
         var c:Ciudad|null=this.getCiudadActual(p);
         if(c?.centroInvestigacion==true){
             e.turnosParaCurar-=20;
