@@ -25,6 +25,9 @@ export class Personaje{
         }
         return null;
     }
+    reducirACeroEnfermedad(c:Ciudad, p:Partida):boolean|void{}
+    construirCentroInvestigacion(c:Ciudad, p:Partida):boolean|void{}
+    
 }
 // id = 1
 export class EspecialistaEnCuarentena extends Personaje{
@@ -35,45 +38,65 @@ export class EspecialistaEnCuarentena extends Personaje{
 }
 // id = 2
 export class Medico extends Personaje{
-    turnoComienzo:number;
+    turnoComienzo:number=0;
     constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number){
         super(id, name, specialSkill, movido);
         this.turnoComienzo=turnoComienzo;
     }
     // funcion asincrona?
-    reducirACeroEnfermedad(c:Ciudad, p:Partida){
-        const tC = p.counterTurnos;
-        this.turnoComienzo = tC;
+    override reducirACeroEnfermedad(c:Ciudad, p:Partida){
+
+        if(this.turnoComienzo=0){
+            const tC = p.counterTurnos;
+            this.turnoComienzo = tC;
+            p.jugadas-=1;
+        }
         while(p.counterTurnos<this.turnoComienzo+4){
             this.movido=true;
+            return false;
         }
         if(p.counterTurnos=this.turnoComienzo+4){
             c.eAmarillo=0;
             c.eAzul=0;
             c.eRojo=0;
             c.eVerde=0;
+            this.turnoComienzo=0;
+            return true;
         }
+        return true;
     }
 }
 // id = 3
 // bloquear X turnos
 export class BobElConstructor extends Personaje{
-    turnoComienzo:number;
+
+    turnoComienzo:number=0;
+
     constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number){
         super(id, name, specialSkill, movido);
         this.turnoComienzo=turnoComienzo;
     }
-    construirCentroInvestigacion(c:Ciudad, p:Partida){
+
+    override construirCentroInvestigacion(c:Ciudad, p:Partida){
+        
         if(c.centroInvestigacion==false){
-            const tC = p.counterTurnos;
-        this.turnoComienzo = tC;
-        while(p.counterTurnos<this.turnoComienzo+4){
-            this.movido=true;
-        }
-        if(p.counterTurnos=this.turnoComienzo+4){
+
+            if(this.turnoComienzo=0){
+                const tC = p.counterTurnos;
+                this.turnoComienzo = tC;
+            }
+
+            while(p.counterTurnos<this.turnoComienzo+4){
+                this.movido=true;
+                return false;
+            }
+            if(p.counterTurnos=this.turnoComienzo+4){
                 c.centroInvestigacion=true;
+                this.turnoComienzo=0;
+                return true;
             }
         }
+        return true;
     }
 }
 // id = 4
