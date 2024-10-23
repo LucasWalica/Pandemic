@@ -4,6 +4,7 @@ import { GamePandemicComponent } from './components/game-pandemic/game-pandemic.
 import { LogInPandemicComponent } from './components/log-in-pandemic/log-in-pandemic.component';
 import { RegisterInPandemicComponent } from './components/register-in-pandemic/register-in-pandemic.component';
 import { ProfileComponent } from './components/profile/profile.component';
+
 export const routes: Routes = [
     {path:'', component:LogInPandemicComponent},
     {path:'register/', component:RegisterInPandemicComponent},
