@@ -71,6 +71,7 @@ section{
     overflow: hidden;
     z-index: -1001;
   }
+  /*
   section .air{
     position: absolute;
     bottom: 0;
@@ -80,6 +81,7 @@ section{
     background: url(../../../assets/imagenes/anp5tx3t.png);
     background-size: 1000px 100px
   }
+  */
   section .air.air1{
     animation: wave 30s linear infinite;
     z-index: -1000;
