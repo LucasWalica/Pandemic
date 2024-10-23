@@ -7,8 +7,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
     {path:'', component:LogInPandemicComponent},
-    {path:'register/', component:RegisterInPandemicComponent},
-    {path:'home/', component:InicioComponent},
-    {path:'game/', component:GamePandemicComponent},
-    {path:'profile/', component:ProfileComponent},
+    {path:'register', component:RegisterInPandemicComponent},
+    {path:'home', component:InicioComponent},
+    {path:'game', component:GamePandemicComponent},
+    {path:'profile', component:ProfileComponent},
 ];
