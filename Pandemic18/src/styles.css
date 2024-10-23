@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*cambiar si es necesario*/
+body{
+    height: 100vh;
+    background-color: black;
+}
