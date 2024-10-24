@@ -12,7 +12,7 @@ export class LogInPandemicComponent {
 
   constructor(private router: Router) { }
   IrAInicio() {
-    this.router.navigate(['profile']);
+    this.router.navigate(['home']);
   }
   IrARegistrer(){
     this.router.navigate(['register']);
