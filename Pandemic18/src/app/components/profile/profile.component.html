@@ -30,14 +30,14 @@
     <div class="grid grid-cols-3 sm:grid-cols-3 md:flex md:flex-row md:justify-center sm:gap-0 gap-5 
                 bg-emerald-600 md:ml-10 md:mr-10 mt-2 m-4 text-center p-4 rounded-md">
         <div>
-            <button class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+            <button (click)="goToInicio()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
             bg-emerald-950 text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Inicio</button>
         </div>
         <div>
-            <button class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+            <button (click)="goLogout()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
             bg-emerald-950 text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6 
             duration-150 cursor-pointer hover:bg-emerald-200 

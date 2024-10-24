@@ -1,0 +1,27 @@
+<div class="fondo">
+    <div class="cuadroInicio">
+        <div class="log-in">
+            <div class="Nick">
+                <p>Nombre de usuario</p>
+                <input type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+            </div>
+            <div class="Nick">
+                <p>email</p>
+                <input type="email" class="email" name="email" placeholder="ingrese su correo"><br><br>
+            </div>
+            <div class="contraseña">
+                <p>Contraseña</p>
+                <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+            </div>
+            <div class="contraseña">
+                <p>Repetir Contraseña</p>
+                <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+            </div>
+            <div class="enter" (click)="IrALogin()" routerLink="/home">Registrar</div>
+        </div>
+        <div class="fuera-log">
+            <span class="registar" type="boton" (click)="IrALogin()">Login</span>
+            <span class="olvide" type="boton" routerLink>Olvide mi contraseña</span>
+        </div>
+    </div>
+</div>
