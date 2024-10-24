@@ -1,1 +1,19 @@
-<p>log-in-pandemic works!</p>
+<div class="fondo">
+    <div class="cuadroInicio">
+        <div class="log-in">
+            <div class="Nick">
+                <p>Nombre de usuario</p>
+                <input type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+            </div>
+            <div class="contraseña">
+                <p>Contraseña</p>
+                <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+            </div>
+            <div class="enter" (click)="IrAInicio()" routerLink="/home">Entrar</div>
+        </div>
+        <div class="fuera-log">
+            <span class="registar" type="boton" (click)="IrARegistrer()">Registrar</span>
+            <span class="olvide" type="boton" routerLink>Olvide mi contraseña</span>
+        </div>
+    </div>
+</div>

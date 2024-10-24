@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in-pandemic',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './log-in-pandemic.component.css'
 })
 export class LogInPandemicComponent {
+
+  constructor(private router: Router) { }
+  IrAInicio() {
+    this.router.navigate(['home']);
+  }
+  IrARegistrer(){
+    this.router.navigate(['register']);
+  }
 
 }
