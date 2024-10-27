@@ -24,6 +24,12 @@ export class ProfileComponent implements OnInit {
     this.profilePics=this.profileData.pics;
   }
 
+  selectPic(src:string){
+    this.profile.profilePic=src;
+    this.isVisible=false;
+    this.profileData.saveProfile(this.profile);
+  }
+
   setVisible(){
     this.isVisible=true;
   }
@@ -35,4 +41,5 @@ export class ProfileComponent implements OnInit {
   goLogout(){
     this.router.navigate([''])
   }
+
 }

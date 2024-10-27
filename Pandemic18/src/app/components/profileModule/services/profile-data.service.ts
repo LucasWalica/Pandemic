@@ -43,8 +43,11 @@ export class ProfileDataService {
   provisionalProfile:Profile = new Profile("Test", "", 1, 10, 2);
 
 
-  selectProfilePic(){
-
+  saveProfile(p:Profile){
+    this.profile=p;
+  }
+  getProfile(){
+    return this.profile;
   }
 
 
