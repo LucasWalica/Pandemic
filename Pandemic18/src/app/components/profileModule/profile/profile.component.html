@@ -13,9 +13,10 @@
                 <div></div>
             </div>
             <!--Picture-->
-            <div class="flex self-center justify-center">
-                <img class="rounded-full border-2" src="../../../../public/buttonssets/portraits-64px/portrait10-4x.png" alt="" height="256px" width="256px">
-            </div>
+            <a class="flex self-center justify-center cursor-pointer hover:[&>*]:border-black duration-150"
+                (click)="setVisible()">
+                <img class="rounded-full border-2" src="{{profile.profilePic}}" alt="" height="256px" width="256px">
+            </a>
         </div>
         <!--Profile data add more rows if needed-->
         <div class="flex flex-col text-center justify-center text-xl m-4">
@@ -52,3 +53,15 @@
         </div>
     </div>
 </div>
+
+
+@if(this.isVisible){
+
+    <div class="grid grid-cols-3">
+        @for(pic of this.profilePics; track pic.src){
+            <img class="rounded-full border-2" src="{{pic.src}}" alt="" height="256px" width="256px">
+        } @empty {
+            There are no items.
+        }
+    </div>
+}
