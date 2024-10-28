@@ -1,12 +1,12 @@
 
 export class Profile{
     name:string;
-    profilePic:string;
+    profilePic:string|null;
     rankingGlobal:number;
     wins:number;
     loses:number;
 
-    constructor(name:string, profilePic:string, 
+    constructor(name:string, profilePic:string|null, 
         rankingGlobal:number,wins:number, loses:number){
         this.name=name;
         this.profilePic=profilePic;

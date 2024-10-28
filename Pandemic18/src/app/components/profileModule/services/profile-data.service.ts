@@ -40,7 +40,7 @@ export class ProfileDataService {
   chargeProfile(){}
   
   
-  provisionalProfile:Profile = new Profile("Test", "", 1, 10, 2);
+  provisionalProfile:Profile = new Profile("Test", null, 1, 10, 2);
 
 
   saveProfile(p:Profile){

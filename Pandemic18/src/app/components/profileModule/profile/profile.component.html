@@ -17,7 +17,9 @@
                 (click)="setVisible()">
                 <img class="rounded-full border-2 border-emerald-900 bg-emerald-800" src="{{profile.profilePic}}" alt="" height="256px" width="256px">
             </a>
-            <div class="text-center">Selecciona tu foto de perfil</div>
+            @if(profile.profilePic==null){
+                <div class="text-center">Selecciona tu foto de perfil</div>
+            }
         </div>
         <!--Profile data add more rows if needed-->
         <div class="flex flex-col text-center justify-center text-xl m-4">
@@ -57,14 +59,16 @@
 
 
 @if(this.isVisible){
-
-    <div class="grid grid-cols-5 absolute inset-0 z-50 m-10 border-2 rounded-md border-emerald-950 shadow-md md:w-1/2 gap-2 items-center bg-emerald-900">
-        @for(pic of this.profilePics; track pic.src){
-            <a (click)="selectPic(pic.src)" class="hover:[&>*]:bg-emerald-300 hover:[&>*]:border-emerald-950">
-                <img class="rounded-full border-2 border-emerald-900 bg-emerald-800" src="{{pic.src}}" alt="" height="64" width="64">
-            </a>
-        } @empty {
-            There are no items.
-        }
+    <div class="absolute inset-0 z-50 m-10 border-2 rounded-md border-emerald-950 shadow-md bg-emerald-900 h-1/2 md:h-3/5">
+        <div class="border-2 rounded-md border-emerald-200 text-center text-emerald-200 bg-emerald-900">
+            <h1 class="text-3xl">Selecciona tu foto de perfil</h1>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-5  md:gap-10 gap-5">
+            @for(pic of this.profilePics; track pic.src){
+                <a (click)="selectPic(pic.src)" class="hover:[&>*]:bg-emerald-300 hover:[&>*]:border-emerald-950 flex justify-center">
+                    <img class="rounded-full border-2 border-emerald-900 bg-emerald-800 h-16 w-16 md:h-32 md:w-32" src="{{pic.src}}" alt="">
+                </a>
+            }
+        </div>
     </div>
-}
+    }

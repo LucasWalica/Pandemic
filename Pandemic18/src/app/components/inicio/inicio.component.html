@@ -12,10 +12,14 @@
     </div>
 </section>
 
-@if(profile.profilePic!=""){
+<!--Permite ver el pic del profile seleccionado,
+aunque hay que cargalo desde el principio-->
+@if(profile.profilePic==null){
     <div class="perfil" (click)="IrAPerfil()"></div>
 }@else{
-    <div class="perfil" (click)="IrAPerfil()"></div>
+    <div class="perfil2" (click)="IrAPerfil()">
+        <img class="rounded-full border-2 border-emerald-950" src="{{profile.profilePic}}"/>
+    </div>
 }
 
 
