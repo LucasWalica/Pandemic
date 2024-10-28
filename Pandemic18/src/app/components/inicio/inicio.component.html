@@ -23,8 +23,8 @@ aunque hay que cargalo desde el principio-->
 }
 
 
-<!--Da error-->
-<div class="inicio1" *ngIf="cuadoInicio == 0">
+
+<div class="inicio1" *ngIf="this.cuadoInicio == 0">
     <div class="jugar" type="boton" (click)="JugarB()">Jugar</div>
     <div class="RankingG" type="boton" (click)="RankGB()">Ranking Global</div>
     <div class="RankingL" type="boton" (click)="RankLB()">Ranking Local</div>
