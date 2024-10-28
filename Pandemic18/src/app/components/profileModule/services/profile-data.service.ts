@@ -7,7 +7,7 @@ import { Profile, profilePic } from '../models/profile.models';
 // servicio usado para cargar los datos del perfil una vez abierta la pantalla
 // usar fetch o algo a la API una vez implementada por ahora fakea los datos
 
-export class ProfileDataService {
+export class ProfileDataService{
 
   constructor() { }
 
@@ -33,11 +33,12 @@ export class ProfileDataService {
 
 
 
-  profile:Profile = {} as Profile;
+  profile:Profile= {} as Profile;
   // usar esta funcion para asignar al profile los datos correspondientes 
   // puede ser que asignando un ID al user 
   // y cada perfil tiene un id que comparte (ideas?)  
   chargeProfile(){}
+  
   
   
   provisionalProfile:Profile = new Profile("Test", null, 1, 10, 2);
@@ -49,6 +50,4 @@ export class ProfileDataService {
   getProfile(){
     return this.profile;
   }
-
-
 }
