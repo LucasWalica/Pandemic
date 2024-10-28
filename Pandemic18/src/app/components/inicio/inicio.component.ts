@@ -8,15 +8,15 @@ import { CommonModule } from '@angular/common';  // Importa CommonModule
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule],  // Asegúrate de agregar CommonModule aquí
+  imports: [CommonModule],  
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']  // Corregir 'styleUrl' a 'styleUrls'
 })
 export class InicioComponent implements OnInit {
  
-  cuadoInicio: number = 0;
-  RankGlobal: boolean = false;
-  RankLocal: boolean = false;
+  cuadoInicio: boolean = false;
+  Rankings: number = 0;
+  Partidas: number = 0;
   profile: Profile = {} as Profile;
   notSelectedProfileImage: string = "../../../../public/assets/default\ avatar.jpg";
 
@@ -26,19 +26,15 @@ export class InicioComponent implements OnInit {
 
   constructor(private router: Router, private profileService: ProfileDataService) { }
 
-  IrAPerfil() {
-    this.router.navigate(['profile']);
-  }
+  IrAPerfil() {this.router.navigate(['profile']);}
 
-  JugarB() {
-    this.cuadoInicio = 1;
-  }
+  JugarB() {this.cuadoInicio = !this.cuadoInicio;}
 
-  RankGB() {
-    this.RankGlobal = true;
-  }
+  RankGB() {this.Rankings = 1;}
 
-  RankLB() {
-    this.RankLocal = true;
-  }
+  RankLB() {this.Rankings = 2;}
+
+  CrearPartida() {this.Partidas = 1;}
+
+  CargarPartida() {this.Partidas = 2;}
 }

@@ -1,3 +1,51 @@
+.perfil{
+  width: 50px;
+  height: 50px;
+  background-image: url(../../../../public/assets/default\ avatar.jpg);
+  background-size: cover;
+  border-radius: 100%;
+  position: absolute;
+  transform: translate(0%);
+  right: 0%;
+  top: 0%;
+  margin: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.perfil2{
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  border-radius: 100%;
+  position: absolute;
+  transform: translate(0%);
+  right: 0%;
+  top: 0%;
+  margin: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.inicioBoton{
+  width: 25%;
+  height: 100px;
+  margin: 10px;
+  padding: 10px;
+  color: aliceblue;
+  font-family:Verdana, "Geneva", Tahoma, sans-serif;
+  font-size: 150%;
+  user-select: none;
+  cursor: pointer;
+} .intro:hover{background: linear-gradient(to right,  #66339900,#9e3ae0,#66339900); transition-duration: 50s;}
+.intro{width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
+.jugar{background-color: #0077ff;}
+.introJugar{border: 5px solid rgb(0, 174, 255);} /*.introJugar:hover{background-color:#00aeff; color: black;}*/
+.RankingG{background-color: #05aa21;}
+.introRG{border: 5px solid #0ddb2f; } /*.introRG:hover{background-color:#0ddb2f; color: black;}*/
+.RankingL{background-color: #dbd800;}
+.introRL{border: 5px solid #eeee0b;} /*.introRL:hover{background-color:#eeee0b; color: black;}*/
+.retroceder{background-color: #cf0e1e;}
+.retrocediendo{border: 5px solid red;} /*.retrocediendo:hover{background-color:red; color: black;}*/
 .slider-thumb::before {
     position: absolute;
     transform:translate(-50%,-50%);
@@ -133,31 +181,3 @@ section{
     }
   }
 
-.perfil{
-  width: 50px;
-  height: 50px;
-  background-image: url(../../../../public/assets/default\ avatar.jpg);
-  background-size: cover;
-  border-radius: 100%;
-  position: absolute;
-  transform: translate(0%);
-  right: 0%;
-  top: 0%;
-  margin: 20px;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-.perfil2{
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  border-radius: 100%;
-  position: absolute;
-  transform: translate(0%);
-  right: 0%;
-  top: 0%;
-  margin: 20px;
-  cursor: pointer;
-  z-index: 1001;
-}
