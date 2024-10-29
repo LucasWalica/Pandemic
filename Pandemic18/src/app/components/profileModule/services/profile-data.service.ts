@@ -11,7 +11,6 @@ export class ProfileDataService{
 
   constructor() { }
 
-
   pics:profilePic[]= [
     new profilePic(1, "/assets/portraits-64px/portrait1-4x.png"),
     new profilePic(2, "/assets/portraits-64px/portrait2-4x.png"),
@@ -29,8 +28,6 @@ export class ProfileDataService{
     new profilePic(14, "/assets/portraits-64px/portrait14-4x.png"),
     new profilePic(15, "/assets/portraits-64px/portrait15-4x.png")
   ];
-  
-
 
 
   profile:Profile= {} as Profile;
@@ -41,7 +38,7 @@ export class ProfileDataService{
   
   
   
-  provisionalProfile:Profile = new Profile("Test", null, 1, 10, 2);
+  provisionalProfile:Profile = new Profile("Test", null, 1, 10);
 
 
   saveProfile(p:Profile){

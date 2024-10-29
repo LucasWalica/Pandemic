@@ -1,4 +1,4 @@
-<section>
+<section class="relative">
     <div class='air air1'></div>
     <div class='air air2'></div>
     <div class='air air3'></div>
@@ -23,14 +23,15 @@ aunque hay que cargalo desde el principio-->
 }
 
 
-
-<div class="inicio1" *ngIf="this.cuadoInicio == false">
-    <div class="jugar inicioBoton" type="boton" (click)="JugarB()"><div class="introJugar intro">Jugar</div></div>
-    <div class="RankingG inicioBoton" type="boton" (click)="RankGB()"><div class="introRG intro">Ranking Global</div></div>
-    <div class="RankingL inicioBoton" type="boton" (click)="RankLB()"><div class="introRL intro">Ranking Local</div></div>
-</div>
-<div class="inicio2" *ngIf="this.cuadoInicio == true">
-    <div class="jugar inicioBoton" type="boton" (click)="CrearPartida()"><div class="introJugar intro">Nueva Partida</div></div>
-    <div class="RankingG inicioBoton" type="boton" (click)="CargarPartida()"><div class="introRG intro">Cargar Partida</div></div>
-    <div class="retroceder inicioBoton" type="boton" (click)="JugarB()"><div class="retrocediendo intro">Atras</div>
+<div class="grid items-center justify-center">
+    <div class="inicio1 flex flex-col items-center" *ngIf="this.cuadoInicio == false">
+        <div class="jugar inicioBoton" type="boton" (click)="JugarB()"><div class="introJugar intro">Jugar</div></div>
+        <div class="RankingG inicioBoton" type="boton" (click)="goToRanking()"><div class="introRG intro">Ranking Global</div></div>
+        <div class="RankingL inicioBoton" type="boton" (click)="RankLB()"><div class="introRL intro">Ranking Local</div></div>
+    </div>
+    <div class="inicio2 flex flex-col items-center" *ngIf="this.cuadoInicio == true">
+        <div class="jugar inicioBoton" type="boton" (click)="CrearPartida()"><div class="introJugar intro">Nueva Partida</div></div>
+        <div class="RankingG inicioBoton" type="boton" (click)="goToRanking()"><div class="introRG intro">Cargar Partida</div></div>
+        <div class="retroceder inicioBoton" type="boton" (click)="JugarB()"><div class="retrocediendo intro">Atras</div>
+    </div>
 </div>

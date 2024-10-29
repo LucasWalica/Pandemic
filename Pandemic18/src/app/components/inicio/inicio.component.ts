@@ -27,7 +27,9 @@ export class InicioComponent implements OnInit {
   constructor(private router: Router, private profileService: ProfileDataService) { }
 
   IrAPerfil() {this.router.navigate(['profile']);}
-
+  goToRanking(){
+    this.router.navigate(['ranking']);
+  }
   JugarB() {this.cuadoInicio = !this.cuadoInicio;}
 
   RankGB() {this.Rankings = 1;}

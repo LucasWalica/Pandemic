@@ -2,15 +2,13 @@
 export class Profile{
     name:string;
     profilePic:string|null;
-    rankingGlobal:number;
     wins:number;
     loses:number;
 
     constructor(name:string, profilePic:string|null, 
-        rankingGlobal:number,wins:number, loses:number){
+        wins:number, loses:number){
         this.name=name;
         this.profilePic=profilePic;
-        this.rankingGlobal=rankingGlobal;
         this.wins = wins;
         this.loses= loses;
     }
