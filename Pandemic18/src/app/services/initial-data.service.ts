@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Personaje, BobElConstructor, Investigador, EspecialistaEnCuarentena, Medico } from '../models/personaje.model';
 import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from '../models/enfermedad.models';
 import { Partida } from '../models/partida.models';
-import { Ciudad } from '../models/ciudad.models';
+import { todasLasCiudades, Ciudad } from '../models/ciudad.models';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class InitialDataService {
 
   Enfermedades:Enfermedad[] = [this.enfAmarilla, this.enfAzul, this.enfRojo, this.enfVerde];
 
-  Ciudades:Ciudad[] = [] as Ciudad[];
+  Ciudades:Ciudad[] = todasLasCiudades;
   
   createGame(){
     var partidaNueva = new Partida(0, 4,  this.Ciudades);
