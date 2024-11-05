@@ -30,6 +30,9 @@ export class InicioComponent implements OnInit {
   goToRanking(){
     this.router.navigate(['ranking']);
   }
+  goToNewGame(){
+    this.router.navigate(['newGame'])
+  }
   JugarB() {this.cuadoInicio = !this.cuadoInicio;}
 
   RankGB() {this.Rankings = 1;}

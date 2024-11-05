@@ -1,0 +1,16 @@
+<div class="absolute w-full h-full map-container">
+
+    <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
+
+    
+        
+        @for (ciudad of partida.listCiudades; track ciudad) {
+            <div class="absolute bg-blue-500 text-white rounded-full p-2 border-2" 
+            [ngStyle]="{'left.px': (ciudad.coordenadasX*scalingFactorX) - 20, 'top.px': (ciudad.coordenadasY*scalingFactorY) - 20}">
+            {{ ciudad.nombre }}
+            </div>
+        }
+            
+       
+</div>
+  
