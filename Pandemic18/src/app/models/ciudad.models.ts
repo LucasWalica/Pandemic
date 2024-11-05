@@ -14,8 +14,7 @@ export class Ciudad{
     eAmarillo:number=0;
 
     constructor(nombre:string, listCiudadesColindantes:string[], centroInvestigacion:boolean,
-        listPersonajes:Personaje[], eVerde:number,eRojo:number,eAzul:number,eAmarillo:number,
-        coordenadasX:number, coordenadasY:number){
+        listPersonajes:Personaje[],coordenadasX:number, coordenadasY:number, eVerde:number,eRojo:number,eAzul:number,eAmarillo:number){
         this.nombre = nombre;
         this.listCiudadesColindandes=listCiudadesColindantes;
         this.centroInvestigacion=centroInvestigacion;
@@ -89,9 +88,9 @@ export class Ciudad{
 
 
 export const todasLasCiudades: Ciudad[] = [
-    new Ciudad ('San Francisco', ['Chicago', 'Los Angeles', 'Manila', 'Tokio'], false, [], 235, 315, 0, 0, 0, 0),
-    new Ciudad ('Chicago', ['San Francisco', 'Montreal', 'Atlanta', 'Mexico DF', 'Los Angeles'],false, [], 300, 280, 0, 0, 0, 0),
-    new Ciudad ('Atlanta', ['Chicago', 'Miami', 'Washington'],false, [], 320, 320, 0, 0, 0, 0),
+    new Ciudad ('San Francisco', ['Chicago', 'Los Angeles', 'Manila', 'Tokio'], false, [], 115, 500, 0, 0, 0, 0),
+    new Ciudad ('Chicago', ['San Francisco', 'Montreal', 'Atlanta', 'Mexico DF', 'Los Angeles'],false, [], 200, 450, 0, 0, 0, 0),
+    new Ciudad ('Atlanta', ['Chicago', 'Miami', 'Washington'],false, [], 205, 540, 0, 0, 0, 0),
     new Ciudad ('Montreal', ['Chicago', 'Nueva York', ' Washington'],false, [], 350, 280, 0, 0, 0, 0),
     new Ciudad ('Nueva York', ['Montreal', 'Washington', 'Londres', 'Madrid'],false, [], 380, 290, 0, 0, 0, 0),
     new Ciudad ('Washington', ['Montreal', 'Nueva York', 'Atlanta', 'Miami'],false, [], 360, 330, 0, 0, 0, 0),

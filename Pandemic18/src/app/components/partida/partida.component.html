@@ -1,16 +1,27 @@
-<div class="absolute w-full h-full map-container">
+<!--main container-->
+<div class="grid grid-cols-5">
+    <div></div>
+    <div class="map-container grid-cols-3 relative w-full h-full col-span-3">
+        <div id="map-content" class="map-content">
 
-    <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
-
-    
-        
-        @for (ciudad of partida.listCiudades; track ciudad) {
-            <div class="absolute bg-blue-500 text-white rounded-full p-2 border-2" 
-            [ngStyle]="{'left.px': (ciudad.coordenadasX*scalingFactorX) - 20, 'top.px': (ciudad.coordenadasY*scalingFactorY) - 20}">
-            {{ ciudad.nombre }}
-            </div>
-        }
             
-       
+            <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
+            
+            
+            
+            @for (ciudad of partida.listCiudades; track ciudad) {
+                <div class="absolute bg-blue-500 text-white rounded-full p-2 border-2" 
+                [ngStyle]="{
+                    'left.px': (ciudad.coordenadasX * scalingFactorX),
+                    'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+            </div>
+            <div class="absolute text-white rounded-full p-2 mt-4 text-center" 
+            [ngStyle]="{
+                'left.px': (ciudad.coordenadasX * scalingFactorX),
+                'top.px': (ciudad.coordenadasY * scalingFactorY)}">{{ciudad.nombre}}</div>
+            }
+    
+        </div>
+    </div>
+    <div></div>
 </div>
-  
