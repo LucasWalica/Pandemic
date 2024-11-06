@@ -14,6 +14,7 @@ export class PartidaComponent implements OnInit {
   partida:Partida = new Partida(0, 4, todasLasCiudades);
   scalingFactorX: number = {} as number;
   scalingFactorY: number = {} as number;
+  charged:boolean = false;
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada:Ciudad = {} as Ciudad;
@@ -24,14 +25,23 @@ export class PartidaComponent implements OnInit {
   startX: number = 0;          
   startY: number = 0; 
 
-
+  
   ngOnInit(): void {
+    this.calculateScalingFactors();      
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    // Recalcular los factores de escalado cuando se redimensiona la ventana
+    this.calculateScalingFactors();
+  }
 
+
+  calculateScalingFactors():void{
     const container = document.querySelector('.map-container');
     if (container) {
       const containerWidth = container.clientWidth;
       const containerHeight = container.clientHeight;
-
       // Calcular los factores de escalado
       this.scalingFactorX = containerWidth / this.originalWidth;
       this.scalingFactorY = containerHeight / this.originalHeight;
@@ -39,31 +49,13 @@ export class PartidaComponent implements OnInit {
       console.log("Container Height:", containerHeight);
       console.log("Scaling Factor X:", this.scalingFactorX);
       console.log("Scaling Factor Y:", this.scalingFactorY);
-
-      
       }
-    }
+  }
 
   showData(ciudad:Ciudad){
     this.ciudadSeleccionada = ciudad;
   }
 
-      // Calcular los factores de escalado según el tamaño del contenedor
-  calculateScalingFactors(): void {
-    const container = document.querySelector('.map-container') as HTMLElement;
-    if (container) {
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-
-      this.scalingFactorX = containerWidth / this.originalWidth;
-      this.scalingFactorY = containerHeight / this.originalHeight;
-
-      console.log("Container Width:", containerWidth);
-      console.log("Container Height:", containerHeight);
-      console.log("Scaling Factor X:", this.scalingFactorX);
-      console.log("Scaling Factor Y:", this.scalingFactorY);
-    }
-  }
   onZoom(event: WheelEvent) {
     event.preventDefault();  
     this.zoomLevel += event.deltaY * -0.001;  
@@ -89,6 +81,5 @@ export class PartidaComponent implements OnInit {
   onMouseUp() {
     this.isPanning = false;
   }
-
   
 }
