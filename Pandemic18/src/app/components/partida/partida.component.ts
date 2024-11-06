@@ -16,7 +16,15 @@ export class PartidaComponent implements OnInit {
   scalingFactorY: number = {} as number;
   originalWidth = 850;  
   originalHeight = 1550; 
-  // 1550 alto 850 ancho para el que fue programado
+  ciudadSeleccionada:Ciudad = {} as Ciudad;
+  zoomLevel: number = 1;       
+  offsetX: number = 0;         
+  offsetY: number = 0;         
+  isPanning: boolean = false;  
+  startX: number = 0;          
+  startY: number = 0; 
+
+
   ngOnInit(): void {
 
     const container = document.querySelector('.map-container');
@@ -36,7 +44,9 @@ export class PartidaComponent implements OnInit {
       }
     }
 
-
+  showData(ciudad:Ciudad){
+    this.ciudadSeleccionada = ciudad;
+  }
 
       // Calcular los factores de escalado según el tamaño del contenedor
   calculateScalingFactors(): void {
@@ -53,6 +63,31 @@ export class PartidaComponent implements OnInit {
       console.log("Scaling Factor X:", this.scalingFactorX);
       console.log("Scaling Factor Y:", this.scalingFactorY);
     }
+  }
+  onZoom(event: WheelEvent) {
+    event.preventDefault();  
+    this.zoomLevel += event.deltaY * -0.001;  
+    this.zoomLevel = Math.min(Math.max(this.zoomLevel, 0.5), 3); 
+  }
+
+  
+  onMouseDown(event: MouseEvent) {
+    this.isPanning = true;
+    this.startX = event.clientX - this.offsetX;
+    this.startY = event.clientY - this.offsetY;
+  }
+
+  
+  onMouseMove(event: MouseEvent) {
+    if (this.isPanning) {
+      this.offsetX = event.clientX - this.startX;
+      this.offsetY = event.clientY - this.startY;
+    }
+  }
+
+  
+  onMouseUp() {
+    this.isPanning = false;
   }
 
   
