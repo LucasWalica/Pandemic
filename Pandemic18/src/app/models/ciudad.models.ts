@@ -55,13 +55,8 @@
             if(this.centroInvestigacion && c.centroInvestigacion){
                 return true;
             }
-            var lx1, ly1, lx2, ly2;
             for(var ciudad of this.listCiudadesColindandes){
                 if(c.nombre==ciudad){
-                    lx1 = c.coordenadasX;
-                    ly1 = c.coordenadasY;
-                    for(var jamon of this.listCiudadesColindandes)
-                    91//numero de lineas en total, por si me sirve de algo en el tripe bucle
                     return true;
                 }
             }
