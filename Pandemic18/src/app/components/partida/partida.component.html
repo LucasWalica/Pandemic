@@ -2,17 +2,17 @@
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
     <div class="grid grid-cols-1 xl:grid-cols-5 border-2 border-emerald-800 m-2 rounded-md p-2">
         <!--div de datos de la ciudad-->
-        <div class="border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
+        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <h1>{{ciudadSeleccionada.nombre}}</h1>
         </div>
-        <div class="map-container grid-cols-3 relative w-full h-full col-span-3" 
+        <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
             (mousedown)="onMouseDown($event)"
             (mousemove)="onMouseMove($event)"
             (mouseup)="onMouseUp()">
-                
-            <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
-                <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
+            
+                <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
+                    <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
                 @for (ciudad of partida.listCiudades; track ciudad) {
                     <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-2 border-2" 
                         [ngStyle]="{
@@ -24,9 +24,10 @@
                         'left.px': (ciudad.coordenadasX * scalingFactorX),
                         'top.px': (ciudad.coordenadasY * scalingFactorY)}">{{ciudad.nombre}}</div>
                     }   
-            </div>
+                </div>
+            
         </div>
-        <div class="border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
+        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <!--Actualizaciones del turno y mas data-->
             {{partida.jugadas}}
         </div>

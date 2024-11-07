@@ -1,24 +1,65 @@
 <div class="fondo">
     <div class="cuadroInicio">
-        <div class="log-in">
+        <form [formGroup]="this.registrationForm" (ngSubmit)="enviar()" class="log-in">
             <div class="Nick">
                 <p>Nombre de usuario</p>
-                <input type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+                <input formControlName="nickName" type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+                @if (!this.registrationForm.valid && this.registrationForm.get('nickName')?.touched) {
+                    @if (this.registrationForm.get('nickName')?.errors?.['required']) {
+                        <div class="text-red-900 text-center">El nickname es obligatorio</div>
+                    }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño minimo son 3 caracteres</div>
+                    }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño máximo son 30 caracteres</div>
+                    }
+                }
             </div>
             <div class="Nick">
                 <p>email</p>
-                <input type="email" class="email" name="email" placeholder="ingrese su correo"><br><br>
+                <input formControlName="email" type="email" class="email" name="email" placeholder="ingrese su correo"><br><br>
+                @if (!this.registrationForm.valid && this.registrationForm.get('email')?.touched) {
+                    @if (this.registrationForm.get('email')?.errors?.['required']) {
+                        <div class="text-red-900 text-center">El email es obligatorio</div>
+                    }@else if (this.registrationForm.get('email')?.errors?.['email']) {
+                        <div class="text-red-900 text-center">Este campo tiene que ser un email valido</div>
+                    }
+                }
             </div>
             <div class="contraseña">
                 <p>Contraseña</p>
-                <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                <input formControlName="password" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                    @if (this.registrationForm.get('password')?.errors?.['required']) {
+                        <div class="text-red-900 text-center">La contraseña es obligatorio</div>
+                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño minimo son 10 caracteres</div>
+                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño máximo son 20 caracteres</div>
+                    }
+                }
             </div>
             <div class="contraseña">
                 <p>Repetir Contraseña</p>
-                <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                <input formControlName="password2" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                    @if (this.registrationForm.get('password')?.errors?.['required']) {
+                        <div class="text-red-900 text-center">La contraseña es obligatorio</div>
+                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño minimo son 10 caracteres</div>
+                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                        <div class="text-red-900 text-center">El tamaño máximo son 20 caracteres</div>
+                    }
+                }
+                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                    @if (registrationForm.get('password2')?.touched && registrationForm.get('password2')?.hasError('passwordMismatch')) {
+                        <div class="text-red-900 text-center"> Las contraseñas no coinciden</div>
+                    }
+                }
             </div>
-            <div class="enter" (click)="IrALogin()" routerLink="/home">Registrar</div>
-        </div>
+            <button type="submit" class="enter" >
+                Registrar
+            </button>
+        </form>
         <div class="fuera-log">
             <span class="registar" type="boton" (click)="IrALogin()">Login</span>
             <span class="olvide" type="boton" routerLink>Olvide mi contraseña</span>
