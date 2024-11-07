@@ -1,8 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, PLATFORM_ID, Inject, ChangeDetectorRef } from '@angular/core';
 import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule} from '@angular/common';
-
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-partida',
   standalone: true,
@@ -11,10 +11,10 @@ import { CommonModule} from '@angular/common';
   styleUrl: './partida.component.css'
 })
 export class PartidaComponent implements OnInit {
+  
   partida:Partida = new Partida(0, 4, todasLasCiudades);
   scalingFactorX: number = {} as number;
   scalingFactorY: number = {} as number;
-  charged:boolean = false;
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada:Ciudad = {} as Ciudad;
@@ -25,9 +25,14 @@ export class PartidaComponent implements OnInit {
   startX: number = 0;          
   startY: number = 0; 
 
-  
+  isBrowser:boolean;
+    
   ngOnInit(): void {
-    this.calculateScalingFactors();      
+    this.calculateScalingFactors(); 
+  }
+  
+  constructor(@Inject(PLATFORM_ID) private platformId:Object){
+    this.isBrowser = isPlatformBrowser(this.platformId)
   }
   
   @HostListener('window:resize', ['$event'])
@@ -36,13 +41,13 @@ export class PartidaComponent implements OnInit {
     this.calculateScalingFactors();
   }
 
-
   calculateScalingFactors():void{
-    const container = document.querySelector('.map-container');
-    if (container) {
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      // Calcular los factores de escalado
+    if(this.isBrowser){
+      const container = document.querySelector('.map-container');
+      if (container) {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        // Calcular los factores de escalado
       this.scalingFactorX = containerWidth / this.originalWidth;
       this.scalingFactorY = containerHeight / this.originalHeight;
       console.log("Container Width:", containerWidth);
@@ -50,6 +55,7 @@ export class PartidaComponent implements OnInit {
       console.log("Scaling Factor X:", this.scalingFactorX);
       console.log("Scaling Factor Y:", this.scalingFactorY);
       }
+    }
   }
 
   showData(ciudad:Ciudad){
@@ -61,14 +67,12 @@ export class PartidaComponent implements OnInit {
     this.zoomLevel += event.deltaY * -0.001;  
     this.zoomLevel = Math.min(Math.max(this.zoomLevel, 0.5), 3); 
   }
-
   
   onMouseDown(event: MouseEvent) {
     this.isPanning = true;
     this.startX = event.clientX - this.offsetX;
     this.startY = event.clientY - this.offsetY;
   }
-
   
   onMouseMove(event: MouseEvent) {
     if (this.isPanning) {
@@ -76,10 +80,10 @@ export class PartidaComponent implements OnInit {
       this.offsetY = event.clientY - this.startY;
     }
   }
-
-  
+ 
   onMouseUp() {
     this.isPanning = false;
   }
+
   
 }
