@@ -50,7 +50,6 @@ input{
 
 .slider-thumb::before {
     position: absolute;
-    transform: translate(-50%,-50%);
     content: "";
     border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
     will-change: border-radius, transform, opacity;
@@ -58,57 +57,25 @@ input{
     display: block;
     -webkit-animation: sliderShape 5s linear infinite;
 }
-.slider-thumb1::before {
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-    width: 450px;
-    height: 450px;
-    background: #038a19;
-    z-index: -3;
-}
-.slider-thumb2::before {
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-    width: 400px;
-    height: 400px;
-    background: #05aa21;
-    z-index: -2;
-}
-/*.slider-thumb3::before {
-    left: 50%;
-    top: 50%;
-    width: 100px;
-    height: 100px;
-    background: #0ddb2f;
-    z-index: -2;
-}
-.slider-thumb4::before {
-    transform: translate(-100%,-100%);
-    left: 50%;
-    top: 50%;
-    width: 200px;
-    height: 200px;
-    background: #0ddb2f;
-    z-index: -2;
-}*/
+.slider-thumb1::before {transform: translate(-50%,-50%);left: 10%;top: 10%;width: 405px;height: 405px;background: #038a19;z-index: -1003;}
+.slider-thumb2::before {transform: translate(-50%,-50%);left: 10%;top: 10%;width: 360px;height: 360px;background: #05aa21;z-index: -1002;}
+.slider-thumb3::before {transform: translate(25%,25%);left: 10%;top: 10%;width: 90px;height: 90px;background: #0ddb2f;z-index: -1002;}
+.slider-thumb4::before {transform: translate(-75%,-75%);left: 10%;top: 10%;width: 180px;height: 180px;background: #0ddb2f;z-index: -1002;}
+.slider-thumb1a::before {transform: translate(-50%,-50%);left: 80%;top: 40%;width: 364.5px;height: 364.5px;background: #053acc;z-index: -1013;}
+.slider-thumb2a::before {transform: translate(-50%,-50%);left: 80%;top: 40%;width: 324px;height: 324px;background: #1654ff;z-index: -1013;}
+.slider-thumb3a::before {transform: translate(-125%,-125%);left: 80%;top: 40%;width: 81px;height: 81px;background: #2783fa;z-index: -1012;}
+.slider-thumb4a::before {transform: translate(-25%,-25%);left: 80%;top: 40%;width: 162px;height: 162px;background: #2783fa;z-index: -1012;}
+.slider-thumb1m::before {transform: translate(-50%,-50%);left: 25%;top: 80%;width: 271.35px;height: 271.35px;background: #7c8a03;z-index: -1023;}
+.slider-thumb2m::before {transform: translate(-50%,-50%);left: 25%;top: 80%;width: 241.2px;height: 241.2px;background: #9aaa05;z-index: -1022;}
+.slider-thumb3m::before {transform: translate(30%,-145%);left: 25%;top: 80%;width: 60px;height: 60px;background: #e7e412;z-index: -1022;}
+.slider-thumb4m::before {transform: translate(-70%,-30%);left: 25%;top: 80%;width: 135px;height: 135px;background: #e7e412;z-index: -1022;}
 @keyframes sliderShape{
     0%,100%{
-        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-        transform: translate3d(0,0,0) rotateZ(0.01deg);
-    }
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;}
     34%{
-        border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
-        transform:  translate3d(0,5px,0) rotateZ(0.01deg);
-    }
-    50%{
-        transform: translate3d(0,0,0) rotateZ(0.01deg);
-    }
-    67%{
-        border-radius: 100% 60% 60% 100% / 100% 100% 60% 60% ;
-        transform: translate3d(0,-3px,0) rotateZ(0.01deg);
-    }
+        border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;}
+    50%{}
+    67%{border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;}
 }
 section{
     position: absolute;

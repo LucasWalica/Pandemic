@@ -47,3 +47,136 @@ input{
 .registar:hover{color: rgb(0, 140, 255);}
 .olvide{user-select: none; cursor: pointer;}
 .olvide:hover{color: rgb(0, 140, 255);}
+
+
+.slider-thumb::before {
+    position: absolute;
+    content: "";
+    border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+    will-change: border-radius, transform, opacity;
+    animation: sliderShape 5s linear infinite;
+    display: block;
+    -webkit-animation: sliderShape 5s linear infinite;
+}
+.slider-thumb1::before {transform: translate(-50%,-50%);left: 10%;top: 10%;width: 405px;height: 405px;background: #038a19;z-index: -1003;}
+.slider-thumb2::before {transform: translate(-50%,-50%);left: 10%;top: 10%;width: 360px;height: 360px;background: #05aa21;z-index: -1002;}
+.slider-thumb3::before {transform: translate(25%,25%);left: 10%;top: 10%;width: 90px;height: 90px;background: #0ddb2f;z-index: -1002;}
+.slider-thumb4::before {transform: translate(-75%,-75%);left: 10%;top: 10%;width: 180px;height: 180px;background: #0ddb2f;z-index: -1002;}
+.slider-thumb1a::before {transform: translate(-50%,-50%);left: 80%;top: 40%;width: 364.5px;height: 364.5px;background: #053acc;z-index: -1013;}
+.slider-thumb2a::before {transform: translate(-50%,-50%);left: 80%;top: 40%;width: 324px;height: 324px;background: #1654ff;z-index: -1013;}
+.slider-thumb3a::before {transform: translate(-125%,-125%);left: 80%;top: 40%;width: 81px;height: 81px;background: #2783fa;z-index: -1012;}
+.slider-thumb4a::before {transform: translate(-25%,-25%);left: 80%;top: 40%;width: 162px;height: 162px;background: #2783fa;z-index: -1012;}
+.slider-thumb1m::before {transform: translate(-50%,-50%);left: 25%;top: 80%;width: 271.35px;height: 271.35px;background: #7c8a03;z-index: -1023;}
+.slider-thumb2m::before {transform: translate(-50%,-50%);left: 25%;top: 80%;width: 241.2px;height: 241.2px;background: #9aaa05;z-index: -1022;}
+.slider-thumb3m::before {transform: translate(30%,-145%);left: 25%;top: 80%;width: 60px;height: 60px;background: #e7e412;z-index: -1022;}
+.slider-thumb4m::before {transform: translate(-70%,-30%);left: 25%;top: 80%;width: 135px;height: 135px;background: #e7e412;z-index: -1022;}
+@keyframes sliderShape{
+    0%,100%{
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;}
+    34%{
+        border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;}
+    50%{}
+    67%{border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;}
+}
+section{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff3546;
+    overflow: hidden;
+    z-index: -1001;
+  }
+  
+  section .air{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 100%;
+    background: url(../../../../..//public/assets/anpizquierdo.png);
+    background-size: 150px 1000px
+  }
+  
+  section .air.air1{
+    animation: wave 30s linear infinite;
+    z-index: -1000;
+    opacity: 1;
+    animation-delay: 0s;
+    left: 0;
+  }
+  section .air.air2{
+    animation: wave2 15s linear infinite;
+    z-index: -999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    left: 10px;
+  }
+  section .air.air3{
+    animation: wave 30s linear infinite;
+    z-index: -998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    left: 15px;
+  }
+  section .air.air4{
+    animation: wave2 5s linear infinite;
+    z-index: -997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    left: 20px;
+  }
+  section .aird{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 100%;
+    background: url(../../../../..//public/assets/anpderecho.png);
+    background-size: 150px 1000px
+  }
+  section .aird.air1{
+    animation: wave 30s linear infinite;
+    z-index: -1000;
+    opacity: 1;
+    animation-delay: 0s;
+    right: 0;
+  }
+  section .aird.air2{
+    animation: wave2 15s linear infinite;
+    z-index: -999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    right: 10px;
+  }
+  section .aird.air3{
+    animation: wave 30s linear infinite;
+    z-index: -998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    right: 15px;
+  }
+  section .aird.air4{
+    animation: wave2 5s linear infinite;
+    z-index: -997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    right: 20px;
+  }
+  @keyframes wave{
+    0%{
+      background-position-y: 0px; 
+    }
+    100%{
+      background-position-y: 1000px; 
+    }
+  }
+  @keyframes wave2{
+    0%{
+      background-position-y: 0px; 
+    }
+    100%{
+      background-position-y: -1000px; 
+    }
+  }
