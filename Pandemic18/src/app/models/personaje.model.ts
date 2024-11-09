@@ -111,3 +111,10 @@ export class Investigador extends Personaje{
         this.movido=true;
     }
 }
+
+export const listaPersonas:Personaje[] = [
+    new EspecialistaEnCuarentena(1,"Especialista en Cuarentenas", "Anula la expansion y aparicion de enfermedades en la ciudad y en las colindantes", false),
+    new Medico(2,"Médico", "Erradica todas las enfermedades de una ciudad tras unos turnos. ", false),
+    new BobElConstructor(3, "Constructor", "Construye centros de investigacion tras unos turnos.", false),
+    new Investigador(4, "Investigador", "Investiga a cura de una enfermedad en específico, si esta en una ciudad con centro de investigacion será más rápido.", false),
+]
