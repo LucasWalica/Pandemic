@@ -1,38 +1,45 @@
-import { Component, OnInit, HostListener, PLATFORM_ID, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, Inject, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-partida',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './partida.component.html',
-  styleUrl: './partida.component.css'
+  styleUrls: ['./partida.component.css']
 })
-export class PartidaComponent implements OnInit {
+export class PartidaComponent implements AfterViewInit {
   
-  partida:Partida = new Partida(0, 4, todasLasCiudades);
-  scalingFactorX: number = {} as number;
-  scalingFactorY: number = {} as number;
+  partida: Partida = new Partida(0, 4, todasLasCiudades);
+  scalingFactorX: number = 1;
+  scalingFactorY: number = 1;
   originalWidth = 850;  
   originalHeight = 1550; 
-  ciudadSeleccionada:Ciudad = {} as Ciudad;
+  ciudadSeleccionada: Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
   offsetX: number = 0;         
   offsetY: number = 0;         
   isPanning: boolean = false;  
   startX: number = 0;          
   startY: number = 0; 
+  isBrowser: boolean;
 
-  isBrowser:boolean;
-    
-  ngOnInit(): void {
-    this.calculateScalingFactors(); 
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
   
-  constructor(@Inject(PLATFORM_ID) private platformId:Object){
-    this.isBrowser = isPlatformBrowser(this.platformId)
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.calculateScalingFactors();
+      this.cdRef.detectChanges();  
+    }, 50);  
   }
   
   @HostListener('window:resize', ['$event'])
@@ -41,24 +48,24 @@ export class PartidaComponent implements OnInit {
     this.calculateScalingFactors();
   }
 
-  calculateScalingFactors():void{
-    if(this.isBrowser){
+  calculateScalingFactors(): void {
+    if (this.isBrowser) {
       const container = document.querySelector('.map-container');
       if (container) {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
         // Calcular los factores de escalado
-      this.scalingFactorX = containerWidth / this.originalWidth;
-      this.scalingFactorY = containerHeight / this.originalHeight;
-      console.log("Container Width:", containerWidth);
-      console.log("Container Height:", containerHeight);
-      console.log("Scaling Factor X:", this.scalingFactorX);
-      console.log("Scaling Factor Y:", this.scalingFactorY);
+        this.scalingFactorX = containerWidth / this.originalWidth;
+        this.scalingFactorY = containerHeight / this.originalHeight;
+        console.log("Container Width:", containerWidth);
+        console.log("Container Height:", containerHeight);
+        console.log("Scaling Factor X:", this.scalingFactorX);
+        console.log("Scaling Factor Y:", this.scalingFactorY);
       }
     }
   }
 
-  showData(ciudad:Ciudad){
+  showData(ciudad: Ciudad) {
     this.ciudadSeleccionada = ciudad;
   }
 
@@ -80,10 +87,8 @@ export class PartidaComponent implements OnInit {
       this.offsetY = event.clientY - this.startY;
     }
   }
- 
+
   onMouseUp() {
     this.isPanning = false;
   }
-
-  
 }
