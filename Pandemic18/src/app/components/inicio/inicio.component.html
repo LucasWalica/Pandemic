@@ -9,6 +9,18 @@
         <div class="slider-thumb2 slider-thumb"></div>
         <div class="slider-thumb3 slider-thumb"></div>
         <div class="slider-thumb4 slider-thumb"></div>
+        <div class="slider-thumb1r slider-thumb lg:block md:hidden sm:hidden"></div>
+        <div class="slider-thumb2r slider-thumb lg:block md:hidden sm:hidden"></div>
+        <div class="slider-thumb3r slider-thumb lg:block md:hidden sm:hidden"></div>
+        <div class="slider-thumb4r slider-thumb lg:block md:hidden sm:hidden"></div>
+        <div class="slider-thumb1a slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb2a slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb3a slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb4a slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb1m slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb2m slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb3m slider-thumb lg:block sm:hidden"></div>
+        <div class="slider-thumb4m slider-thumb lg:block sm:hidden"></div>
     </div>
 </section>
 
@@ -27,7 +39,7 @@ aunque hay que cargalo desde el principio-->
     <div class="inicio1 flex flex-col items-center" *ngIf="this.cuadoInicio == false">
         <div class="jugar inicioBoton" type="boton" (click)="JugarB()"><div class="introJugar intro">Jugar</div></div>
         <div class="RankingG inicioBoton" type="boton" (click)="goToRanking()"><div class="introRG intro">Ranking Global</div></div>
-        <div class="RankingL inicioBoton" type="boton" (click)="RankLB()"><div class="introRL intro">Ranking Local</div></div>
+        <div class="RankingL inicioBoton" type="boton" (click)="RankLB()"><div class="introRL intro">Informacion</div></div>
     </div>
     <div class="inicio2 flex flex-col items-center" *ngIf="this.cuadoInicio == true">
         <div class="jugar inicioBoton" type="boton" (click)="goToNewGame()"><div class="introJugar intro">Nueva Partida</div></div>

@@ -6,6 +6,7 @@ import { RegisterInPandemicComponent } from './components/auth/register-in-pande
 import { ProfileComponent } from './components/profileModule/profile/profile.component';
 import { RankingComponent } from './components/rankingModule/ranking/ranking.component';
 import { PartidaComponent } from './components/partida/partida.component';
+import { InformacionComponent } from './components/informacion/informacion.component';
 
 export const routes: Routes = [
     {path:'', component:LogInPandemicComponent},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     {path:'game', component:GamePandemicComponent},
     {path:'profile', component:ProfileComponent},
     {path:'ranking', component:RankingComponent},
+    {path: 'info', component:InformacionComponent},
     {path:'newGame', component:PartidaComponent}
 ];

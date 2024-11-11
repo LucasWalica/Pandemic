@@ -9,7 +9,6 @@
     padding-top: 10px;
     border: rgb(64, 24, 117) solid 5px;
     border-radius: 15PX;
-    width: 300px;
     height: auto;
     background-color: rgb(49, 49, 161);
     color: aliceblue;
@@ -19,7 +18,7 @@
     flex-direction: column;
 }
 .enter{
-    height: 40px;
+    height: auto;
     border: black solid 3px;
     border-radius: 5px;
     padding: 5px;
