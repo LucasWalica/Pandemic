@@ -3,6 +3,7 @@ import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
+import { Personaje } from '../../models/personaje.model';
 
 @Component({
   selector: 'app-partida',
@@ -19,6 +20,8 @@ export class PartidaComponent implements AfterViewInit {
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
+  personajeSeleccionado:Personaje = {} as Personaje;
+  ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
   offsetX: number = 0;         
   offsetY: number = 0;         
@@ -28,6 +31,9 @@ export class PartidaComponent implements AfterViewInit {
   // variable necesaria para dispositivos moviles
   initialDistance: number = 0;
   isBrowser: boolean;
+  showCharacterActionUI:boolean = false;
+  
+
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -67,6 +73,14 @@ export class PartidaComponent implements AfterViewInit {
         console.log("Scaling Factor Y:", this.scalingFactorY);
       }
     }
+  }
+  selectChar(char:Personaje, c:Ciudad){
+    this.personajeSeleccionado = char;
+    this.ciudadPersonajeSeleccionado = c;
+    this.showCharacterActionUI=true;
+  }
+  closeUI(){
+    this.showCharacterActionUI=false;
   }
 
   showData(ciudad: Ciudad) {

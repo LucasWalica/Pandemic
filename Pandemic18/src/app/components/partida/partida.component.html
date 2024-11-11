@@ -1,4 +1,4 @@
-<div>
+<div class="relative">
    
 
     
@@ -45,14 +45,15 @@
                 </div>
             </div>
             <div class="text-center border-2 border-emerald-700">
-                <h1>Personajes: </h1>
-                <div>
+                <div class="grid grid-cols-2">
                     @for (ciudad of partida.listCiudades; track ciudad) {
                         @if (ciudad.listPersonajes.length>0) {
                             @for (personajes of ciudad.listPersonajes; track personajes) {
-                                <div class="grid grid-cols-1 text-center">
-                                        <div>{{personajes.name}}</div>
-                                        <div>{{ciudad.nombre}}</div>
+                                <div class="">
+                                    <button (click)="selectChar(personajes, ciudad)" class="h-8 bg-emerald-400 m-2 rounded-md">
+                                        {{personajes.name}}
+                                    </button>
+                                    <div class="h-8">{{ciudad.nombre}}</div>
                                 </div>
                             }
                         }
@@ -61,4 +62,52 @@
             </div>
         </div>
     </div>
+    <!--Acciones con personajes -->
+    @if (this.showCharacterActionUI) {
+        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-1/2 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
+            <h1 class="text-2xl">{{personajeSeleccionado.name}}</h1>
+            @if (personajeSeleccionado.id===1) {
+                <h1 class="m-2">
+                    {{personajeSeleccionado.specialSkill}}
+                    <br><br>
+                    Actualmente está anulando la expansión de las enfermedades en {{this.ciudadPersonajeSeleccionado.nombre}} y sus colindantes
+                </h1> 
+            }
+            @else if (personajeSeleccionado.id===2) {
+                <h1 class="m-2">
+                    {{personajeSeleccionado.specialSkill}}
+                    <br><br>
+                    <button (click)="personajeSeleccionado.reducirACeroEnfermedad(ciudadPersonajeSeleccionado, this.partida)">
+                        Erradicar Enfermedad
+                    </button>
+                </h1> 
+            }
+            @else if (personajeSeleccionado.id===3) {
+                <h1 class="m-2">
+                    {{personajeSeleccionado.specialSkill}}
+                    <br><br>
+                    @if (!this.ciudadPersonajeSeleccionado.centroInvestigacion) {
+                        <button (click)="this.personajeSeleccionado.construirCentroInvestigacion(this.ciudadPersonajeSeleccionado, this.partida)">
+                            Construir centro de investigación
+                        </button>
+                    } @else {
+                        <h1>Esta ciudad ya tiene un centro de investigación.</h1>
+                    }
+                </h1> 
+            }
+            @else if (personajeSeleccionado.id===4) {
+                <h1 class="m-2">
+                    {{personajeSeleccionado.specialSkill}}
+                    <br><br>
+                    añadir seleccion de investigacion de enfermedad y boton
+                </h1> 
+            }
+            <div class="items-center">
+                <button (click)="closeUI()" class="border-2 rounded-md border-black bg-red-950 text-red-500 pl-4 pr-4 p-2 hover:bg-red-700 hover:text-red-950">
+                    Close
+                </button>
+            </div>
+        </div>
+    }
 </div>
+
