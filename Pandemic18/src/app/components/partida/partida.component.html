@@ -7,6 +7,12 @@
         <!--div de datos de la ciudad-->
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <h1>{{ciudadSeleccionada.nombre}}</h1>
+            <div class="grid grid-cols-4">
+                {{ciudadSeleccionada.eAmarillo}}
+                {{ciudadSeleccionada.eVerde}}
+                {{ciudadSeleccionada.eRojo}}
+                {{ciudadSeleccionada.eAzul}}
+            </div>
         </div>
         <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
@@ -14,7 +20,7 @@
             (mousemove)="onMouseMove($event)"
             (mouseup)="onMouseUp()">
                 <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
-                    <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover">
+                    <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover unselectable" draggable="false" (dragstart)="false;">
                         @for (ciudad of partida.listCiudades; track ciudad) {
                             <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-2 border-2" 
                             [ngStyle]="{
@@ -30,8 +36,29 @@
         </div>
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <!--Actualizaciones del turno y mas data-->
-            {{partida.jugadas}}
+            <div class="grid grid-cols-2 text-center">
+                <div>
+                    Jugadas: {{partida.jugadas}}
+                </div>
+                <div>
+                    Turno número: {{partida.counterTurnos}}
+                </div>
+            </div>
+            <div class="text-center border-2 border-emerald-700">
+                <h1>Personajes: </h1>
+                <div>
+                    @for (ciudad of partida.listCiudades; track ciudad) {
+                        @if (ciudad.listPersonajes.length>0) {
+                            @for (personajes of ciudad.listPersonajes; track personajes) {
+                                <div class="grid grid-cols-1 text-center">
+                                        <div>{{personajes.name}}</div>
+                                        <div>{{ciudad.nombre}}</div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
         </div>
     </div>
-    
 </div>

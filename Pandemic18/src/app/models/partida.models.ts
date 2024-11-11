@@ -1,5 +1,6 @@
 import { Ciudad } from "./ciudad.models";
-import { Personaje } from "./personaje.model";
+import { listaPersonas, Personaje } from "./personaje.model";
+
 
 export class Partida{
     counterTurnos:number=0;
@@ -20,6 +21,8 @@ export class Partida{
             this.jugadas-=1;
         }
     }  
+
+
 
     dibujarLineas(c:Ciudad){
         for(var inicioLinea=0; inicioLinea < this.listCiudades.length; inicioLinea++){
@@ -99,5 +102,12 @@ export class Partida{
     eliminarVerde(c:Ciudad){
         c.eVerde-=1
         this.counterTurnos-=1
+    }
+
+    asignarPersonajes():void{
+        for(let i=0; i<listaPersonas.length; i++){
+            this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
+            .listPersonajes.push(listaPersonas[i]);
+        }
     }
 }

@@ -4,58 +4,58 @@
             <div class="Nick">
                 <p>Nombre de usuario</p>
                 <input formControlName="nickName" type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
-                @if (!this.registrationForm.valid && this.registrationForm.get('nickName')?.touched) {
-                    @if (this.registrationForm.get('nickName')?.errors?.['required']) {
-                        <div class="text-red-900 text-center">El nickname es obligatorio</div>
-                    }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño minimo son 3 caracteres</div>
-                    }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño máximo son 30 caracteres</div>
-                    }
-                }
             </div>
+            @if (!this.registrationForm.valid && this.registrationForm.get('nickName')?.touched) {
+                @if (this.registrationForm.get('nickName')?.errors?.['required']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El nickname es obligatorio</div>
+                }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño minimo son 3 caracteres</div>
+                }@else if (this.registrationForm.get('nickName')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño máximo son 30 caracteres</div>
+                }
+            }
             <div class="Nick">
                 <p>email</p>
                 <input formControlName="email" type="email" class="email" name="email" placeholder="ingrese su correo"><br><br>
-                @if (!this.registrationForm.valid && this.registrationForm.get('email')?.touched) {
-                    @if (this.registrationForm.get('email')?.errors?.['required']) {
-                        <div class="text-red-900 text-center">El email es obligatorio</div>
-                    }@else if (this.registrationForm.get('email')?.errors?.['email']) {
-                        <div class="text-red-900 text-center">Este campo tiene que ser un email valido</div>
-                    }
-                }
             </div>
+            @if (!this.registrationForm.valid && this.registrationForm.get('email')?.touched) {
+                @if (this.registrationForm.get('email')?.errors?.['required']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El email es obligatorio</div>
+                }@else if (this.registrationForm.get('email')?.errors?.['email']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">Este campo tiene que ser un email valido</div>
+                }
+            }
             <div class="contraseña">
                 <p>Contraseña</p>
                 <input formControlName="password" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
-                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
-                    @if (this.registrationForm.get('password')?.errors?.['required']) {
-                        <div class="text-red-900 text-center">La contraseña es obligatorio</div>
-                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño minimo son 10 caracteres</div>
-                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño máximo son 20 caracteres</div>
-                    }
-                }
             </div>
+            @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                @if (this.registrationForm.get('password')?.errors?.['required']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">La contraseña es obligatorio</div>
+                }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño minimo son 10 caracteres</div>
+                }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño máximo son 20 caracteres</div>
+                }
+            }
             <div class="contraseña">
                 <p>Repetir Contraseña</p>
                 <input formControlName="password2" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
-                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
-                    @if (this.registrationForm.get('password')?.errors?.['required']) {
-                        <div class="text-red-900 text-center">La contraseña es obligatorio</div>
-                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño minimo son 10 caracteres</div>
-                    }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
-                        <div class="text-red-900 text-center">El tamaño máximo son 20 caracteres</div>
-                    }
-                }
-                @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
-                    @if (registrationForm.get('password2')?.touched && registrationForm.get('password2')?.hasError('passwordMismatch')) {
-                        <div class="text-red-900 text-center"> Las contraseñas no coinciden</div>
-                    }
-                }
             </div>
+            @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                @if (this.registrationForm.get('password')?.errors?.['required']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">La contraseña es obligatorio</div>
+                }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño minimo son 10 caracteres</div>
+                }@else if (this.registrationForm.get('password')?.errors?.['minlength']) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50">El tamaño máximo son 20 caracteres</div>
+                }
+            }
+            @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
+                @if (registrationForm.get('password2')?.touched && registrationForm.get('password2')?.hasError('passwordMismatch')) {
+                    <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50"> Las contraseñas no coinciden</div>
+                }
+            }
             <button type="submit" class="enter" >
                 Registrar
             </button>

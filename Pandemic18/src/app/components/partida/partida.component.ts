@@ -25,6 +25,8 @@ export class PartidaComponent implements AfterViewInit {
   isPanning: boolean = false;  
   startX: number = 0;          
   startY: number = 0; 
+  // variable necesaria para dispositivos moviles
+  initialDistance: number = 0;
   isBrowser: boolean;
 
   constructor(
@@ -40,6 +42,8 @@ export class PartidaComponent implements AfterViewInit {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
     }, 50);  
+    // asignar personajes de forma aleatoria en ciudades del mapa
+    this.partida.asignarPersonajes();
   }
   
   @HostListener('window:resize', ['$event'])
@@ -77,8 +81,12 @@ export class PartidaComponent implements AfterViewInit {
   
   onMouseDown(event: MouseEvent) {
     this.isPanning = true;
+    if(this.isPanning){
+      document.body.style.cursor = "grab";
+    }
     this.startX = event.clientX - this.offsetX;
     this.startY = event.clientY - this.offsetY;
+
   }
   
   onMouseMove(event: MouseEvent) {
@@ -90,5 +98,75 @@ export class PartidaComponent implements AfterViewInit {
 
   onMouseUp() {
     this.isPanning = false;
+    if(!this.isPanning){
+      document.body.style.cursor = "default";
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  // metodos para dispositivos moviles : 
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    if (event.touches.length === 1) {
+      // Un solo toque: iniciamos el desplazamiento
+      this.isPanning = true;
+      this.startX = event.touches[0].clientX - this.offsetX;
+      this.startY = event.touches[0].clientY - this.offsetY;
+    } else if (event.touches.length === 2) {
+      // Dos toques: iniciar zoom por pellizco
+      this.isPanning = false;
+      this.initialDistance = this.getDistance(event.touches[0], event.touches[1]);
+    }
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    event.preventDefault();
+    if (this.isPanning && event.touches.length === 1) {
+      // Desplazamiento con un solo toque
+      this.offsetX = event.touches[0].clientX - this.startX;
+      this.offsetY = event.touches[0].clientY - this.startY;
+    } else if (event.touches.length === 2) {
+      // Zoom por pellizco con dos toques
+      const currentDistance = this.getDistance(event.touches[0], event.touches[1]);
+      const scaleChange = currentDistance / this.initialDistance;
+      this.zoomLevel = Math.min(Math.max(this.zoomLevel * scaleChange, 0.5), 3);
+      this.initialDistance = currentDistance;
+    }
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    if (event.touches.length < 2) {
+      this.isPanning = false;
+    }
+  }
+
+  // Calcular la distancia entre dos puntos táctiles para el pellizco
+  private getDistance(touch1: Touch, touch2: Touch): number {
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
   }
 }
+
