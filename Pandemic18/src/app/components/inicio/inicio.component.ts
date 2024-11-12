@@ -33,11 +33,11 @@ export class InicioComponent implements OnInit {
   goToNewGame(){
     this.router.navigate(['newGame'])
   }
+  gotoInfo(){
+    this.router.navigate(['info'])
+  }
+
   JugarB() {this.cuadoInicio = !this.cuadoInicio;}
-
-  RankGB() {this.Rankings = 1;}
-
-  RankLB() {this.Rankings = 2;}
 
   CrearPartida() {this.Partidas = 1;}
 

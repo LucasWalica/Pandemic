@@ -1,1 +1,33 @@
-<p>informacion works!</p>
+@if(profile.profilePic==null){
+    <div class="perfil" (click)="IrAPerfil()"></div>
+}@else{
+    <div class="perfil2" (click)="IrAPerfil()">
+        <img class="rounded-full border-2 border-emerald-950" src="{{profile.profilePic}}"/>
+    </div>
+}
+
+<div class="panelinfo grid-cols-3 grid-rows-5 bg-black"></div>
+
+
+
+<section class="relative">
+    <div class='air air1'></div>
+    <div class='air air2'></div>
+    <div class='air air3'></div>
+    <div class='air air4'></div>
+    <div class='aird air1'></div>
+    <div class='aird air2'></div>
+    <div class='aird air3'></div>
+    <div class='aird air4'></div>
+
+    <div class="slider-thumbb">
+        <div class="slider-thumb1r slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb2r slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb3r slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb4r slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb1a slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb2a slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb3a slider-thumb lg:block hidden"></div>
+        <div class="slider-thumb4a slider-thumb lg:block hidden"></div>
+    </div>
+</section>
