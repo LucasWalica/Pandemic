@@ -51,7 +51,7 @@
                     @for (ciudad of partida.listCiudades; track ciudad) {
                         @if (ciudad.listPersonajes.length>0) {
                             @for (personajes of ciudad.listPersonajes; track personajes) {
-                                <div class="">
+                                <div>
                                     <button (click)="selectChar(personajes, ciudad)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
                                         {{personajes.name}}
                                     </button>
@@ -64,7 +64,7 @@
             </div>
             <!--acciones-->
             <div class="flex self-center items-center text-center justify-center">
-                <button class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
                 hover:pl-6 hover:pr-6 duration-150">
                     Pasar turno
                 </button>
@@ -124,7 +124,9 @@
                        @for (cInicio of this.partida.listCiudades; track cInicio) {
                         @if (cInicio.nombre===ciudadPersonajeSeleccionado.nombre) {
                             @for (ciudad of cInicio.listCiudadesColindandes; track ciudad) {
-                                <button (click)="this.partida.moverPersonaje(ciudadPersonajeSeleccionado, this.partida.getCiudadByName(ciudad), personajeSeleccionado)">{{ciudad}}</button>
+                                <button (click)="this.partida.moverPersonaje(ciudadPersonajeSeleccionado, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
+                                    {{ciudad}}
+                                </button>
                             }
                         }
                        }

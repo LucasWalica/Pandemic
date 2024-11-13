@@ -50,7 +50,6 @@ export class PartidaComponent implements AfterViewInit {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
     }, 50);  
-    // asignar personajes de forma aleatoria en ciudades del mapa 
   }
   
   @HostListener('window:resize', ['$event'])
@@ -82,6 +81,11 @@ export class PartidaComponent implements AfterViewInit {
   }
   closeUI(){
     this.showCharacterActionUI=false;
+  }
+
+  // actualizar interfaz
+  checkCharExists(){
+    
   }
 
   showData(ciudad: Ciudad) {
