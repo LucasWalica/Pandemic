@@ -84,6 +84,14 @@
             }
             return false;
         }   
+
+        getCiudadByName(cNombre:string){
+            for(let i=0; i<todasLasCiudades.length; i++){
+                if(todasLasCiudades[i].nombre === cNombre){
+                    return todasLasCiudades[i];
+                }
+            }
+        }
     }   
 
 

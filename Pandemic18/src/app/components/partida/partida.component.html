@@ -52,7 +52,7 @@
                         @if (ciudad.listPersonajes.length>0) {
                             @for (personajes of ciudad.listPersonajes; track personajes) {
                                 <div class="">
-                                    <button (click)="selectChar(personajes, ciudad)" class="bg-emerald-400 m-2 rounded-md w-40 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
+                                    <button (click)="selectChar(personajes, ciudad)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
                                         {{personajes.name}}
                                     </button>
                                     <div class="h-8">{{ciudad.nombre}}</div>
@@ -116,6 +116,21 @@
                     añadir seleccion de investigacion de enfermedad y boton
                 </h1> 
             }
+            <div>
+                <div>{{ciudadPersonajeSeleccionado.nombre}}</div>
+                <div>
+                    <h1>Quieres mover el personaje a: </h1>
+                    <div>
+                       @for (cInicio of this.partida.listCiudades; track cInicio) {
+                        @if (cInicio.nombre===ciudadPersonajeSeleccionado.nombre) {
+                            @for (ciudad of cInicio.listCiudadesColindandes; track ciudad) {
+                                <button (click)="this.partida.moverPersonaje(ciudadPersonajeSeleccionado, this.partida.getCiudadByName(ciudad), personajeSeleccionado)">{{ciudad}}</button>
+                            }
+                        }
+                       }
+                    </div>
+                </div>
+            </div>
             <div class="items-center">
                 <button (click)="closeUI()" class="border-2 rounded-md border-black bg-red-950 text-red-500 pl-4 pr-4 p-2 hover:bg-red-700 hover:text-red-950">
                     Close

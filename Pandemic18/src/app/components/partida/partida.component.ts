@@ -119,24 +119,6 @@ export class PartidaComponent implements AfterViewInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   // metodos para dispositivos moviles : 
 

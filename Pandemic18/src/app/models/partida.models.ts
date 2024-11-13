@@ -23,6 +23,15 @@ export class Partida{
         }
     }  
 
+    getCiudadByName(cNombre:string):Ciudad{
+        for(let i=0; i<this.listCiudades.length; i++){
+            if(this.listCiudades[i].nombre === cNombre){
+                return this.listCiudades[i];
+            }
+        }
+        return this.listCiudades[0];
+    }
+
 
 
     dibujarLineas(c:Ciudad){
