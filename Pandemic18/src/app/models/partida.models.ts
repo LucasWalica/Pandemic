@@ -11,6 +11,7 @@ export class Partida{
         this.counterTurnos=counterTurnos;
         this.jugadas=jugadas;
         this.listCiudades=listCiudades;
+        this.asignarPersonajes();
     }
 
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){

@@ -1,4 +1,4 @@
-import { Component, HostListener, PLATFORM_ID, Inject, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, Inject, AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,8 @@ export class PartidaComponent implements AfterViewInit {
   initialDistance: number = 0;
   isBrowser: boolean;
   showCharacterActionUI:boolean = false;
+  // para no cargar mas veces 
+  cargado:boolean = false;
   
 
 
@@ -48,8 +50,7 @@ export class PartidaComponent implements AfterViewInit {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
     }, 50);  
-    // asignar personajes de forma aleatoria en ciudades del mapa
-    this.partida.asignarPersonajes();
+    // asignar personajes de forma aleatoria en ciudades del mapa 
   }
   
   @HostListener('window:resize', ['$event'])
