@@ -94,7 +94,7 @@ section{
     left: 0;
     width: 150px;
     height: 100%;
-    background: url(../../../../..//public/assets/anpizquierdo.png);
+    background: url(/assets/anpizquierdo.png);
     background-size: 150px 1000px
   }
   
@@ -132,7 +132,7 @@ section{
     right: 0;
     width: 150px;
     height: 100%;
-    background: url(../../../../..//public/assets/anpderecho.png);
+    background: url(/assets/anpderecho.png);
     background-size: 150px 1000px
   }
   section .aird.air1{

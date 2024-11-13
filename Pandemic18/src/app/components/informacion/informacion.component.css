@@ -1,7 +1,19 @@
+.panelinfo{
+  border: black solid 5px;
+  position: absolute;
+  transform: translate(-50%);
+  left: 50%;
+  background-color: #851010ab;
+  height: 50%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+
 .perfil{
     width: 50px;
     height: 50px;
-    background-image: url(../../../../public/assets/default\ avatar.jpg);
+    background-image: url(/assets/default\ avatar.jpg);
     background-size: cover;
     border-radius: 100%;
     position: absolute;
@@ -26,10 +38,6 @@
     cursor: pointer;
     z-index: 1001;
   }
-
-
-
-
 .slider-thumb::before {
     position: absolute;
     transform:translate(-50%,-50%);
@@ -72,7 +80,7 @@ section{
     left: 0;
     width: 150px;
     height: 100%;
-    background: url(../../../..//public/assets/anpizquierdo.png);
+    background: url(/assets/anpizquierdo.png);
     background-size: 150px 1000px
   }
   
