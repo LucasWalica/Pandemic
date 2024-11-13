@@ -11,6 +11,7 @@ export class Partida{
         this.counterTurnos=counterTurnos;
         this.jugadas=jugadas;
         this.listCiudades=listCiudades;
+        this.asignarPersonajes();
     }
 
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){
@@ -24,16 +25,16 @@ export class Partida{
 
 
 
-    dibujarLineas(c:Ciudad){
-        for(var inicioLinea=0; inicioLinea < this.listCiudades.length; inicioLinea++){
-            var lx1=c.coordenadasX;
-            var ly1=c.coordenadasY;
-            for(var finLinea=0; finLinea < c.listCiudadesColindandes.length; finLinea++){
+   // dibujarLineas(c:Ciudad){
+        //for(var inicioLinea=0; inicioLinea < this.listCiudades.length; inicioLinea++){
+           // var lx1=c.coordenadasX;
+           // var ly1=c.coordenadasY;
+           // for(var finLinea=0; finLinea < c.todasLasCiudadesColindandes.length; finLinea++){
                 
-            }
-        }
-        91//numero de lineas en total, por si me sirve de algo en el tripe bucle
-    }
+         //   }
+       // }
+     //   91//numero de lineas en total, por si me sirve de algo en el tripe bucle
+    //}
     
 
     // testear
@@ -47,7 +48,7 @@ export class Partida{
                 if(personaje.construirCentroInvestigacion(ciudad, this)===true){
                     personaje.movido=false;
                 }
-                if(personaje.reducirACeroEnfermedad(ciudad, this)==true){
+                if(personaje.reducirACeroEnfermedad(ciudad, this)===true){
                     personaje.movido=false;
                 }
             }
@@ -57,13 +58,14 @@ export class Partida{
 
     // testear
     contagiarRandom(){
-        var counter = 0;
         var enfermedades = [1, 2, 3, 4];
         var gravedadInfeccion = 1;
         if(this.counterTurnos<=4){
             gravedadInfeccion=2;
         }
-        while(counter>4){
+
+        for(let i=0; i<4; i++){
+
             var ciudadRandom = this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
             var enfermedadRandom = enfermedades[Math.floor(Math.random()*enfermedades.length)]
             switch(enfermedadRandom){

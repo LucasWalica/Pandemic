@@ -34,23 +34,25 @@
                     }   
             </div>
         </div>
+        <!--datos partida-->
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <!--Actualizaciones del turno y mas data-->
-            <div class="grid grid-cols-2 text-center">
+            <div class="grid grid-cols-2 text-center border-2 border-emerald-950 rounded-sm m-1 p-2">
                 <div>
-                    Jugadas: {{partida.jugadas}}
+                    Jugadas restantes: {{partida.jugadas}}
                 </div>
                 <div>
                     Turno número: {{partida.counterTurnos}}
                 </div>
             </div>
-            <div class="text-center border-2 border-emerald-700">
+            <!--datos personajes-->
+            <div class="text-center border-2 border-emerald-700 rounded-md">
                 <div class="grid grid-cols-2">
                     @for (ciudad of partida.listCiudades; track ciudad) {
                         @if (ciudad.listPersonajes.length>0) {
                             @for (personajes of ciudad.listPersonajes; track personajes) {
-                                <div class="">
-                                    <button (click)="selectChar(personajes, ciudad)" class="h-8 bg-emerald-400 m-2 rounded-md">
+                                <div>
+                                    <button (click)="selectChar(personajes, ciudad)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
                                         {{personajes.name}}
                                     </button>
                                     <div class="h-8">{{ciudad.nombre}}</div>
@@ -60,11 +62,23 @@
                     }
                 </div>
             </div>
+            <!--acciones-->
+            <div class="flex self-center items-center text-center justify-center">
+                <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                hover:pl-6 hover:pr-6 duration-150">
+                    Pasar turno
+                </button>
+                <button class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                hover:pl-6 hover:pr-6 duration-150">
+                    Guardar Partida
+                </button>
+            </div>
         </div>
     </div>
+
     <!--Acciones con personajes -->
     @if (this.showCharacterActionUI) {
-        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-1/2 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
+        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-80 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
             <h1 class="text-2xl">{{personajeSeleccionado.name}}</h1>
             @if (personajeSeleccionado.id===1) {
                 <h1 class="m-2">
@@ -102,6 +116,23 @@
                     añadir seleccion de investigacion de enfermedad y boton
                 </h1> 
             }
+            <div>
+                <div>{{ciudadPersonajeSeleccionado.nombre}}</div>
+                <div>
+                    <h1>Quieres mover el personaje a: </h1>
+                    <div>
+                       @for (cInicio of this.partida.listCiudades; track cInicio) {
+                        @if (cInicio.nombre===ciudadPersonajeSeleccionado.nombre) {
+                            @for (ciudad of cInicio.listCiudadesColindandes; track ciudad) {
+                                <button (click)="this.partida.moverPersonaje(ciudadPersonajeSeleccionado, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
+                                    {{ciudad}}
+                                </button>
+                            }
+                        }
+                       }
+                    </div>
+                </div>
+            </div>
             <div class="items-center">
                 <button (click)="closeUI()" class="border-2 rounded-md border-black bg-red-950 text-red-500 pl-4 pr-4 p-2 hover:bg-red-700 hover:text-red-950">
                     Close
