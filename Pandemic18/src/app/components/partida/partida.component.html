@@ -48,18 +48,14 @@
             <!--datos personajes-->
             <div class="text-center border-2 border-emerald-700 rounded-md">
                 <div class="grid grid-cols-2">
-                    @for (ciudad of partida.listCiudades; track ciudad) {
-                        @if (ciudad.listPersonajes.length>0) {
-                            @for (personajes of ciudad.listPersonajes; track personajes) {
+                    @for (personaje of listPersonajes; track personaje) {
                                 <div>
-                                    <button (click)="selectChar(personajes, ciudad)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
-                                        {{personajes.name}}
+                                    <button (click)="selectChar(personaje, personaje.ciudadEnLaQueEsta)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
+                                        {{personaje.name}}
                                     </button>
-                                    <div class="h-8">{{ciudad.nombre}}</div>
+                                    <div class="h-8">{{personaje.ciudadEnLaQueEsta.nombre}}</div>
                                 </div>
                             }
-                        }
-                    }
                 </div>
             </div>
             <!--acciones-->
@@ -122,9 +118,9 @@
                     <h1>Quieres mover el personaje a: </h1>
                     <div>
                        @for (cInicio of this.partida.listCiudades; track cInicio) {
-                        @if (cInicio.nombre===ciudadPersonajeSeleccionado.nombre) {
+                        @if (cInicio.nombre===personajeSeleccionado.ciudadEnLaQueEsta.nombre) {
                             @for (ciudad of cInicio.listCiudadesColindandes; track ciudad) {
-                                <button (click)="this.partida.moverPersonaje(ciudadPersonajeSeleccionado, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
+                                <button (click)="this.partida.moverPersonaje(personajeSeleccionado.ciudadEnLaQueEsta, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
                                     {{ciudad}}
                                 </button>
                             }

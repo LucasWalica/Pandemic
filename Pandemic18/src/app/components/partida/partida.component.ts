@@ -3,7 +3,7 @@ import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
-import { Personaje } from '../../models/personaje.model';
+import { Personaje, listaPersonas } from '../../models/personaje.model';
 
 @Component({
   selector: 'app-partida',
@@ -20,6 +20,7 @@ export class PartidaComponent implements AfterViewInit {
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
+  listPersonajes:Personaje[] = listaPersonas;
   personajeSeleccionado:Personaje = {} as Personaje;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
@@ -83,10 +84,6 @@ export class PartidaComponent implements AfterViewInit {
     this.showCharacterActionUI=false;
   }
 
-  // actualizar interfaz
-  checkCharExists(){
-    
-  }
 
   showData(ciudad: Ciudad) {
     this.ciudadSeleccionada = ciudad;

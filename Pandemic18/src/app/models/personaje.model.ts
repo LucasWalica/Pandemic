@@ -7,6 +7,7 @@ export class Personaje{
     name:string; 
     specialSkill:string;
     movido:boolean=false;
+    ciudadEnLaQueEsta:Ciudad = {} as Ciudad;
 
     constructor(id:number, name:string, specialSkill:string, movido:boolean){
         this.id=id;
@@ -27,7 +28,9 @@ export class Personaje{
     reducirACeroEnfermedad(c:Ciudad, p:Partida):boolean|void{}
     construirCentroInvestigacion(c:Ciudad, p:Partida):boolean|void{}
     investigar(e:Enfermedad, p:Partida){}
-    
+    cambiarCiudad(c:Ciudad){
+        this.ciudadEnLaQueEsta=c;
+    }  
 }
 // id = 1
 export class EspecialistaEnCuarentena extends Personaje{

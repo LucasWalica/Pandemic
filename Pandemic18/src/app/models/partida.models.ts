@@ -18,6 +18,7 @@ export class Partida{
         if(cInicio.communicateWith(cFinal)){
             cInicio.quitarPersonaje(p);
             cFinal.aniadiPersonaje(p);
+            p.cambiarCiudad(cFinal);
             p.movido=true;
             this.jugadas-=1;
         }
@@ -108,8 +109,10 @@ export class Partida{
 
     asignarPersonajes():void{
         for(let i=0; i<listaPersonas.length; i++){
-            this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
-            .listPersonajes.push(listaPersonas[i]);
+            let c: Ciudad = this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
+            c.listPersonajes.push(listaPersonas[i]);
+            listaPersonas[i].ciudadEnLaQueEsta = c;
+
         }
     }
 }
