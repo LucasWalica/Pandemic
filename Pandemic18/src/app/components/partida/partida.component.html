@@ -74,7 +74,7 @@
 
     <!--Acciones con personajes -->
     @if (this.showCharacterActionUI) {
-        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-80 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
+        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
             <h1 class="text-2xl">{{personajeSeleccionado.name}}</h1>
             @if (personajeSeleccionado.id===1) {
                 <h1 class="m-2">
@@ -84,43 +84,67 @@
                 </h1> 
             }
             @else if (personajeSeleccionado.id===2) {
-                <h1 class="m-2">
-                    {{personajeSeleccionado.specialSkill}}
+                <div class="flex flex-col justify-center">
+                    <h1 class="m-2">
+                        {{personajeSeleccionado.specialSkill}}
+                    </h1> 
                     <br><br>
-                    <button (click)="personajeSeleccionado.reducirACeroEnfermedad(ciudadPersonajeSeleccionado, this.partida)">
-                        Erradicar Enfermedad
+                    <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150"
+                    (click)="personajeSeleccionado.reducirACeroEnfermedad(ciudadPersonajeSeleccionado, this.partida)">
+                    Erradicar Enfermedad
                     </button>
-                </h1> 
+                </div>
             }
             @else if (personajeSeleccionado.id===3) {
-                <h1 class="m-2">
-                    {{personajeSeleccionado.specialSkill}}
+                <div class="flex flex-col justify-center">
+                    <h1 class="m-2">
+                        {{personajeSeleccionado.specialSkill}}
+                    </h1> 
                     <br><br>
                     @if (!this.ciudadPersonajeSeleccionado.centroInvestigacion) {
-                        <button (click)="this.personajeSeleccionado.construirCentroInvestigacion(this.ciudadPersonajeSeleccionado, this.partida)">
-                            Construir centro de investigación
-                        </button>
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150"
+                        (click)="this.personajeSeleccionado.construirCentroInvestigacion(this.ciudadPersonajeSeleccionado, this.partida)">
+                        Construir centro de investigación
+                    </button>
                     } @else {
                         <h1>Esta ciudad ya tiene un centro de investigación.</h1>
                     }
-                </h1> 
+                </div>
             }
             @else if (personajeSeleccionado.id===4) {
-                <h1 class="m-2">
-                    {{personajeSeleccionado.specialSkill}}
+                <div class="flex flex-col justify-center">
+                    <h1 class="m-2">
+                        {{personajeSeleccionado.specialSkill}}
+                    </h1> 
                     <br><br>
-                    añadir seleccion de investigacion de enfermedad y boton
-                </h1> 
+                    <div class="grid grid-cols-4 text-center">
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                            curar e verde
+                        </button>
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                            curar e azul
+                        </button>
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                            curar e roja
+                        </button>
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                            curar e amarilla
+                        </button>
+                    </div>
+                </div>
             }
             <div>
-                <div>{{ciudadPersonajeSeleccionado.nombre}}</div>
-                <div>
-                    <h1>Quieres mover el personaje a: </h1>
-                    <div>
+                <div class="text-center">
+                    <h1 class="text-2xl">{{ciudadPersonajeSeleccionado.nombre}}</h1>
+                </div>
+                <div class="border-2 p-2 rounded-md border-emerald-950 text-center flex justify-center flex-col">
+                    <h1 class="text-xl bg-emerald-800 p-1 rounded-md text-emerald-200">Mover a:</h1>
+                    <div class="flex flex-row gap-4">
                        @for (cInicio of this.partida.listCiudades; track cInicio) {
                         @if (cInicio.nombre===personajeSeleccionado.ciudadEnLaQueEsta.nombre) {
                             @for (ciudad of cInicio.listCiudadesColindandes; track ciudad) {
-                                <button (click)="this.partida.moverPersonaje(personajeSeleccionado.ciudadEnLaQueEsta, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
+                                <button class="border-2 rounded-md pl-1 pr-1 m-2 border-red-950 text-lime-300 bg-emerald-800 hover:bg-red-950 hover:text-lime-300" 
+                                (click)="this.partida.moverPersonaje(personajeSeleccionado.ciudadEnLaQueEsta, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
                                     {{ciudad}}
                                 </button>
                             }
@@ -129,7 +153,7 @@
                     </div>
                 </div>
             </div>
-            <div class="items-center">
+            <div class="mt-5 items-center">
                 <button (click)="closeUI()" class="border-2 rounded-md border-black bg-red-950 text-red-500 pl-4 pr-4 p-2 hover:bg-red-700 hover:text-red-950">
                     Close
                 </button>
