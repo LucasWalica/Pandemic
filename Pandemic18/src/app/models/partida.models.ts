@@ -15,7 +15,7 @@ export class Partida{
     }
 
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){
-        if(cInicio.communicateWith(cFinal)){
+        if(cInicio.communicateWith(cFinal) && this.jugadas>0){
             cInicio.quitarPersonaje(p);
             cFinal.aniadiPersonaje(p);
             p.cambiarCiudad(cFinal);
@@ -91,22 +91,30 @@ export class Partida{
     }
 
     eliminarAzul(c:Ciudad){
-        c.eAzul-=1
-        this.counterTurnos-=1
+        if(this.jugadas>0){
+            c.eAzul-=1
+            this.counterTurnos-=1
+        }
     }
     eliminarAmarilla(c:Ciudad){
-        c.eAmarillo-=1
-        this.counterTurnos-=1
+        if(this.jugadas>0){
+            c.eAmarillo-=1
+            this.counterTurnos-=1
+        }
     }
     eliminarRoja(c:Ciudad){
-        c.eRojo-=1
-        this.counterTurnos-=1
+        if(this.jugadas>0){
+            c.eRojo-=1
+            this.counterTurnos-=1
+        }
     }
     eliminarVerde(c:Ciudad){
-        c.eVerde-=1
-        this.counterTurnos-=1
+        if(this.jugadas>0){
+            c.eVerde-=1
+            this.counterTurnos-=1
+        }
     }
-
+    // metodo llamado al iniciar una partida para asignar personajes de forma aleatoria en las ciudades
     asignarPersonajes():void{
         for(let i=0; i<listaPersonas.length; i++){
             let c: Ciudad = this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]

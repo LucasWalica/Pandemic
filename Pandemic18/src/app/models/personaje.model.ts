@@ -48,7 +48,7 @@ export class Medico extends Personaje{
     // funcion asincrona?
     override reducirACeroEnfermedad(c:Ciudad, p:Partida){
 
-        if(this.turnoComienzo=0){
+        if(this.turnoComienzo=0 && p.jugadas>0){
             const tC = p.counterTurnos;
             this.turnoComienzo = tC;
             p.jugadas-=1;
@@ -79,7 +79,7 @@ export class BobElConstructor extends Personaje{
 
     override construirCentroInvestigacion(c:Ciudad, p:Partida){
         
-        if(c.centroInvestigacion==false){
+        if(c.centroInvestigacion==false && p.jugadas>0){
 
             if(this.turnoComienzo=0){
                 const tC = p.counterTurnos;
@@ -105,13 +105,15 @@ export class Investigador extends Personaje{
         super(id, name, specialSkill, movido);
     }
     override investigar(e:Enfermedad, p:Partida){
-        var c:Ciudad|null=this.getCiudadActual(p);
-        if(c?.centroInvestigacion==true){
-            e.turnosParaCurar-=20;
-        }else{
-            e.turnosParaCurar-=10;
-        }          
-        this.movido=true;
+        if(p.counterTurnos>0){
+            var c:Ciudad|null=this.getCiudadActual(p);
+            if(c?.centroInvestigacion==true){
+                e.turnosParaCurar-=20;
+            }else{
+                e.turnosParaCurar-=10;
+            }          
+            this.movido=true;
+        }
     }
 }
 
