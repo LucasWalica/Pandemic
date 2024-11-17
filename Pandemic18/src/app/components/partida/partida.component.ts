@@ -33,6 +33,7 @@ export class PartidaComponent implements AfterViewInit {
   initialDistance: number = 0;
   isBrowser: boolean;
   showCharacterActionUI:boolean = false;
+  showCiudadesMasInfectadas:boolean = false;
   // para no cargar mas veces 
   cargado:boolean = false;
   
@@ -82,6 +83,12 @@ export class PartidaComponent implements AfterViewInit {
   }
   closeUI(){
     this.showCharacterActionUI=false;
+  }
+  mostrarCiudadesMasInfectadas(){
+    this.showCiudadesMasInfectadas=true;
+  }
+  cerrarCiudadesMasInfectadas(){
+    this.showCiudadesMasInfectadas=false;
   }
 
 

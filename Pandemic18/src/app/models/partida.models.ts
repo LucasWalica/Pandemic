@@ -1,4 +1,5 @@
 import { Ciudad } from "./ciudad.models";
+import { Enfermedad } from "./enfermedad.models";
 import { listaPersonas, Personaje } from "./personaje.model";
 
 
@@ -54,7 +55,13 @@ export class Partida{
                 }
             }
         }
-        this.contagiarRandom()
+        this.contagiarRandom();
+        // ordenar ciudades segun rango de infeccion
+        this.listCiudades.sort((ciudadA, ciudadB) => {
+            const nivelEnfermedadA = ciudadA.calcularNivelEnfermedad();
+            const nivelEnfermedadB = ciudadB.calcularNivelEnfermedad();
+            return nivelEnfermedadB - nivelEnfermedadA; 
+        });
     }
 
     // testear
@@ -69,6 +76,8 @@ export class Partida{
 
             var ciudadRandom = this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
             var enfermedadRandom = enfermedades[Math.floor(Math.random()*enfermedades.length)]
+            console.log(ciudadRandom, " ciudad random")
+            console.log(enfermedadRandom, " enfermedad random")
             switch(enfermedadRandom){
                 case 1: {
                     ciudadRandom.eAmarillo+=gravedadInfeccion;

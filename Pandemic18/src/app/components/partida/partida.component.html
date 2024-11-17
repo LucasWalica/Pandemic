@@ -4,6 +4,9 @@
     
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
     <div class="grid grid-cols-1 xl:grid-cols-5 border-2 border-emerald-800 m-2 rounded-md p-2">
+        
+        
+        
         <!--div de datos de la ciudad-->
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <h1>{{ciudadSeleccionada.nombre}}</h1>
@@ -13,7 +16,20 @@
                 {{ciudadSeleccionada.eRojo}}
                 {{ciudadSeleccionada.eAzul}}
             </div>
+            <div>
+                <button (click)="mostrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                    Ver ciudades más infectadas
+                </button>
+            </div>
         </div>
+
+
+
+
+
+
+
         <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
             (mousedown)="onMouseDown($event)"
@@ -71,6 +87,24 @@
             </div>
         </div>
     </div>
+
+
+    <!-- ciudades mas infectadas -->
+     @if (this.showCiudadesMasInfectadas) {
+        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
+            <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+            hover:pl-6 hover:pr-6 duration-150">Cerrar</button>
+            <div class="overflow-y-auto h-80 w-full text-center grid grid-cols-2 gap-4">
+                @for (ciudad of this.partida.listCiudades; track ciudad) {
+                    <button (click)="showData(ciudad); cerrarCiudadesMasInfectadas()"
+                    class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                        hover:pl-6 hover:pr-6 duration-150">
+                        {{ciudad.nombre}} {{ciudad.calcularNivelEnfermedad()}}
+                    </button>
+                }
+            </div>
+        </div>
+     }
 
     <!--Acciones con personajes -->
     @if (this.showCharacterActionUI) {

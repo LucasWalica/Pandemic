@@ -96,6 +96,9 @@
             return todasLasCiudades[0];
         }
         
+        calcularNivelEnfermedad(): number {
+            return this.eVerde + this.eRojo + this.eAzul + this.eAmarillo;
+        } 
 
     }   
 
