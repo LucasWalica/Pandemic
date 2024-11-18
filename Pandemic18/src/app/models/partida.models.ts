@@ -1,5 +1,4 @@
 import { Ciudad } from "./ciudad.models";
-import { Enfermedad } from "./enfermedad.models";
 import { listaPersonas, Personaje } from "./personaje.model";
 
 
@@ -25,19 +24,6 @@ export class Partida{
         }
     }  
 
-
-
-   // dibujarLineas(c:Ciudad){
-        //for(var inicioLinea=0; inicioLinea < this.listCiudades.length; inicioLinea++){
-           // var lx1=c.coordenadasX;
-           // var ly1=c.coordenadasY;
-           // for(var finLinea=0; finLinea < c.todasLasCiudadesColindandes.length; finLinea++){
-                
-         //   }
-       // }
-     //   91//numero de lineas en total, por si me sirve de algo en el tripe bucle
-    //}
-    
 
     // testear
     pasarTurno(){        

@@ -27,14 +27,31 @@
 
 
 
-
-
-
+       
+<!--Contenedor del mapa-->
         <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
             (mousedown)="onMouseDown($event)"
             (mousemove)="onMouseMove($event)"
             (mouseup)="onMouseUp()">
+            
+            
+            <!--lineas de conexion-->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none"
+            [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px, ' + offsetY + 'px)'}">
+            <ng-container *ngFor="let ciudad of partida.listCiudades">
+              <line 
+                *ngFor="let colindante of ciudad.listCiudadesColindandes"
+                [attr.x1]="ciudad.coordenadasX * scalingFactorX + 10"
+                [attr.y1]="ciudad.coordenadasY * scalingFactorY + 10"
+                [attr.x2]="(getCiudad(colindante)?.coordenadasX || 0) * scalingFactorX + 10"
+                [attr.y2]="(getCiudad(colindante)?.coordenadasY || 0) * scalingFactorY + 10"
+                stroke="red"
+                stroke-width="2">
+              </line>
+            </ng-container>
+          </svg>
+
                 <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
                     <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover unselectable" draggable="false" (dragstart)="false;">
                         @for (ciudad of partida.listCiudades; track ciudad) {
@@ -50,6 +67,8 @@
                     }   
             </div>
         </div>
+
+
         <!--datos partida-->
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
             <!--Actualizaciones del turno y mas data-->

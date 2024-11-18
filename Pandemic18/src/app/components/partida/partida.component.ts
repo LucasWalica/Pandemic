@@ -84,11 +84,20 @@ export class PartidaComponent implements AfterViewInit {
   closeUI(){
     this.showCharacterActionUI=false;
   }
+  
   mostrarCiudadesMasInfectadas(){
     this.showCiudadesMasInfectadas=true;
   }
   cerrarCiudadesMasInfectadas(){
     this.showCiudadesMasInfectadas=false;
+  }
+
+
+
+
+
+  getCiudad(nombre: string): Ciudad | undefined {
+    return this.partida.listCiudades.find(c => c.nombre === nombre);
   }
 
 
