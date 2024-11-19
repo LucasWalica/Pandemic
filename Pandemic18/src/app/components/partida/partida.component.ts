@@ -3,7 +3,7 @@ import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
-import { Personaje, listaPersonas } from '../../models/personaje.model';
+import { BobElConstructor, EspecialistaEnCuarentena, Investigador, Medico, Personaje, listaPersonas } from '../../models/personaje.model';
 
 @Component({
   selector: 'app-partida',
@@ -21,7 +21,7 @@ export class PartidaComponent implements AfterViewInit {
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
   listPersonajes:Personaje[] = listaPersonas;
-  personajeSeleccionado:Personaje = {} as Personaje;
+  personajeSeleccionado:Personaje | EspecialistaEnCuarentena | Medico | Investigador | BobElConstructor = {} as Personaje | EspecialistaEnCuarentena | Medico | Investigador | BobElConstructor ;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
   offsetX: number = 0;         

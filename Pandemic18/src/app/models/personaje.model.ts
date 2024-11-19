@@ -42,6 +42,7 @@ export class EspecialistaEnCuarentena extends Personaje{
 // id = 2
 export class Medico extends Personaje{
     turnoComienzo:number=0;
+    erradicando:boolean = false;
     constructor(id:number, name:string, specialSkill:string, movido:boolean){
         super(id, name, specialSkill, movido);
     }
@@ -52,12 +53,14 @@ export class Medico extends Personaje{
             const tC = p.counterTurnos;
             this.turnoComienzo = tC;
             p.jugadas-=1;
+            this.erradicando=true;
         }
-        while(p.counterTurnos<this.turnoComienzo+4){
+        while(p.counterTurnos<this.turnoComienzo+4 && this.erradicando){
             this.movido=true;
             return false;
         }
         if(p.counterTurnos=this.turnoComienzo+4){
+            this.erradicando = false;
             c.eAmarillo=0;
             c.eAzul=0;
             c.eRojo=0;
@@ -72,6 +75,7 @@ export class Medico extends Personaje{
 export class BobElConstructor extends Personaje{
 
     turnoComienzo:number=0;
+    contruyendo:boolean = false;
 
     constructor(id:number, name:string, specialSkill:string, movido:boolean){
         super(id, name, specialSkill, movido);
@@ -83,14 +87,17 @@ export class BobElConstructor extends Personaje{
 
             if(this.turnoComienzo=0){
                 const tC = p.counterTurnos;
+                p.jugadas-=1;
+                this.contruyendo=true;
                 this.turnoComienzo = tC;
             }
 
-            while(p.counterTurnos<this.turnoComienzo+4){
+            while(p.counterTurnos<this.turnoComienzo+4 && this.contruyendo){
                 this.movido=true;
                 return false;
             }
             if(p.counterTurnos=this.turnoComienzo+4){
+                this.contruyendo=false;
                 c.centroInvestigacion=true;
                 this.turnoComienzo=0;
                 return true;
