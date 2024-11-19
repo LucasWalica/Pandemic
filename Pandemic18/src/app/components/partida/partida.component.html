@@ -47,15 +47,25 @@
             <svg class="absolute inset-0 w-full h-full pointer-events-none"
             [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px, ' + offsetY + 'px)'}">
             <ng-container *ngFor="let ciudad of partida.listCiudades">
-              <line 
-                *ngFor="let colindante of ciudad.listCiudadesColindandes"
-                [attr.x1]="ciudad.coordenadasX * scalingFactorX + 10"
-                [attr.y1]="ciudad.coordenadasY * scalingFactorY + 10"
-                [attr.x2]="(getCiudad(colindante)?.coordenadasX || 0) * scalingFactorX + 10"
-                [attr.y2]="(getCiudad(colindante)?.coordenadasY || 0) * scalingFactorY + 10"
-                stroke="red"
-                stroke-width="2">
-              </line>
+                <ng-container *ngFor="let colindante of ciudad.listCiudadesColindandes">
+                    <line 
+                        [attr.x1]="ciudad.coordenadasX * scalingFactorX + 10"
+                        [attr.y1]="ciudad.coordenadasY * scalingFactorY + 10"
+                        [attr.x2]="(getCiudad(colindante)?.coordenadasX || 0) * scalingFactorX + 10"
+                        [attr.y2]="(getCiudad(colindante)?.coordenadasY || 0) * scalingFactorY + 10"
+                        stroke="red"
+                        stroke-width="2">
+                    </line>
+                    <!--borrar si hace falta-->
+                    <text 
+                        [attr.x]="((ciudad.coordenadasX + (getCiudad(colindante)?.coordenadasX || 0)) / 2) * scalingFactorX"
+                        [attr.y]="((ciudad.coordenadasY + (getCiudad(colindante)?.coordenadasY || 0)) / 2) * scalingFactorY"
+                        fill="red" 
+                        font-size="10" 
+                        text-anchor="middle">
+                        {{ ciudad.nombre }} - {{ colindante }}
+                    </text>
+                </ng-container>
             </ng-container>
           </svg>
 
