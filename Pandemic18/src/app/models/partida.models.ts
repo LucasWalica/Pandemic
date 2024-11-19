@@ -1,5 +1,5 @@
 import { Ciudad } from "./ciudad.models";
-import { listaPersonas, Personaje } from "./personaje.model";
+import { listaPersonas, Personaje, EspecialistaEnCuarentena, Medico, Investigador, BobElConstructor } from "./personaje.model";
 
 
 export class Partida{
@@ -33,12 +33,13 @@ export class Partida{
         for(var ciudad of this.listCiudades){
             for(var personaje of ciudad.listPersonajes){
                 personaje.movido=false;
-                if(personaje.construirCentroInvestigacion(ciudad, this)===true){
-                    personaje.movido=false;
+                if(personaje.id===3 && personaje.enAccion){
+                    personaje.construirCentroInvestigacion(ciudad, this);
                 }
-                if(personaje.reducirACeroEnfermedad(ciudad, this)===true){
-                    personaje.movido=false;
+                if(personaje.id===2 && personaje.enAccion){
+                    personaje.reducirACeroEnfermedad(ciudad, this);
                 }
+
             }
         }
         this.contagiarRandom();

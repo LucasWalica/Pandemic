@@ -163,10 +163,14 @@
                         {{personajeSeleccionado.specialSkill}}
                     </h1> 
                     <br><br>
-                    <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150"
-                    (click)="personajeSeleccionado.reducirACeroEnfermedad(ciudadPersonajeSeleccionado, this.partida)">
-                    Erradicar Enfermedad
+                    @if (!this.personajeSeleccionado.enAccion) {
+                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150"
+                        (click)="personajeSeleccionado.reducirACeroEnfermedad(ciudadPersonajeSeleccionado, this.partida)">
+                        Erradicar Enfermedad
                     </button>
+                    }@else if (this.personajeSeleccionado.enAccion) {
+                        <h1>Este personaje está erradicando las enfermedades de la ciudad.</h1>
+                    }
                 </div>
             }
             @else if (personajeSeleccionado.id===3) {
@@ -175,12 +179,14 @@
                         {{personajeSeleccionado.specialSkill}}
                     </h1> 
                     <br><br>
-                    @if (!this.ciudadPersonajeSeleccionado.centroInvestigacion) {
+                    @if (!this.ciudadPersonajeSeleccionado.centroInvestigacion && !personajeSeleccionado.enAccion) {
                         <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150"
                         (click)="this.personajeSeleccionado.construirCentroInvestigacion(this.ciudadPersonajeSeleccionado, this.partida)">
                         Construir centro de investigación
-                    </button>
-                    } @else {
+                    </button> 
+                    }@else if (personajeSeleccionado.enAccion) {
+                        <h1>Este personaje está construyendo un centro de investigación.</h1>
+                    }@else {
                         <h1>Esta ciudad ya tiene un centro de investigación.</h1>
                     }
                 </div>
@@ -221,8 +227,8 @@
                                 (click)="this.partida.moverPersonaje(personajeSeleccionado.ciudadEnLaQueEsta, cInicio.getCiudadByName(ciudad), personajeSeleccionado)">
                                     {{ciudad}}
                                 </button>
+                                }
                             }
-                        }
                        }
                     </div>
                 </div>

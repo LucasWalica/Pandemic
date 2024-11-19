@@ -4,6 +4,7 @@ import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { BobElConstructor, EspecialistaEnCuarentena, Investigador, Medico, Personaje, listaPersonas } from '../../models/personaje.model';
+import { Enfermedad } from '../../models/enfermedad.models';
 
 @Component({
   selector: 'app-partida',

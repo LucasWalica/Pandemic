@@ -8,12 +8,16 @@ export class Personaje{
     specialSkill:string;
     movido:boolean=false;
     ciudadEnLaQueEsta:Ciudad = {} as Ciudad;
+    turnoComienzo:number=0;
+    enAccion:boolean = false;
 
-    constructor(id:number, name:string, specialSkill:string, movido:boolean){
+    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
         this.id=id;
         this.name=name;
         this.specialSkill=specialSkill;
         this.movido=movido;
+        this.turnoComienzo =turnoComienzo;
+        this.enAccion = enAccion;
     }
     getCiudadActual(p:Partida):Ciudad|null{
         for(var ciudad of p.listCiudades){
@@ -34,37 +38,37 @@ export class Personaje{
 }
 // id = 1
 export class EspecialistaEnCuarentena extends Personaje{
-    constructor(id:number, name:string, specialSkill:string, movido:boolean){
-        super(id, name, specialSkill, movido);
+    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
+        super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
     // metodo anular transmision implementado en clase enfermedad
 }
 // id = 2
 export class Medico extends Personaje{
-    turnoComienzo:number=0;
-    erradicando:boolean = false;
-    constructor(id:number, name:string, specialSkill:string, movido:boolean){
-        super(id, name, specialSkill, movido);
+    
+    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
+        super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
-    // funcion asincrona?
-    override reducirACeroEnfermedad(c:Ciudad, p:Partida){
+    override reducirACeroEnfermedad(c:Ciudad|null, p:Partida){
 
-        if(this.turnoComienzo=0 && p.jugadas>0){
+        if(this.turnoComienzo===0 && p.jugadas>0){
             const tC = p.counterTurnos;
             this.turnoComienzo = tC;
             p.jugadas-=1;
-            this.erradicando=true;
+            this.enAccion=true;
         }
-        while(p.counterTurnos<this.turnoComienzo+4 && this.erradicando){
+        if(p.counterTurnos<this.turnoComienzo+4 && this.enAccion){
             this.movido=true;
             return false;
         }
-        if(p.counterTurnos=this.turnoComienzo+4){
-            this.erradicando = false;
-            c.eAmarillo=0;
-            c.eAzul=0;
-            c.eRojo=0;
-            c.eVerde=0;
+        if(p.counterTurnos===this.turnoComienzo+4){
+            this.enAccion = false;
+            if(c){
+                c.eAmarillo=0;
+                c.eAzul=0;
+                c.eRojo=0;
+                c.eVerde=0;
+            }
             this.turnoComienzo=0;
             return true;
         }
@@ -74,30 +78,27 @@ export class Medico extends Personaje{
 // id = 3
 export class BobElConstructor extends Personaje{
 
-    turnoComienzo:number=0;
-    contruyendo:boolean = false;
-
-    constructor(id:number, name:string, specialSkill:string, movido:boolean){
-        super(id, name, specialSkill, movido);
+    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
+        super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
 
     override construirCentroInvestigacion(c:Ciudad, p:Partida){
         
         if(c.centroInvestigacion==false && p.jugadas>0){
 
-            if(this.turnoComienzo=0){
+            if(this.turnoComienzo===0){
                 const tC = p.counterTurnos;
                 p.jugadas-=1;
-                this.contruyendo=true;
+                this.enAccion=true;
                 this.turnoComienzo = tC;
             }
 
-            while(p.counterTurnos<this.turnoComienzo+4 && this.contruyendo){
+            if(p.counterTurnos<this.turnoComienzo+4 && this.enAccion){
                 this.movido=true;
                 return false;
             }
-            if(p.counterTurnos=this.turnoComienzo+4){
-                this.contruyendo=false;
+            if(p.counterTurnos===this.turnoComienzo+4){
+                this.enAccion=false;
                 c.centroInvestigacion=true;
                 this.turnoComienzo=0;
                 return true;
@@ -108,13 +109,13 @@ export class BobElConstructor extends Personaje{
 }
 // id = 4
 export class Investigador extends Personaje{
-    constructor(id:number, name:string, specialSkill:string, movido:boolean){
-        super(id, name, specialSkill, movido);
+    constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
+        super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
     override investigar(e:Enfermedad, p:Partida){
         if(p.counterTurnos>0){
             var c:Ciudad|null=this.getCiudadActual(p);
-            if(c?.centroInvestigacion==true){
+            if(c?.centroInvestigacion===true){
                 e.turnosParaCurar-=20;
             }else{
                 e.turnosParaCurar-=10;
@@ -125,8 +126,8 @@ export class Investigador extends Personaje{
 }
 
 export const listaPersonas:Personaje[] = [
-    new EspecialistaEnCuarentena(1,"Especialista en Cuarentenas", "Anula la expansion y aparicion de enfermedades en la ciudad y en las colindantes", false),
-    new Medico(2,"Médico", "Erradica todas las enfermedades de una ciudad tras unos turnos. ", false),
-    new BobElConstructor(3, "Constructor", "Construye centros de investigacion tras unos turnos.", false),
-    new Investigador(4, "Investigador", "Investiga a cura de una enfermedad en específico, si esta en una ciudad con centro de investigacion será más rápido.", false),
+    new EspecialistaEnCuarentena(1,"Especialista en Cuarentenas", "Anula la expansion y aparicion de enfermedades en la ciudad y en las colindantes", false, 0, false),
+    new Medico(2,"Médico", "Erradica todas las enfermedades de una ciudad tras unos turnos. ", false,  0, false),
+    new BobElConstructor(3, "Constructor", "Construye centros de investigacion tras unos turnos.", false,  0, false),
+    new Investigador(4, "Investigador", "Investiga a cura de una enfermedad en específico, si esta en una ciudad con centro de investigacion será más rápido.", false,  0, false),
 ]
