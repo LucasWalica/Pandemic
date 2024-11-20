@@ -31,6 +31,14 @@ export class Enfermedad{
         }
         return ciudad;
     }
+
+
+    getEnfermedadByName(name:string):Enfermedad|undefined{
+        if(name===this.name){
+            return this;
+        }
+        return undefined;
+    }
 }
 // hace falta refactorizar los metodos por si hay personajes en la ciudad
 // enfermedad vanilla
@@ -51,6 +59,7 @@ export class eAmarilla extends Enfermedad {
         }
     }
 }
+// se extiende a todas las ciudades colindantes y posteriormente sube en la ciudad 
 export class eVerde extends Enfermedad{
 
     constructor(name:string, turnosParaCurar:number, infeccionAColindandes:number){
@@ -102,4 +111,11 @@ export class eAzul extends Enfermedad{
         }
     }
 }
+
+export const listEnfermedades:Enfermedad[] = [
+    new eVerde("verde", 100, 1), 
+    new eAmarilla("amarilla", 100, 1),
+    new eAzul("azul", 200, 1),
+    new eRojo("roja", 100, 2)
+];
 

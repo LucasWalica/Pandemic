@@ -31,7 +31,7 @@ export class Personaje{
     }
     reducirACeroEnfermedad(c:Ciudad, p:Partida):boolean|void{}
     construirCentroInvestigacion(c:Ciudad, p:Partida):boolean|void{}
-    investigar(e:Enfermedad, p:Partida){}
+    investigar(e:Enfermedad|undefined, p:Partida){}
     cambiarCiudad(c:Ciudad){
         this.ciudadEnLaQueEsta=c;
     }  
@@ -113,7 +113,7 @@ export class Investigador extends Personaje{
         super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
     override investigar(e:Enfermedad, p:Partida){
-        if(p.counterTurnos>0){
+        if(!this.movido && e.turnosParaCurar>0){
             var c:Ciudad|null=this.getCiudadActual(p);
             if(c?.centroInvestigacion===true){
                 e.turnosParaCurar-=20;
@@ -121,6 +121,7 @@ export class Investigador extends Personaje{
                 e.turnosParaCurar-=10;
             }          
             this.movido=true;
+            p.jugadas--;
         }
     }
 }

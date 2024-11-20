@@ -7,29 +7,51 @@
                 
         <!--div de datos de la ciudad-->
         <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
-            @if (ciudadSeleccionada.nombre) {
-
-                <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
-                <div class="grid grid-cols-2 text-center">
-                    <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
-                        Enf Amarilla: {{ciudadSeleccionada.eAmarillo}}
+            <div class="border-2 rounded-md p-2 border-emerald-950">
+                <div class="text-center">
+                    <h1 class="text-2xl m-1">
+                        Vacunas 
+                    </h1>
+                </div>
+                <div class="grid grid-cols-4 rounded-md text-center gap-1">
+                    <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md">
+                        Azul&nbsp;  {{getEnfermedadByName('azul')?.turnosParaCurar}}
                     </div>
-                    <div class="border-2 border-green-500 bg-green-700 text-green-200 rounded-md p-1 text-sm">
-                        Enf Verde: {{ciudadSeleccionada.eVerde}}
+                    <div class="bg-red-400 text-red-950 border-red-950 rounded-md text-md">
+                        Roja&nbsp;  {{getEnfermedadByName('roja')?.turnosParaCurar}}
                     </div>
-                    <div class="border-2 border-red-500 bg-red-700 text-red-200 rounded-md p-1 text-sm">
-                        Enf Roja: {{ciudadSeleccionada.eRojo}}
+                    <div class="bg-yellow-400 text-yellow-950 border-yellow-950 rounded-md text-md">
+                        Amarilla {{getEnfermedadByName('amarilla')?.turnosParaCurar}}
                     </div>
-                    <div class="border-2 border-blue-500 bg-blue-700 text-blue-200 rounded-md p-1 text-sm">
-                        Enf Azul: {{ciudadSeleccionada.eAzul}}
+                    <div class="bg-green-400 text-green-950 border-green-950 rounded-md text-md">
+                        Verde {{getEnfermedadByName('verde')?.turnosParaCurar}}
                     </div>
                 </div>
-                <div class="flex flex-row gap-2 justify-center border-2 border-emerald-950 rounded-md">
-                    @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
-                        <div>
-                            {{ciudad}}
+            </div>
+            @if (ciudadSeleccionada.nombre) {
+                <div class="p-1">
+                    <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
+                    <div class="grid grid-cols-2 text-center">
+                        <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
+                            Enf Amarilla: {{ciudadSeleccionada.eAmarillo}}
                         </div>
-                    }
+                        <div class="border-2 border-green-500 bg-green-700 text-green-200 rounded-md p-1 text-sm">
+                            Enf Verde: {{ciudadSeleccionada.eVerde}}
+                        </div>
+                        <div class="border-2 border-red-500 bg-red-700 text-red-200 rounded-md p-1 text-sm">
+                            Enf Roja: {{ciudadSeleccionada.eRojo}}
+                        </div>
+                        <div class="border-2 border-blue-500 bg-blue-700 text-blue-200 rounded-md p-1 text-sm">
+                            Enf Azul: {{ciudadSeleccionada.eAzul}}
+                        </div>
+                    </div>
+                    <div class="flex flex-row gap-2 justify-center border-2 border-emerald-950 rounded-md">
+                        @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
+                            <div>
+                                {{ciudad}}
+                            </div>
+                        }
+                    </div>
                 </div>
             }
                 
@@ -198,18 +220,29 @@
                     </h1> 
                     <br><br>
                     <div class="grid grid-cols-4 text-center">
-                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                            curar e verde
-                        </button>
-                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                            curar e azul
-                        </button>
-                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                            curar e roja
-                        </button>
-                        <button class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                            curar e amarilla
-                        </button>
+                        @if (!personajeSeleccionado.enAccion) {
+
+                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('verde'), this.partida)"
+                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                curar e verde
+                            </button>
+                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('azul'), this.partida)"
+                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                curar e azul
+                            </button>
+                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('roja'), this.partida)"
+                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                curar e roja
+                            </button>
+                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('amarilla'), this.partida)"
+                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                curar e amarilla
+                            </button>
+                        } @else if (this.personajeSeleccionado.enAccion) {
+                            <h1 class="border-2 rounded-md border-emerald-950 text-2xl">
+                                El personaje está estudiando una enfermedad
+                            </h1>
+                        }
                     </div>
                 </div>
             }

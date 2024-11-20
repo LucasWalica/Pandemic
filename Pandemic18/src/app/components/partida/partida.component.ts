@@ -4,7 +4,7 @@ import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { BobElConstructor, EspecialistaEnCuarentena, Investigador, Medico, Personaje, listaPersonas } from '../../models/personaje.model';
-import { Enfermedad } from '../../models/enfermedad.models';
+import { Enfermedad, listEnfermedades } from '../../models/enfermedad.models';
 
 @Component({
   selector: 'app-partida',
@@ -15,14 +15,14 @@ import { Enfermedad } from '../../models/enfermedad.models';
 })
 export class PartidaComponent implements AfterViewInit {
   
-  partida: Partida = new Partida(0, 4, todasLasCiudades);
+  partida: Partida = new Partida(0, 4, todasLasCiudades, listEnfermedades);
   scalingFactorX: number = 1;
   scalingFactorY: number = 1;
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
   listPersonajes:Personaje[] = listaPersonas;
-  personajeSeleccionado:Personaje | EspecialistaEnCuarentena | Medico | Investigador | BobElConstructor = {} as Personaje | EspecialistaEnCuarentena | Medico | Investigador | BobElConstructor ;
+  personajeSeleccionado:Personaje = {} as Personaje;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
   offsetX: number = 0;         
@@ -94,6 +94,11 @@ export class PartidaComponent implements AfterViewInit {
   }
 
 
+  getEnfermedadByName(name:string):Enfermedad|undefined{
+    let enfermedad:Enfermedad|undefined =  this.partida.listEnfermedades.find(enf=>enf.name===name);
+    console.log("funciono");
+    return enfermedad;
+  }
 
 
 

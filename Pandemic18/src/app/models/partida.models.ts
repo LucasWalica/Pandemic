@@ -1,16 +1,19 @@
 import { Ciudad } from "./ciudad.models";
 import { listaPersonas, Personaje, EspecialistaEnCuarentena, Medico, Investigador, BobElConstructor } from "./personaje.model";
+import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from "./enfermedad.models";
 
 
 export class Partida{
     counterTurnos:number=0;
     jugadas:number=4;
     listCiudades:Ciudad[];
+    listEnfermedades:Enfermedad[];
 
-    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[]){
+    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[]){
         this.counterTurnos=counterTurnos;
         this.jugadas=jugadas;
         this.listCiudades=listCiudades;
+        this.listEnfermedades=listEnfermedades;
         this.asignarPersonajes();
     }
 
@@ -67,19 +70,31 @@ export class Partida{
             console.log(enfermedadRandom, " enfermedad random")
             switch(enfermedadRandom){
                 case 1: {
-                    ciudadRandom.eAmarillo+=gravedadInfeccion;
+                    var eAmarilla = this.listEnfermedades.find(enf => enf.name === 'amarilla');
+                        if(eAmarilla && eAmarilla.turnosParaCurar>0){
+                            ciudadRandom.eAmarillo+=gravedadInfeccion;
+                        }
                     break;
                 }
                 case 2:{
-                    ciudadRandom.eVerde+=gravedadInfeccion;
+                    var eVerde = this.listEnfermedades.find(enf=>enf.name==="verde");
+                    if(eVerde && eVerde.turnosParaCurar>0){
+                        ciudadRandom.eVerde+=gravedadInfeccion;
+                    }
                     break;
                 }
                 case 3: {
-                    ciudadRandom.eRojo+=gravedadInfeccion;
+                    var eRojo = this.listEnfermedades.find(enf=>enf.name==="roja");
+                    if(eRojo && eRojo.turnosParaCurar>0){
+                        ciudadRandom.eRojo+=gravedadInfeccion;
+                    }
                     break;
                 }
                 case 4:{
-                    ciudadRandom.eAzul+=gravedadInfeccion;
+                    var eAzul = this.listEnfermedades.find(enf => enf.name ==="azul");
+                    if(eAzul && eAzul.turnosParaCurar>0){    
+                        ciudadRandom.eAzul+=gravedadInfeccion;
+                    }
                     break;
                 } 
             }
