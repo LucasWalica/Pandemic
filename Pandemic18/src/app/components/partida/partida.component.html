@@ -45,12 +45,15 @@
                             Enf Azul: {{ciudadSeleccionada.eAzul}}
                         </div>
                     </div>
-                    <div class="flex flex-row gap-2 justify-center border-2 border-emerald-950 rounded-md">
-                        @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
-                            <div>
-                                {{ciudad}}
-                            </div>
-                        }
+                    <div>
+                        <h1 class="text-center">Ciudades colindantes:</h1>
+                        <div class="grid grid-cols-2 gap-1 justify-center text-center">
+                            @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
+                                <div class="border-2 rounded-md ">
+                                    {{ciudad}}
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             }
@@ -91,25 +94,25 @@
                 </ng-container>
             </ng-container>
           </svg>
-
+          <!--Ciudades-->
                 <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
                     <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover unselectable" draggable="false" (dragstart)="false;">
-                        @for (ciudad of partida.listCiudades; track ciudad) {
-                            <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2" 
+                     @for (ciudad of partida.listCiudades; track ciudad) {
+                           <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2" 
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}">
-                    </div>
-                    <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
-                        'left.px': (ciudad.coordenadasX * scalingFactorX),
-                        'top.px': (ciudad.coordenadasY * scalingFactorY)}">
-                        <div>
-                            {{ciudad.nombre}}
-                        </div>
-                    </div>
-                    }   
+                            </div>
+                            <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
+                                'left.px': (ciudad.coordenadasX * scalingFactorX),
+                                'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                <div>
+                                    {{ciudad.nombre}}
+                                </div>
+                            </div>
+                            }   
+                </div>
             </div>
-        </div>
 
 
         <!--datos partida-->
@@ -161,7 +164,28 @@
                     <button (click)="showData(ciudad); cerrarCiudadesMasInfectadas()"
                     class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
                         hover:pl-6 hover:pr-6 duration-150">
-                        {{ciudad.nombre}} {{ciudad.calcularNivelEnfermedad()}}
+                        <div class="flex flex-col text-center">
+                            <div>
+                                {{ciudad.nombre}}     
+                            </div>
+                            <div class="grid grid-cols-4">
+                                <div class="border-2 border-yellow-950 text-yellow-950 bg-yellow-600 rounded-md">
+                                   {{ciudad.eAmarillo}}
+                                </div>
+                                <div class="border-2 border-blue-950 text-blue-950 bg-blue-600 rounded-md">
+                                    {{ciudad.eAzul}}
+                                </div>
+                                <div class="border-2 border-red-950 text-red-950 bg-red-600 rounded-md">
+                                    {{ciudad.eRojo}}
+                                </div>
+                                <div class="border-2 border-green-950 text-green-950 bg-green-600 rounded-md">
+                                    {{ciudad.eVerde}}
+                                </div>
+                            </div>
+                            <div>    
+                               Nivel de enfermedad total: {{ciudad.calcularNivelEnfermedad()}}
+                            </div>
+                        </div>
                     </button>
                 }
             </div>
