@@ -9,6 +9,23 @@
   margin-bottom: 10%;
 }
 
+.striped-div {
+  width: 200px; /* Ancho del div */
+  height: 200px; /* Altura del div */
+  background: repeating-linear-gradient(
+    -45deg, /* Ángulo de las líneas */
+    #ac3333, /* Color 1 */
+    #ac3333 15px, /* Final del Color 1 */
+    #2a973c 15px, /* Inicio del Color 2 */
+    #2a973c 30px, /* Final del Color 2 */
+    #346bb3 30px, /* Inicio del Color 3 */
+    #346bb3 45px, /* Final del Color 3 */
+    #ac3333 45px, /* Inicio del Color 4 */
+    #acaa33 60px /* Final del Color 4 */
+  );
+  border: 1px solid #000; /* Opcional: borde para el div */
+}
+
 
 .perfil{
     width: 50px;
