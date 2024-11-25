@@ -140,6 +140,7 @@ export class PartidaComponent implements AfterViewInit {
       document.body.style.cursor = "default";
     }
   }
+  
 
 
   
