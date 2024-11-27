@@ -1,5 +1,5 @@
     import { Personaje } from "./personaje.model";
-
+    import { Partida } from "./partida.models";
 
     export class Ciudad{
         nombre:string;
@@ -83,7 +83,16 @@
                 }
             }
             return false;
-        }   
+        }
+        
+        ciudadContienePersonajes(p:Partida):boolean{
+            for(let i=0;i<this.listPersonajes.length; i++){
+                if(this.listPersonajes[i].getCiudadActual(p)?.nombre===this.nombre){
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
         getCiudadByName(cName:string):Ciudad{

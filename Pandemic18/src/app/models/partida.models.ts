@@ -7,13 +7,15 @@ export class Partida{
     counterTurnos:number=0;
     jugadas:number=4;
     listCiudades:Ciudad[];
+    listaPersonajes:Personaje[];
     listEnfermedades:Enfermedad[];
 
-    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[]){
+    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[], listaPersonajes:Personaje[]){
         this.counterTurnos=counterTurnos;
         this.jugadas=jugadas;
         this.listCiudades=listCiudades;
         this.listEnfermedades=listEnfermedades;
+        this.listaPersonajes = listaPersonajes;
         this.asignarPersonajes();
     }
 

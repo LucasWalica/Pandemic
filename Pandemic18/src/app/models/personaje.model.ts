@@ -2,6 +2,7 @@ import { Ciudad } from "./ciudad.models";
 import { Enfermedad } from "./enfermedad.models";
 import { Partida } from "./partida.models";
 
+
 export class Personaje{
     id:number;
     name:string; 
