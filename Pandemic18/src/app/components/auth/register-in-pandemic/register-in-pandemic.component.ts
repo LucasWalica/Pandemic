@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, ReactiveFormsModule, Validators, FormGroup} from '@angular/forms';
-
+import { AuthServiceService } from '../../../services/auth-service.service';
 @Component({
   selector: 'app-register-in-pandemic',
   standalone: true,
@@ -13,7 +13,7 @@ import {FormControl, ReactiveFormsModule, Validators, FormGroup} from '@angular/
 })
 export class RegisterInPandemicComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService:AuthServiceService) { }
   
   registrationForm = new FormGroup({
     nickName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -24,14 +24,14 @@ export class RegisterInPandemicComponent {
     validators: passwordConfirmationValidator("password", "password2"),
   });
   
-  enviar(){
-    if(this.registrationForm.valid){
-      console.log(this.registrationForm.value)
-    }else{
-      console.log("No valido el formulario")
-    }
+  enviar(event:Event){
+    event.preventDefault()
+    this.authService.registrar(
+      this.registrationForm.get('nickName')?.value?? '',
+      this.registrationForm.get('email')?.value?? '', 
+      this.registrationForm.get('password')?.value?? '')
+  
   }
-
 
   IrALogin(){
     this.router.navigate(['']);

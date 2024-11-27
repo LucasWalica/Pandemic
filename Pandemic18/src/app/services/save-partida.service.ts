@@ -10,7 +10,6 @@ export class SavePartidaService {
 
     //needed to get user ID before calling this method (reEscribir)
   guardarPartida(partida:Partida, user_Id:number) {
-    const userId = 1;
     // Asumimos que 'this.partida' es un objeto con las entidades completas
     const partidaSinCiclos = JSON.stringify({
       counterTurnos: partida.counterTurnos,
@@ -45,7 +44,8 @@ export class SavePartidaService {
         en_accion: personaje.enAccion,
         turno_comienzo: personaje.turnoComienzo
       })),
-      user_id: userId,
+      // corregir user ID, no es necesario, se agregaria el tokensico
+      user_id: user_Id,
     });
 
     console.log(partidaSinCiclos);  // Verifica la estructura antes de enviarla

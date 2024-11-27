@@ -1,6 +1,6 @@
 <div class="fondo">
     <div class="cuadroInicio lg:w-96 lg:text-2xl sm:w-64 sm:text-sm">
-        <form [formGroup]="this.registrationForm" (ngSubmit)="enviar()" class="log-in">
+        <form [formGroup]="this.registrationForm" (ngSubmit)="enviar($event)" class="log-in">
             <div class="Nick">
                 <p>Nombre de usuario</p>
                 <input formControlName="nickName" type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>

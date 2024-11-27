@@ -1,20 +1,20 @@
-<div class="cuadroInicio lg:w-96 lg:text-2xl sm:w-64 sm:text-sm">
+<form [formGroup]="loginForm" (ngSubmit)="enviar($event)" class="cuadroInicio lg:w-96 lg:text-2xl sm:w-64 sm:text-sm">
     <div class="log-in">
         <div class="Nick">
-            <p>Nombre de usuario</p>
-            <input type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+            <p>Email</p>
+            <input type="text" formControlName="email" id="email" required class="username" name="username" placeholder="Ingrese su usuario"><br><br>
         </div>
         <div class="contraseña">
             <p>Contraseña</p>
-            <input type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+            <input type="password" formControlName="password" id="password" required class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
         </div>
-        <div class="enter" (click)="IrAInicio()" routerLink="/home">Entrar</div>
+        <button type="submit" class="enter">Entrar</button>
     </div>
     <div class="fuera-log">
         <span class="registar" type="boton" (click)="IrARegistrer()">Registrar</span><span style="color: rgba(0, 0, 0, 0);">.</span>
         <span class="olvide" type="boton" routerLink>Olvide mi contraseña</span>
     </div>
-</div>
+</form>
 
 
 

@@ -45,7 +45,7 @@ export class PartidaComponent implements AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdRef: ChangeDetectorRef, savePartidaService:SavePartidaService
+    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -60,8 +60,8 @@ export class PartidaComponent implements AfterViewInit {
   }
 
 
-  guardarPartida(partida:Partida){
-    // esta en el service
+  guardarPartida(){
+    this.savePartidaService.guardarPartida(this.partida, 1)
   }
   
   
