@@ -103,9 +103,26 @@
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}">
                             </div>
+                            
+                            <div class="striped-div bg-red-600" *ngIf="ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde && ciudad.eRojo>0"
+                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                            </div>
+                            <div class="striped-div bg-blue-700" *ngIf="ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo && ciudad.eAzul>0"
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
+                            </div>
+                            <div class="striped-div bg-green-600" *ngIf="ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo && ciudad.eVerde>0"
+                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                            </div>
+                            <div class="striped-div bg-yellow-600" *ngIf="ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul && ciudad.eAmarillo>0"
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
+                            </div>
+                            <div class="striped-div bg-pink-700" *ngIf="!(ciudad.eRojo===0||ciudad.eAzul===0||ciudad.eAmarillo===0||ciudad.eVerde===0) && ((ciudad.eRojo===ciudad.eAmarillo || ciudad.eRojo===ciudad.eAzul || ciudad.eRojo===ciudad.eVerde  ||  ciudad.eAzul===ciudad.eVerde || ciudad.eAzul===ciudad.eAmarillo  ||  ciudad.eVerde===ciudad.eAmarillo) || ((ciudad.eRojo === ciudad.eAzul && ciudad.eRojo === ciudad.eAmarillo)||(ciudad.eRojo === ciudad.eAzul && ciudad.eRojo === ciudad.eVerde)||(ciudad.eRojo === ciudad.eAmarillo && ciudad.eRojo === ciudad.eVerde)||(ciudad.eAzul === ciudad.eAmarillo && ciudad.eAzul === ciudad.eVerde)) || (ciudad.eRojo === ciudad.eAzul &&ciudad.eRojo === ciudad.eAmarillo &&ciudad.eRojo === ciudad.eVerde))"
+                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
+                            </div>
                             <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                
                                 <div>
                                     {{ciudad.nombre}}
                                 </div>
