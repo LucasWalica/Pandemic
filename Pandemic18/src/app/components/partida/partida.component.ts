@@ -3,8 +3,11 @@ import { Partida } from '../../models/partida.models';
 import { todasLasCiudades, Ciudad } from '../../models/ciudad.models';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
-import { BobElConstructor, EspecialistaEnCuarentena, Investigador, Medico, Personaje, listaPersonas } from '../../models/personaje.model';
+import { Personaje, listaPersonas } from '../../models/personaje.model';
 import { Enfermedad, listEnfermedades } from '../../models/enfermedad.models';
+import { SavePartidaService } from '../../services/save-partida.service';
+// testeando api
+import * as flatted from 'flatted';
 
 @Component({
   selector: 'app-partida',
@@ -15,7 +18,7 @@ import { Enfermedad, listEnfermedades } from '../../models/enfermedad.models';
 })
 export class PartidaComponent implements AfterViewInit {
   
-  partida: Partida = new Partida(0, 4, todasLasCiudades, listEnfermedades);
+  partida: Partida = new Partida(0, 4, todasLasCiudades, listEnfermedades, listaPersonas);
   scalingFactorX: number = 1;
   scalingFactorY: number = 1;
   originalWidth = 850;  
@@ -42,7 +45,7 @@ export class PartidaComponent implements AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef, savePartidaService:SavePartidaService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -53,7 +56,14 @@ export class PartidaComponent implements AfterViewInit {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
     }, 50);  
+    
   }
+
+
+  guardarPartida(partida:Partida){
+    // esta en el service
+  }
+  
   
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -96,7 +106,6 @@ export class PartidaComponent implements AfterViewInit {
 
   getEnfermedadByName(name:string):Enfermedad|undefined{
     let enfermedad:Enfermedad|undefined =  this.partida.listEnfermedades.find(enf=>enf.name===name);
-    console.log("funciono");
     return enfermedad;
   }
 
