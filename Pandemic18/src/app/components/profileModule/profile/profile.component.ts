@@ -19,19 +19,24 @@ export class ProfileComponent implements OnInit {
 
   isVisible:boolean = false;
 
-
   ngOnInit(): void {
-    this.profile=this.profileData.provisionalProfile;
-    this.profilePics=this.profileData.pics;
     if(!this.authService.userIsAuthenticated()){
       this.router.navigate(['']);
-    } 
+    };
+    this.profilePics=this.profileData.pics;
+    this.profileData.chargeProfile();
+    // timeout para que la respuesta de la api llegue a tiempo para cargar el html
+    setTimeout(() => {
+      this.profile=this.profileData.profile;
+      console.log(this.profile.name, this.profile.profilePic, this.profile.puntuacion);
+    }, 500);
   }
 
   selectPic(src:string){
     this.profile.profilePic=src;
     this.isVisible=false;
     this.profileData.saveProfile(this.profile);
+    this.profileData.changeProfilePic(src);
   }
 
   setVisible(){

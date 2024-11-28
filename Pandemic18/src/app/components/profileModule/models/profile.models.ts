@@ -2,24 +2,18 @@
 export class Profile{
     name:string;
     profilePic:string|null;
-    wins:number;
-    loses:number;
-
-    constructor(name:string, profilePic:string|null, 
-        wins:number, loses:number){
+    puntuacion:number;
+    constructor(name:string, profilePic:string|null, puntuacion:number){
         this.name=name;
         this.profilePic=profilePic;
-        this.wins = wins;
-        this.loses= loses;
+        this.puntuacion = puntuacion;
     }
 }
 
 export class profilePic{
-    id:number;
     src:string;
 
-    constructor(id:number, src:string){
-        this.id=id;
+    constructor(src:string){
         this.src=src;
     }
 }
