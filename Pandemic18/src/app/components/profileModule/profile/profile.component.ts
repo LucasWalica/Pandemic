@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goLogout(){
+    this.authService.logout();
     this.router.navigate([''])
   }
   goToRanking(){

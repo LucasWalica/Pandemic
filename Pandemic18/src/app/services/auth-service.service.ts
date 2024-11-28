@@ -10,6 +10,8 @@ export class AuthServiceService {
 
   constructor(private router:Router) { }
 
+
+  // funcion que permite registrarse
   registrar(nickName:string, email:string, password:string){
 
     const datosUsuario = JSON.stringify({
@@ -37,6 +39,7 @@ export class AuthServiceService {
     .catch(error => console.error('Error:', error));
   }
 
+  // funcion que permite loguearse
   logear(email: string, password: string) {
     const datosUsuario = JSON.stringify({
       email: email,

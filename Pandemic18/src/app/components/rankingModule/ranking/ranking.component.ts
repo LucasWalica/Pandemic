@@ -33,6 +33,7 @@ export class RankingComponent implements OnInit{
   }
 
   goLogout(){
+    this.authService.logout();
     this.router.navigate([''])
   }
 
