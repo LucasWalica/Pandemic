@@ -40,6 +40,8 @@ export class PartidaComponent implements AfterViewInit {
   showCiudadesMasInfectadas:boolean = false;
   // para no cargar mas veces 
   cargado:boolean = false;
+  //desplegable de las opciones
+  opcionesDesp:boolean = false;
   
 
 
@@ -199,6 +201,10 @@ export class PartidaComponent implements AfterViewInit {
     const dx = touch2.clientX - touch1.clientX;
     const dy = touch2.clientY - touch1.clientY;
     return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  desplegarOpciones(){
+    this.opcionesDesp = !this.opcionesDesp;
   }
 }
 

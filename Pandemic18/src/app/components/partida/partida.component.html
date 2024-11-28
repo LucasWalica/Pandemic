@@ -2,47 +2,48 @@
    
 
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
-    <div class="grid grid-cols-1 xl:grid-cols-5 border-2 border-emerald-800 m-2 rounded-md p-2">
+    <div class="grid grid-cols-1 xl:grid-cols-5 m-2 rounded-md p-2 select-none">
         
                 
         <!--div de datos de la ciudad-->
-        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
-            <div class="border-2 rounded-md p-2 border-emerald-950">
-                <div class="text-center">
-                    <h1 class="text-2xl m-1">
-                        Vacunas 
-                    </h1>
-                </div>
+        <div class="z-20  p-2">
+            <div class=" rounded-md p-2 ">
                 <div class="grid grid-cols-4 rounded-md text-center gap-1">
                     <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md">
-                        Azul&nbsp;  {{getEnfermedadByName('azul')?.turnosParaCurar}}
+                        &nbsp;  {{getEnfermedadByName('azul')?.turnosParaCurar}}
                     </div>
                     <div class="bg-red-400 text-red-950 border-red-950 rounded-md text-md">
-                        Roja&nbsp;  {{getEnfermedadByName('roja')?.turnosParaCurar}}
+                        &nbsp;  {{getEnfermedadByName('roja')?.turnosParaCurar}}
                     </div>
                     <div class="bg-yellow-400 text-yellow-950 border-yellow-950 rounded-md text-md">
-                        Amarilla {{getEnfermedadByName('amarilla')?.turnosParaCurar}}
+                        {{getEnfermedadByName('amarilla')?.turnosParaCurar}}
                     </div>
                     <div class="bg-green-400 text-green-950 border-green-950 rounded-md text-md">
-                        Verde {{getEnfermedadByName('verde')?.turnosParaCurar}}
+                        {{getEnfermedadByName('verde')?.turnosParaCurar}}
                     </div>
                 </div>
             </div>
+            <div>
+                <button (click)="mostrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                    Ciudades
+                </button>
+            </div>
             @if (ciudadSeleccionada.nombre) {
-                <div class="p-1">
+                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
                     <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
                     <div class="grid grid-cols-2 text-center">
                         <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
-                            Enf Amarilla: {{ciudadSeleccionada.eAmarillo}}
+                            Chinosis: {{ciudadSeleccionada.eAmarillo}}
                         </div>
                         <div class="border-2 border-green-500 bg-green-700 text-green-200 rounded-md p-1 text-sm">
-                            Enf Verde: {{ciudadSeleccionada.eVerde}}
+                            Veganitis: {{ciudadSeleccionada.eVerde}}
                         </div>
                         <div class="border-2 border-red-500 bg-red-700 text-red-200 rounded-md p-1 text-sm">
-                            Enf Roja: {{ciudadSeleccionada.eRojo}}
+                            Gastroindio: {{ciudadSeleccionada.eRojo}}
                         </div>
                         <div class="border-2 border-blue-500 bg-blue-700 text-blue-200 rounded-md p-1 text-sm">
-                            Enf Azul: {{ciudadSeleccionada.eAzul}}
+                            Polinoma: {{ciudadSeleccionada.eAzul}}
                         </div>
                     </div>
                     <div>
@@ -57,13 +58,6 @@
                     </div>
                 </div>
             }
-                
-            <div class="flex justify-center p-2">
-                <button (click)="mostrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                    hover:pl-6 hover:pr-6 duration-150">
-                    Ver ciudades más infectadas
-                </button>
-            </div>
         </div>
 
 
@@ -116,7 +110,7 @@
                             <div class="striped-div bg-yellow-600" *ngIf="ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul && ciudad.eAmarillo>0"
                                 [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
-                            <div class="striped-div bg-pink-700" *ngIf="(ciudad.eRojo !== 0 || ciudad.eAzul !== 0 || ciudad.eAmarillo !== 0 || ciudad.eVerde !== 0) && ((ciudad.eRojo===ciudad.eAmarillo || ciudad.eRojo===ciudad.eAzul || ciudad.eRojo===ciudad.eVerde  ||  ciudad.eAzul===ciudad.eVerde || ciudad.eAzul===ciudad.eAmarillo  ||  ciudad.eVerde===ciudad.eAmarillo) || ((ciudad.eRojo === ciudad.eAzul && ciudad.eRojo === ciudad.eAmarillo)||(ciudad.eRojo === ciudad.eAzul && ciudad.eRojo === ciudad.eVerde)||(ciudad.eRojo === ciudad.eAmarillo && ciudad.eRojo === ciudad.eVerde)||(ciudad.eAzul === ciudad.eAmarillo && ciudad.eAzul === ciudad.eVerde)) || (ciudad.eRojo === ciudad.eAzul &&ciudad.eRojo === ciudad.eAmarillo &&ciudad.eRojo === ciudad.eVerde))"
+                            <div class="striped-div bg-white" *ngIf="!(ciudad.eRojo === 0 || ciudad.eAzul === 0 || ciudad.eAmarillo === 0 || ciudad.eVerde === 0) && (!(ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde) || !(ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo) || !(ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo) || !(ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul))"
                             [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
@@ -143,29 +137,32 @@
                     Turno número: {{partida.counterTurnos}}
                 </div>
             </div>
+            <div class="grid text-center border-2 border-emerald-950 rounded-md m-1 p-1" (click)="desplegarOpciones()">↡</div>
             <!--datos personajes-->
-            <div class="text-center border-2 border-emerald-700 rounded-md">
-                <div class="grid grid-cols-2">
-                    @for (personaje of listPersonajes; track personaje) {
-                                <div>
-                                    <button (click)="selectChar(personaje, personaje.ciudadEnLaQueEsta)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
-                                        {{personaje.name}}
-                                    </button>
-                                    <div class="h-8">{{personaje.ciudadEnLaQueEsta.nombre}}</div>
-                                </div>
-                            }
+            <div *ngIf="opcionesDesp==true">
+                <div class="text-center border-2 border-emerald-700 rounded-md">
+                    <div class="grid grid-cols-2">
+                        @for (personaje of listPersonajes; track personaje) {
+                                    <div>
+                                        <button (click)="selectChar(personaje, personaje.ciudadEnLaQueEsta)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
+                                            {{personaje.name}}
+                                        </button>
+                                        <div class="h-8">{{personaje.ciudadEnLaQueEsta.nombre}}</div>
+                                    </div>
+                                }
+                    </div>
                 </div>
-            </div>
-            <!--acciones-->
-            <div class="flex self-center items-center text-center justify-center">
-                <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                hover:pl-6 hover:pr-6 duration-150">
-                    Pasar turno
-                </button>
-                <button (click)="guardarPartida()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                hover:pl-6 hover:pr-6 duration-150">
-                    Guardar Partida
-                </button>
+                <!--acciones-->
+                <div class="flex self-center items-center text-center justify-center">
+                    <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                        Pasar turno
+                    </button>
+                    <button (click)="guardarPartida()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                        Guardar Partida
+                    </button>
+                </div>
             </div>
         </div>
     </div>
