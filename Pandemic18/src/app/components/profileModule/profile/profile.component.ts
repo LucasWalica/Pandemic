@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile, profilePic } from '../models/profile.models';
 import { ProfileDataService } from '../services/profile-data.service';
+import { AuthServiceService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { ProfileDataService } from '../services/profile-data.service';
 })
 export class ProfileComponent implements OnInit {
   
-  constructor(private router:Router, private profileData:ProfileDataService){}
+  constructor(private router:Router, private profileData:ProfileDataService, private authService:AuthServiceService){}
   profile:Profile = {} as Profile;
   profilePics:profilePic[] = {} as profilePic[];
 
@@ -22,6 +23,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profile=this.profileData.provisionalProfile;
     this.profilePics=this.profileData.pics;
+    if(!this.authService.userIsAuthenticated()){
+      this.router.navigate(['']);
+    } 
   }
 
   selectPic(src:string){

@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Partida } from '../models/partida.models';
+import { AuthServiceService } from './auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class SavePartidaService {
 
-  constructor() { }
-
+  
+  private token:string | null = null;
+  constructor(private authService:AuthServiceService) {
+    this.token = this.authService.getToken();
+    console.log('Token obtenido en SavePartidaService:', this.token);
+   }  
 
     //needed to get user ID before calling this method (reEscribir)
-  guardarPartida(partida:Partida, user_Id:number) {
-    // Asumimos que 'this.partida' es un objeto con las entidades completas
+  guardarPartida(partida:Partida) {
+    if (!this.token) {
+      console.error('No se encontró token al guardar la partida.');
+      return;
+  }
     const partidaSinCiclos = JSON.stringify({
       counterTurnos: partida.counterTurnos,
       jugadas: partida.jugadas,
       listCiudades: partida.listCiudades.map(ciudad => ({
         nombre: ciudad.nombre,
-        //partida_id: 1,
         centroInvestigacion: ciudad.centroInvestigacion,
         coordenadasX: ciudad.coordenadasX,
         coordenadasY: ciudad.coordenadasY,
@@ -35,31 +42,30 @@ export class SavePartidaService {
         name: enfermedad.name,
         turnosParaCurar: enfermedad.turnosParaCurar,
         infeccionAColindandes: enfermedad.infeccionAColindandes,
-        //partida_id: 1,
       })),
       listaPersonajes: partida.listaPersonajes.map(personaje => ({
         name: personaje.name,
-        //partida_id:1,
         movido: personaje.movido,
         en_accion: personaje.enAccion,
         turno_comienzo: personaje.turnoComienzo
       })),
       // corregir user ID, no es necesario, se agregaria el tokensico
-      user_id: user_Id,
+      // user_id: user_Id,
     });
 
-    console.log(partidaSinCiclos);  // Verifica la estructura antes de enviarla
+    console.log(partidaSinCiclos);  
 
     fetch('http://127.0.0.1:8000/api/partidas/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.authService.getToken()}`
       },
-      body: partidaSinCiclos  // Enviar el objeto de manera estructurada sin referencias cíclicas
+      body: partidaSinCiclos  
     })
     .then(response => {
-      console.log(response);  // Verifica la respuesta en la consola
-      return response.json();  // Solo intentar parsear si la respuesta es válida
+      console.log(response);  
+      return response.json();  
     })
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));

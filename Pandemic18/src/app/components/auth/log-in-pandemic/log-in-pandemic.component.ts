@@ -30,7 +30,6 @@ export class LogInPandemicComponent {
       this.loginForm.get('email')?.value??'',
       this.loginForm.get('password')?.value?? ''
     )
-
   }
 
 

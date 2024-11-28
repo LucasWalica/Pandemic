@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile } from '../profileModule/models/profile.models';
 import { ProfileDataService } from '../profileModule/services/profile-data.service';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-informacion',
@@ -17,9 +18,12 @@ export class InformacionComponent {
 
   ngOnInit(): void {
     this.profile = this.profileService.getProfile();  
+    if(!this.authService.userIsAuthenticated()){
+      this.router.navigate(['']);
+    } 
   }
 
-  constructor(private router: Router, private profileService: ProfileDataService) { }
+  constructor(private router: Router, private profileService: ProfileDataService, private authService:AuthServiceService) { }
 
   IrAPerfil() {this.router.navigate(['profile']);}
 

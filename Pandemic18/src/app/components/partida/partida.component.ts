@@ -6,8 +6,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { Personaje, listaPersonas } from '../../models/personaje.model';
 import { Enfermedad, listEnfermedades } from '../../models/enfermedad.models';
 import { SavePartidaService } from '../../services/save-partida.service';
-// testeando api
-import * as flatted from 'flatted';
+import { AuthServiceService } from '../../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-partida',
@@ -45,7 +45,7 @@ export class PartidaComponent implements AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService
+    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService, private router:Router
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -55,13 +55,15 @@ export class PartidaComponent implements AfterViewInit {
     setTimeout(() => {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
-    }, 50);  
-    
+    }, 50);
+    if(this.authService.userIsAuthenticated()){
+      this.router.navigate(['login']);
+    }  
   }
 
 
   guardarPartida(){
-    this.savePartidaService.guardarPartida(this.partida, 1)
+    this.savePartidaService.guardarPartida(this.partida)
   }
   
   

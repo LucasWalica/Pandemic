@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RankingService } from '../ranking.service';
 import { Profile } from '../../profileModule/models/profile.models';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../../../services/auth-service.service';
 @Component({
   selector: 'app-ranking',
   standalone: true,
@@ -12,11 +13,14 @@ import { Router } from '@angular/router';
 export class RankingComponent implements OnInit{
   
   profiles:Profile[] = [] as Profile[];
-  constructor(private router:Router, private rankingService:RankingService){}
+  constructor(private router:Router, private rankingService:RankingService, private authService:AuthServiceService){}
 
   ngOnInit(): void {
     this.profiles = this.rankingService.fakeProfiles;
     this.profiles = this.rankingService.orderProfiles(this.profiles);
+    if(!this.authService.userIsAuthenticated()){
+      this.router.navigate(['']);
+    }
   }
 
 

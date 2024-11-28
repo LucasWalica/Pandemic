@@ -4,7 +4,7 @@ import { Profile } from '../profileModule/models/profile.models';
 import { OnInit } from '@angular/core';
 import { ProfileDataService } from '../profileModule/services/profile-data.service';
 import { CommonModule } from '@angular/common';  // Importa CommonModule
-
+import { AuthServiceService } from '../../services/auth-service.service';
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -22,9 +22,12 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = this.profileService.getProfile();  
+    if(!this.authService.userIsAuthenticated()){
+      this.router.navigate(['']);
+    }  
   }
 
-  constructor(private router: Router, private profileService: ProfileDataService) { }
+  constructor(private router: Router, private profileService: ProfileDataService, private authService:AuthServiceService) { }
 
   IrAPerfil() {this.router.navigate(['profile']);}
   goToRanking(){

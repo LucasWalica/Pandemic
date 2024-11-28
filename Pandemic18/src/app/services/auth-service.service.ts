@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
@@ -75,8 +75,10 @@ export class AuthServiceService {
     localStorage.setItem('authToken', token);
   }
 
-  getToken():string | null{
-    return this.token || localStorage.getItem('authToken')
+  getToken(){
+      this.token = localStorage.getItem('authToken');
+      console.log('Token devuelto por getToken:', this.token);
+      return this.token;
   }
 
   logout(){
@@ -85,5 +87,14 @@ export class AuthServiceService {
     this.router.navigate(['navigate']);
   }
 
+
+  userIsAuthenticated(): boolean {
+    const token = this.getToken();
+    if(token === null || token === '' || token === '{}'){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
 }
