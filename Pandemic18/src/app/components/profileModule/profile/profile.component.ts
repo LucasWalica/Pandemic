@@ -23,13 +23,18 @@ export class ProfileComponent implements OnInit {
     if(!this.authService.userIsAuthenticated()){
       this.router.navigate(['']);
     };
+    if(!this.userProfileIsSaved()){
+      this.profileData.chargeProfile();
+      // timeout para que la respuesta de la api llegue a tiempo para cargar el html
+      setTimeout(() => {
+        this.profile=this.profileData.profile;
+      }, 500);
+      this.profileData.saveProfileToStorage();
+    }else{
+     this.profileData.loadProfileFromStorage();
+     this.profile = this.profileData.profile;
+    }
     this.profilePics=this.profileData.pics;
-    this.profileData.chargeProfile();
-    // timeout para que la respuesta de la api llegue a tiempo para cargar el html
-    setTimeout(() => {
-      this.profile=this.profileData.profile;
-      console.log(this.profile.name, this.profile.profilePic, this.profile.puntuacion);
-    }, 500);
   }
 
   selectPic(src:string){
@@ -53,6 +58,15 @@ export class ProfileComponent implements OnInit {
   }
   goToRanking(){
     this.router.navigate(['ranking']);
+  }
+
+  userProfileIsSaved(){
+    const profile = localStorage.getItem("profile");
+    if(profile === null || profile === '' || profile === "{}"){
+      return false;
+    }
+    return true;
+  
   }
 
 }
