@@ -3,6 +3,7 @@ import { listaPersonas, Personaje, EspecialistaEnCuarentena, Medico, Investigado
 import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from "./enfermedad.models";
 
 
+
 export class Partida{
     counterTurnos:number=0;
     jugadas:number=4;
@@ -141,7 +142,7 @@ export class Partida{
         let infeccion = 0;
         for(let i=0; i<this.listCiudades.length; i++){
             let c:Ciudad = this.listCiudades[i];
-            infeccion = infeccion + c.eAmarillo +  c.eAzul + c.eRojo + c.eVerde;
+            infeccion+=c.eAmarillo +  c.eAzul + c.eRojo + c.eVerde;
         }
         return infeccion;
     }

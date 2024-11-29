@@ -1,6 +1,9 @@
 import { Injectable} from '@angular/core';
 import { Partida } from '../models/partida.models';
+import { PartidaI } from '../models/interfaces.interface';
 import { AuthServiceService } from './auth-service.service';
+import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,7 @@ import { AuthServiceService } from './auth-service.service';
 export class SavePartidaService {
 
   
-  constructor(private authService:AuthServiceService) {
+  constructor(private authService:AuthServiceService, private http:HttpClient) {
    
    }  
 
@@ -75,31 +78,53 @@ export class SavePartidaService {
     .catch(error => console.error('Error:', error));
   }
 
-  getPartidaList(): Promise<Partida[]> {
-    return fetch('http://127.0.0.1:8000/api/partidas/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.authService.getToken()}`
-      },
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al obtener partidas');
-      }
-      return response.json(); 
-    })
-    .then((data: Partida[]) => {
-      return data; 
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      throw error;
-    });
+  getPartidaList(): Observable<PartidaI[]> {
+    const token = this.authService.getToken(); 
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+
+    return this.http.get<any[]>('http://127.0.0.1:8000/api/partidas/', { headers }).pipe(
+      map((data: any[]) =>
+        data.map(partida => ({
+          counterTurnos: partida.counterTurnos || 0,
+          jugadas: partida.jugadas || 0,
+          listCiudades: partida.ciudades.map((ciudad: any) => ({
+            nombre: ciudad.nombre,
+            listCiudadesColindandes: ciudad.listCiudadesColindandes || [],
+            listPersonajes: ciudad.listPersonajes || [],
+            centroInvestigacion: ciudad.centroInvestigacion || false,
+            coordenadasX: ciudad.coordenadasX || 0,
+            coordenadasY: ciudad.coordenadasY || 0,
+            eVerde: ciudad.eVerde || 0,
+            eRojo: ciudad.eRojo || 0,
+            eAzul: ciudad.eAzul || 0,
+            eAmarillo: ciudad.eAmarillo || 0,
+          })),
+          listaPersonajes: partida.ciudades.flatMap((ciudad: any) => 
+            ciudad.listPersonajes.map((personaje: any) => ({
+              id: personaje.id,
+              name: personaje.name,
+              specialSkill: personaje.specialSkill || '',
+              movido: personaje.movido || false,
+              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta,
+              turnoComienzo: personaje.turnoComienzo || 0,
+              enAccion: personaje.enAccion || false,
+            }))
+          ),
+          listEnfermedades: partida.enfermedades.map((enfermedad: any) => ({
+            name: enfermedad.name,
+            turnosParaCurar: enfermedad.turnosParaCurar || 0,
+            infeccionAColindandes: enfermedad.infeccionAColindandes || 0,
+          })),
+        }))
+      )
+    );
   }
   
-
+}
 
   
 
-}
+
