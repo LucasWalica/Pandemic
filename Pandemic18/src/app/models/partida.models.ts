@@ -136,4 +136,13 @@ export class Partida{
 
         }
     }
+
+    infeccionTotal(){
+        let infeccion = 0;
+        for(let i=0; i<this.listCiudades.length; i++){
+            let c:Ciudad = this.listCiudades[i];
+            infeccion = infeccion + c.eAmarillo +  c.eAzul + c.eRojo + c.eVerde;
+        }
+        return infeccion;
+    }
 }

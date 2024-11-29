@@ -46,7 +46,7 @@ aunque hay que cargalo desde el principio-->
     </div>
     <div class="inicio2 flex flex-col items-center" *ngIf="this.cuadoInicio == true">
         <div class="jugar inicioBoton" type="boton" (click)="goToNewGame()"><div class="introJugar intro">Nueva Partida</div></div>
-        <div class="RankingG inicioBoton" type="boton"><div class="introRG intro">Cargar Partida</div></div>
+        <div class="RankingG inicioBoton" type="boton" (click)="goToPartidaList()"><div class="introRG intro">Cargar Partida</div></div>
         <div class="retroceder inicioBoton" type="boton" (click)="JugarB()"><div class="retrocediendo intro">Atras</div>
     </div>
 </div>

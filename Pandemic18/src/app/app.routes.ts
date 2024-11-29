@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/profileModule/profile/profile.com
 import { RankingComponent } from './components/rankingModule/ranking/ranking.component';
 import { PartidaComponent } from './components/partida/partida.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
+import { PartidaListComponent } from './components/partida-list/partida-list.component';
 
 export const routes: Routes = [
     {path:'', component:LogInPandemicComponent},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     {path:'profile', component:ProfileComponent},
     {path:'ranking', component:RankingComponent},
     {path: 'info', component:InformacionComponent},
-    {path:'newGame', component:PartidaComponent}
+    {path:'newGame', component:PartidaComponent},
+    {path: 'partidaList', component:PartidaListComponent}
 ];

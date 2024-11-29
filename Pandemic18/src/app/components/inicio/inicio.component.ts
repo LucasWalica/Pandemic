@@ -40,6 +40,9 @@ export class InicioComponent implements OnInit {
     this.router.navigate(['info'])
   }
 
+  goToPartidaList(){
+    this.router.navigate(['partidaList'])
+  }
   JugarB() {this.cuadoInicio = !this.cuadoInicio;}
 
   CrearPartida() {this.Partidas = 1;}

@@ -87,6 +87,7 @@ export class ProfileDataService implements OnInit{
       puntuacion:this.profile.puntuacion
     }));
   }
+  
   loadProfileFromStorage(){
     const profileString = localStorage.getItem("profile");
      if(profileString){
