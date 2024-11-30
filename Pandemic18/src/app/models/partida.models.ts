@@ -17,9 +17,11 @@ export class Partida{
         this.listCiudades=listCiudades;
         this.listEnfermedades=listEnfermedades;
         this.listaPersonajes = listaPersonajes;
-        this.asignarPersonajes();
+        
     }
-
+    //if(this.listaPersonajes[0].ciudadEnLaQueEsta.nombre !== typeof 'string'){
+    //    this.asignarPersonajes();
+    //}
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){
         if(cInicio.communicateWith(cFinal) && this.jugadas>0){
             cInicio.quitarPersonaje(p);

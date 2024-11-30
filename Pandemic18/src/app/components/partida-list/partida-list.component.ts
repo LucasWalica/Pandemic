@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SavePartidaService } from '../../services/save-partida.service';
 import { Partida } from '../../models/partida.models';
 import { PartidaI } from '../../models/interfaces.interface';
+
 @Component({
   selector: 'app-partida-list',
   standalone: true,
@@ -16,11 +17,14 @@ export class PartidaListComponent implements OnInit {
   constructor(private gameService:SavePartidaService){
 
   }
+
+  // se pierden datos en esta funcion
   ngOnInit(): void {
     this.gameService.getPartidaList().subscribe({
       next: (data: PartidaI[]) => {
         for(let i=0; i<data.length; i++){
           const partidaData = data[i]; 
+          console.log(partidaData);
           const p: Partida = new Partida(
             partidaData.counterTurnos, 
             partidaData.jugadas, 
@@ -31,6 +35,7 @@ export class PartidaListComponent implements OnInit {
           this.partidas.push(p);
         }
         console.log('Partidas cargadas:', this.partidas);
+        console.log("partida",this.partidas[0]);
       },
       error: (err) => {
         console.error('Error al cargar las partidas:', err);

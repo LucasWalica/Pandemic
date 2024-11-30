@@ -108,7 +108,7 @@ export class SavePartidaService {
               name: personaje.name,
               specialSkill: personaje.specialSkill || '',
               movido: personaje.movido || false,
-              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta,
+              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta, 
               turnoComienzo: personaje.turnoComienzo || 0,
               enAccion: personaje.enAccion || false,
             }))

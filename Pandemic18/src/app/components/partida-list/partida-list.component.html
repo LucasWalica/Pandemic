@@ -34,6 +34,13 @@
             <div class="col-span-3">
                 Infeccion total {{partida.infeccionTotal()}}
             </div>
+            <div>
+                @for (ciudad of partida.listCiudades; track ciudad) {
+                    @for (personaje of ciudad.listPersonajes; track personaje) {
+                        <div>{{personaje.name}}</div>
+                    }
+                }
+            </div>
         </div>
     </div>
    }
