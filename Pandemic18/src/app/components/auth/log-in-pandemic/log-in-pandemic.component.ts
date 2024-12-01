@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../../services/auth-service.service';
@@ -13,9 +13,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './log-in-pandemic.component.html',
   styleUrl: './log-in-pandemic.component.css'
 })
-export class LogInPandemicComponent {
+export class LogInPandemicComponent implements OnInit {
 
   constructor(private router: Router, private authService:AuthServiceService) { }
+
+
+  ngOnInit(): void {
+    if(this.authService.userIsAuthenticated()){
+      this.router.navigate(['profile']);
+    }
+  }
 
 
   loginForm = new FormGroup({

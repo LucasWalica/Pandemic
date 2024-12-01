@@ -21,25 +21,14 @@ export class PartidaListComponent implements OnInit {
   // se pierden datos en esta funcion
   ngOnInit(): void {
     this.gameService.getPartidaList().subscribe({
-      next: (data: PartidaI[]) => {
-        for(let i=0; i<data.length; i++){
-          const partidaData = data[i]; 
-          console.log(partidaData);
-          const p: Partida = new Partida(
-            partidaData.counterTurnos, 
-            partidaData.jugadas, 
-            partidaData.listCiudades, 
-            partidaData.listaPersonajes, 
-            partidaData.listEnfermedades
-          );
-          this.partidas.push(p);
-        }
+      next: (partidas: PartidaI[]) => {
+        this.partidas = partidas.map((partidaI) => new Partida(partidaI.counterTurnos, partidaI.jugadas, partidaI.listCiudades, partidaI.listEnfermedades, partidaI.listaPersonajes)); // Los datos ya están completamente mapeados
         console.log('Partidas cargadas:', this.partidas);
-        console.log("partida",this.partidas[0]);
+        console.log('Primera partida:', this.partidas[0]);
       },
       error: (err) => {
         console.error('Error al cargar las partidas:', err);
-      }
+      },
     });
   }
   

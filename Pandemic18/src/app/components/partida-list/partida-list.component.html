@@ -38,6 +38,7 @@
                 @for (ciudad of partida.listCiudades; track ciudad) {
                     @for (personaje of ciudad.listPersonajes; track personaje) {
                         <div>{{personaje.name}}</div>
+                        <div>{{personaje.ciudadEnLaQueEsta.nombre}}</div>
                     }
                 }
             </div>

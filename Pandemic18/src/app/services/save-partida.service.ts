@@ -92,8 +92,25 @@ export class SavePartidaService {
           jugadas: partida.jugadas || 0,
           listCiudades: partida.ciudades.map((ciudad: any) => ({
             nombre: ciudad.nombre,
-            listCiudadesColindandes: ciudad.listCiudadesColindandes || [],
-            listPersonajes: ciudad.listPersonajes || [],
+            listCiudadesColindandes: ciudad.listCiudadesColindantes
+              ? ciudad.listCiudadesColindantes.map((colindante: any) => colindante.name)
+              : [],
+              listPersonajes: ciudad.listPersonajes
+              ? ciudad.listPersonajes.map((personaje: any) => ({
+                  id: personaje.id || 0,
+                  name: personaje.name || '',
+                  specialSkill: personaje.specialSkill || '',
+                  movido: personaje.movido === 1,
+                  turnoComienzo: personaje.turno_comienzo || 0,
+                  enAccion: personaje.enAccion || false,
+                  ciudadEnLaQueEsta: {
+                    nombre: ciudad.name,
+                    coordenadasX: ciudad.coordenadasX,
+                    coordenadasY: ciudad.coordenadasY,
+                    centroInvestigacion: ciudad.centro_investigacion === 1,
+                  },
+                }))
+              : [],
             centroInvestigacion: ciudad.centroInvestigacion || false,
             coordenadasX: ciudad.coordenadasX || 0,
             coordenadasY: ciudad.coordenadasY || 0,
@@ -102,14 +119,21 @@ export class SavePartidaService {
             eAzul: ciudad.eAzul || 0,
             eAmarillo: ciudad.eAmarillo || 0,
           })),
-          listaPersonajes: partida.ciudades.flatMap((ciudad: any) => 
+          listaPersonajes: partida.ciudades.flatMap((ciudad: any) =>
             ciudad.listPersonajes.map((personaje: any) => ({
               id: personaje.id,
               name: personaje.name,
               specialSkill: personaje.specialSkill || '',
-              movido: personaje.movido || false,
-              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta, 
-              turnoComienzo: personaje.turnoComienzo || 0,
+              movido: personaje.movido === 1,
+              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
+                ? {
+                    nombre: personaje.ciudadEnLaQueEsta.name,
+                    coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
+                    coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
+                    centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
+                  }
+                : null,
+              turnoComienzo: personaje.turno_comienzo || 0,
               enAccion: personaje.enAccion || false,
             }))
           ),
@@ -122,9 +146,4 @@ export class SavePartidaService {
       )
     );
   }
-  
 }
-
-  
-
-
