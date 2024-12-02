@@ -5,23 +5,27 @@ import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from "./enfermedad.models
 
 
 export class Partida{
+    id:number = 0;
     counterTurnos:number=0;
     jugadas:number=4;
     listCiudades:Ciudad[];
     listaPersonajes:Personaje[];
     listEnfermedades:Enfermedad[];
 
-    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[], listaPersonajes:Personaje[]){
+    constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[], listaPersonajes:Personaje[],id:number=0){
         this.counterTurnos=counterTurnos;
         this.jugadas=jugadas;
         this.listCiudades=listCiudades;
         this.listEnfermedades=listEnfermedades;
-        this.listaPersonajes = listaPersonajes;
-        
+        this.listaPersonajes = listaPersonajes;    
+        this.id =id;
+        if(this.id===0){
+            this.asignarPersonajes();
+        }
     }
-    //if(this.listaPersonajes[0].ciudadEnLaQueEsta.nombre !== typeof 'string'){
-    //    this.asignarPersonajes();
-    //}
+    setId(id:number){
+        this.id=id;
+    }
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){
         if(cInicio.communicateWith(cFinal) && this.jugadas>0){
             cInicio.quitarPersonaje(p);

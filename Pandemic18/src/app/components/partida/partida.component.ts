@@ -52,7 +52,7 @@ export class PartidaComponent implements AfterViewInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
   
-
+  // se calcula el tamaño de pantalla para posicionar las ciudades
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.calculateScalingFactors();
@@ -64,17 +64,24 @@ export class PartidaComponent implements AfterViewInit {
   }
 
 
+  // guardar partida nueva en bd, añadir funcionalidad con ID de partida y partida interface para que funcione con 
+  // partidas existentes 
   guardarPartida(){
-    this.savePartidaService.guardarPartida(this.partida)
+    if(this.partida.id === 0){
+      this.savePartidaService.guardarPartida(this.partida)
+    }
   }
   
   
+  // ordenador
   @HostListener('window:resize', ['$event'])
   onResize() {
     // Recalcular los factores de escalado cuando se redimensiona la ventana
     this.calculateScalingFactors();
   }
 
+
+  // formatear ciudades
   calculateScalingFactors(): void {
     if (this.isBrowser) {
       const container = document.querySelector('.map-container');
@@ -91,22 +98,24 @@ export class PartidaComponent implements AfterViewInit {
       }
     }
   }
+  // mostrar ui y seleccionar personaje
   selectChar(char:Personaje, c:Ciudad){
     this.personajeSeleccionado = char;
     this.ciudadPersonajeSeleccionado = c;
     this.showCharacterActionUI=true;
   }
+  // cerrar ui 
   closeUI(){
     this.showCharacterActionUI=false;
   }
-  
+  // mostrar menu
   mostrarCiudadesMasInfectadas(){
     this.showCiudadesMasInfectadas=true;
   }
+  // ocultar menu
   cerrarCiudadesMasInfectadas(){
     this.showCiudadesMasInfectadas=false;
   }
-
 
   getEnfermedadByName(name:string):Enfermedad|undefined{
     let enfermedad:Enfermedad|undefined =  this.partida.listEnfermedades.find(enf=>enf.name===name);
@@ -119,17 +128,17 @@ export class PartidaComponent implements AfterViewInit {
     return this.partida.listCiudades.find(c => c.nombre === nombre);
   }
 
-
+// usabilidad
   showData(ciudad: Ciudad) {
     this.ciudadSeleccionada = ciudad;
   }
-
+// usabilidad
   onZoom(event: WheelEvent) {
     event.preventDefault();  
     this.zoomLevel += event.deltaY * -0.001;  
     this.zoomLevel = Math.min(Math.max(this.zoomLevel, 0.5), 3); 
   }
-  
+  // usabilidad
   onMouseDown(event: MouseEvent) {
     this.isPanning = true;
     if(this.isPanning){
@@ -139,14 +148,14 @@ export class PartidaComponent implements AfterViewInit {
     this.startY = event.clientY - this.offsetY;
 
   }
-  
+  // usabilidad
   onMouseMove(event: MouseEvent) {
     if (this.isPanning) {
       this.offsetX = event.clientX - this.startX;
       this.offsetY = event.clientY - this.startY;
     }
   }
-
+  // usabilidad
   onMouseUp() {
     this.isPanning = false;
     if(!this.isPanning){
@@ -158,7 +167,6 @@ export class PartidaComponent implements AfterViewInit {
 
   
   // metodos para dispositivos moviles : 
-
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
     if (event.touches.length === 1) {
@@ -173,6 +181,8 @@ export class PartidaComponent implements AfterViewInit {
     }
   }
 
+
+  // movil
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent) {
     event.preventDefault();
@@ -189,6 +199,7 @@ export class PartidaComponent implements AfterViewInit {
     }
   }
 
+  // movil
   @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent) {
     if (event.touches.length < 2) {

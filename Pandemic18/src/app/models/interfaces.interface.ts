@@ -3,6 +3,7 @@ import { Personaje } from "./personaje.model";
 import { Enfermedad } from "./enfermedad.models";
 
 export interface PartidaI{
+    id:number;
     counterTurnos:number;
     jugadas:number;
     listCiudades:any[];

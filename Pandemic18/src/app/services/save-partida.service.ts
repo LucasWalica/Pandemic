@@ -88,6 +88,7 @@ export class SavePartidaService {
     return this.http.get<any[]>('http://127.0.0.1:8000/api/partidas/', { headers }).pipe(
       map((data: any[]) =>
         data.map(partida => ({
+          id:partida.id,
           counterTurnos: partida.counterTurnos || 0,
           jugadas: partida.jugadas || 0,
           listCiudades: partida.ciudades.map((ciudad: any) => ({
