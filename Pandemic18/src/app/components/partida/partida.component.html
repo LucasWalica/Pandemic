@@ -7,7 +7,7 @@
                 
         <!--div de datos de la ciudad-->
         <div class="z-20  p-2">
-            <div class=" rounded-md p-2 ">
+            <div class=" rounded-md p-2 border-emerald-300 border-2">
                 <div class="grid grid-cols-4 rounded-md text-center gap-1">
                     <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md">
                         &nbsp;  {{getEnfermedadByName('azul')?.turnosParaCurar}}
@@ -22,6 +22,7 @@
                         {{getEnfermedadByName('verde')?.turnosParaCurar}}
                     </div>
                 </div>
+                <div class="text-center text-emerald-300">Vacunas</div>
             </div>
             <div>
                 <button (click)="mostrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
@@ -95,7 +96,13 @@
                            <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2" 
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
-                                'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                'top.px': (ciudad.coordenadasY * scalingFactorY)}"
+                            [ngClass]="{
+                                'especialista':ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Especialista en Cuarentenas',
+                                'medico' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Médico',
+                                'constructor' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Constructor',
+                                'investigado' : ciudad.listPersonajes &&  ciudad.listPersonajes[0]?.name === 'Investigador' 
+                            }">
                             </div>
                             
                             <div class="striped-div bg-red-600" *ngIf="ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde && ciudad.eRojo>0"
@@ -144,9 +151,20 @@
                     <div class="grid grid-cols-2">
                         @for (personaje of listPersonajes; track personaje) {
                                     <div>
-                                        <button (click)="selectChar(personaje, personaje.ciudadEnLaQueEsta)" class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700 hover:text-emerald-300 duration-150">
-                                            {{personaje.name}}
-                                        </button>
+                                        <div class="flex flex-row">
+                                            <div class="flex justify-center" [ngClass]="{
+                                                    'especialista':personaje.name === 'Especialista en Cuarentenas',
+                                                    'medico' : personaje.name === 'Médico',
+                                                    'constructor' : personaje.name === 'Constructor',
+                                                    'investigado' : personaje.name === 'Investigador' 
+                                            }"></div>
+                                            <button (click)="selectChar(personaje, personaje.ciudadEnLaQueEsta)" 
+                                            class="bg-emerald-400 m-2 rounded-md w-28 h-12 hover:bg-emerald-700
+                                             hover:text-emerald-300 duration-150">
+                                                {{personaje.name}}
+                                            </button>
+                                            <div></div>
+                                        </div>
                                         <div class="h-8">{{personaje.ciudadEnLaQueEsta.nombre}}</div>
                                     </div>
                                 }
@@ -210,6 +228,12 @@
     @if (this.showCharacterActionUI) {
         <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
             <h1 class="text-2xl">{{personajeSeleccionado.name}}</h1>
+            <div [ngClass]="{
+                'especialista':personajeSeleccionado.name === 'Especialista en Cuarentenas',
+                'medico' : personajeSeleccionado.name === 'Médico',
+                'constructor' : personajeSeleccionado.name === 'Constructor',
+                'investigado' : personajeSeleccionado.name === 'Investigador' 
+            }"></div>
             @if (personajeSeleccionado.id===1) {
                 <h1 class="m-2">
                     {{personajeSeleccionado.specialSkill}}

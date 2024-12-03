@@ -16,4 +16,35 @@
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 70%);
     -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 70%);
   }
-  
+
+  /* clases para animaciones de personajes */
+.especialista{
+  background: url('/assets/char_sprites/AmongUsFree/AmongUsIdle.png');
+  height: 32px;
+  width: 32px;
+  animation: char steps(4) 3s infinite
+}
+.medico{
+  background: url('/assets/char_sprites/AmongUsFree/Idle 2.png');
+  height: 32px;
+  width: 32px;
+  animation: char steps(4) 3s infinite
+}
+.constructor{
+  background: url('/assets/char_sprites/AmongUsFree/Idle 3.png');
+  height: 32px;
+  width: 32px;
+  animation: char steps(4) 3s infinite
+}
+.investigado{
+  background: url('/assets/char_sprites/AmongUsFree/Idle.png');
+  height: 32px;
+  width: 32px;
+  animation: char steps(4) 3s infinite
+}
+
+
+@keyframes char{
+  from{background-position: 0px;}
+  to{background-position: -128px;}
+}
