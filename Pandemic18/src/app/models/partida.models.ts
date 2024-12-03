@@ -5,12 +5,13 @@ import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from "./enfermedad.models
 
 
 export class Partida{
-    id:number = 0;
+    
     counterTurnos:number=0;
     jugadas:number=4;
     listCiudades:Ciudad[];
     listaPersonajes:Personaje[];
     listEnfermedades:Enfermedad[];
+    id:number = 0;
 
     constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[], listaPersonajes:Personaje[],id:number=0){
         this.counterTurnos=counterTurnos;
@@ -18,7 +19,7 @@ export class Partida{
         this.listCiudades=listCiudades;
         this.listEnfermedades=listEnfermedades;
         this.listaPersonajes = listaPersonajes;    
-        this.id =id;
+        this.id = id;
         if(this.id===0){
             this.asignarPersonajes();
         }

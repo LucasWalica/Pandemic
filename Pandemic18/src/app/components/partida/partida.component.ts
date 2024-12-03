@@ -16,8 +16,9 @@ import { Router } from '@angular/router';
   templateUrl: './partida.component.html',
   styleUrls: ['./partida.component.css']
 })
-export class PartidaComponent implements AfterViewInit {
+export class PartidaComponent implements AfterViewInit, OnInit {
   
+
   partida: Partida = new Partida(0, 4, todasLasCiudades, listEnfermedades, listaPersonas);
   scalingFactorX: number = 1;
   scalingFactorY: number = 1;
@@ -42,36 +43,40 @@ export class PartidaComponent implements AfterViewInit {
   cargado:boolean = false;
   //desplegable de las opciones
   opcionesDesp:boolean = false;
-  
 
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService, private router:Router
-  ) {
+    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService,private router:Router) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
   
+
+
+  ngOnInit(){
+    if(this.savePartidaService.partida.id > 0){ 
+      this.partida = this.savePartidaService.partida;
+      console.log("id: ",this.savePartidaService.partida.id);
+      console.log(this.savePartidaService.partida);
+    }
+  }
   // se calcula el tamaño de pantalla para posicionar las ciudades
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.calculateScalingFactors();
       this.cdRef.detectChanges();  
     }, 50);
-    if(this.authService.userIsAuthenticated()){
-      this.router.navigate(['login']);
+    if(!this.authService.userIsAuthenticated()){
+      this.router.navigate(['']);
     }  
   }
 
 
-  // guardar partida nueva en bd, añadir funcionalidad con ID de partida y partida interface para que funcione con 
-  // partidas existentes 
-  guardarPartida(){
-    if(this.partida.id === 0){
-      this.savePartidaService.guardarPartida(this.partida)
-    }
-  }
   
+
+  guardarPartida(){
+    this.savePartidaService.guardarPartida(this.partida);
+  }
   
   // ordenador
   @HostListener('window:resize', ['$event'])

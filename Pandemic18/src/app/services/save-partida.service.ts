@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class SavePartidaService {
 
   
+  partida:Partida = {} as Partida;
   constructor(private authService:AuthServiceService, private http:HttpClient) {
    
    }  
@@ -24,6 +25,7 @@ export class SavePartidaService {
       return;
   }
     const partidaSinCiclos = JSON.stringify({
+      id:partida.id,
       counterTurnos: partida.counterTurnos,
       jugadas: partida.jugadas,
       listCiudades: partida.listCiudades.map(ciudad => ({
@@ -40,6 +42,7 @@ export class SavePartidaService {
         eVerde: ciudad.eVerde,
         listPersonajes: ciudad.listPersonajes.map(personaje => ({
           name: personaje.name,
+          specialSkill: personaje.specialSkill || "sin habilidad especial",
           movido: personaje.movido,
           en_accion: personaje.enAccion,
           turno_comienzo: personaje.turnoComienzo
@@ -52,6 +55,7 @@ export class SavePartidaService {
       })),
       listaPersonajes: partida.listaPersonajes.map(personaje => ({
         name: personaje.name,
+        specialSkill: personaje.specialSkill,
         movido: personaje.movido,
         en_accion: personaje.enAccion,
         turno_comienzo: personaje.turnoComienzo
@@ -88,60 +92,60 @@ export class SavePartidaService {
     return this.http.get<any[]>('http://127.0.0.1:8000/api/partidas/', { headers }).pipe(
       map((data: any[]) =>
         data.map(partida => ({
-          id:partida.id,
-          counterTurnos: partida.counterTurnos || 0,
-          jugadas: partida.jugadas || 0,
+          id:Number(partida.id),
+          turno: Number(partida.turno),
+          jugadas: partida.jugadas || 4,
           listCiudades: partida.ciudades.map((ciudad: any) => ({
-            nombre: ciudad.nombre,
+            nombre: ciudad.name,
             listCiudadesColindandes: ciudad.listCiudadesColindantes
               ? ciudad.listCiudadesColindantes.map((colindante: any) => colindante.name)
               : [],
-              listPersonajes: ciudad.listPersonajes
-              ? ciudad.listPersonajes.map((personaje: any) => ({
-                  id: personaje.id || 0,
-                  name: personaje.name || '',
-                  specialSkill: personaje.specialSkill || '',
-                  movido: personaje.movido === 1,
-                  turnoComienzo: personaje.turno_comienzo || 0,
-                  enAccion: personaje.enAccion || false,
-                  ciudadEnLaQueEsta: {
-                    nombre: ciudad.name,
-                    coordenadasX: ciudad.coordenadasX,
-                    coordenadasY: ciudad.coordenadasY,
-                    centroInvestigacion: ciudad.centro_investigacion === 1,
-                  },
-                }))
-              : [],
-            centroInvestigacion: ciudad.centroInvestigacion || false,
-            coordenadasX: ciudad.coordenadasX || 0,
-            coordenadasY: ciudad.coordenadasY || 0,
-            eVerde: ciudad.eVerde || 0,
-            eRojo: ciudad.eRojo || 0,
-            eAzul: ciudad.eAzul || 0,
-            eAmarillo: ciudad.eAmarillo || 0,
+              listPersonajes: partida.personajes
+          .filter((personaje: any) => personaje.ciudadEnLaQueEsta?.name === ciudad.name)  // Verificar si el personaje está en la ciudad
+          .map((personaje: any) => ({
+            id: personaje.id,
+            name: personaje.name,
+            specialSkill: personaje.specialSkill,
+            movido: personaje.movido === 1, 
+            ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
+              ? {
+                  nombre: personaje.ciudadEnLaQueEsta.name,
+                  coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
+                  coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
+                  centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
+                }
+              : null,
+            turnoComienzo: personaje.turno_comienzo,
+            enAccion: personaje.enAccion === 1,  
           })),
-          listaPersonajes: partida.ciudades.flatMap((ciudad: any) =>
-            ciudad.listPersonajes.map((personaje: any) => ({
-              id: personaje.id,
-              name: personaje.name,
-              specialSkill: personaje.specialSkill || '',
-              movido: personaje.movido === 1,
-              ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
-                ? {
-                    nombre: personaje.ciudadEnLaQueEsta.name,
-                    coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
-                    coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
-                    centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
-                  }
-                : null,
-              turnoComienzo: personaje.turno_comienzo || 0,
-              enAccion: personaje.enAccion || false,
-            }))
-          ),
+            centroInvestigacion: ciudad.centroInvestigacion === 1,
+            coordenadasX: ciudad.coordenadasX,
+            coordenadasY: ciudad.coordenadasY,
+            eVerde: ciudad.eVerde,
+            eRojo: ciudad.eRoja,
+            eAzul: ciudad.eAzul,
+            eAmarillo: ciudad.eAmarilla,
+          })),
+          listaPersonajes: partida.personajes.map((personaje: any) => ({
+            id: personaje.id,
+            name: personaje.name,
+            specialSkill: personaje.specialSkill,
+            movido: personaje.movido === 1, 
+            ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
+              ? {
+                  nombre: personaje.ciudadEnLaQueEsta.name,
+                  coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
+                  coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
+                  centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
+                }
+              : null,
+            turnoComienzo: personaje.turno_comienzo,
+            enAccion: personaje.enAccion === 1,  
+          })),          
           listEnfermedades: partida.enfermedades.map((enfermedad: any) => ({
             name: enfermedad.name,
-            turnosParaCurar: enfermedad.turnosParaCurar || 0,
-            infeccionAColindandes: enfermedad.infeccionAColindandes || 0,
+            turnosParaCurar: enfermedad.turnosParaCurar,
+            infeccionAColindandes: enfermedad.infeccionAColindandes,
           })),
         }))
       )

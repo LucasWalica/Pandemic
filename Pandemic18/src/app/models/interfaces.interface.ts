@@ -4,7 +4,7 @@ import { Enfermedad } from "./enfermedad.models";
 
 export interface PartidaI{
     id:number;
-    counterTurnos:number;
+    turno:number;
     jugadas:number;
     listCiudades:any[];
     listaPersonajes:any[];

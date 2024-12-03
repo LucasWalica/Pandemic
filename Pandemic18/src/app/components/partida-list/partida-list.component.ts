@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SavePartidaService } from '../../services/save-partida.service';
 import { Partida } from '../../models/partida.models';
 import { PartidaI } from '../../models/interfaces.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-partida-list',
@@ -14,7 +15,7 @@ export class PartidaListComponent implements OnInit {
 
 
   partidas:Partida[] = [] as Partida[];
-  constructor(private gameService:SavePartidaService){
+  constructor(private gameService:SavePartidaService, private router:Router){
 
   }
 
@@ -23,7 +24,7 @@ export class PartidaListComponent implements OnInit {
     this.gameService.getPartidaList().subscribe({
       next: (partidas: PartidaI[]) => {
         this.partidas = partidas.map((partidaI) =>
-          new Partida(partidaI.counterTurnos, partidaI.jugadas, partidaI.listCiudades, partidaI.listEnfermedades, partidaI.listaPersonajes, partidaI.id)
+          new Partida(partidaI.turno, partidaI.jugadas, partidaI.listCiudades, partidaI.listEnfermedades, partidaI.listaPersonajes, partidaI.id)
       ); // Los datos ya están completamente mapeados
         console.log('Partidas cargadas:', this.partidas);
         console.log('Primera partida:', this.partidas[0]);
@@ -32,6 +33,12 @@ export class PartidaListComponent implements OnInit {
         console.error('Error al cargar las partidas:', err);
       },
     });
+  }
+
+  cargarPartida(p:Partida){
+    this.gameService.partida = p;
+    console.log("Datos de partida cargada: ", p);
+    this.router.navigate(['newGame']);
   }
   
 }

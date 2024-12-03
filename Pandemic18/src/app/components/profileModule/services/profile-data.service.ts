@@ -30,13 +30,11 @@ export class ProfileDataService implements OnInit{
     new profilePic("/assets/portraits-64px/portrait15-4x.png")
   ];
 
-
-  profile:Profile= {} as Profile;
+  profile:Profile = {} as Profile;
   
   ngOnInit(): void {
     this.loadProfileFromStorage();
   }
-
 
   chargeProfile() {
     const token = this.authService.getToken();
