@@ -52,7 +52,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   }
   
 
-
   ngOnInit(){
     if(this.savePartidaService.partida.id > 0){ 
       this.partida = this.savePartidaService.partida;

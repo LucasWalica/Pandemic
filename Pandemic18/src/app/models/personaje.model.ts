@@ -23,7 +23,7 @@ export class Personaje{
     getCiudadActual(p:Partida):Ciudad|null{
         for(var ciudad of p.listCiudades){
             for(var personaje of ciudad.listPersonajes){
-                if(personaje.id==this.id){
+                if(personaje.id===this.id){
                     return ciudad;
                 }
             }
