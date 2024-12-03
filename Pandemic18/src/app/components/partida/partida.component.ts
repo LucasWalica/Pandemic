@@ -55,8 +55,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   ngOnInit(){
     if(this.savePartidaService.partida.id > 0){ 
       this.partida = this.savePartidaService.partida;
-      console.log("id: ",this.savePartidaService.partida.id);
-      console.log(this.savePartidaService.partida);
+      console.log("partida: ",this.partida);
     }
   }
   // se calcula el tamaño de pantalla para posicionar las ciudades

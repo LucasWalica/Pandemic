@@ -3,7 +3,9 @@ import { SavePartidaService } from '../../services/save-partida.service';
 import { Partida } from '../../models/partida.models';
 import { PartidaI } from '../../models/interfaces.interface';
 import { Router } from '@angular/router';
-
+import { Personaje } from '../../models/personaje.model';
+import { Enfermedad } from '../../models/enfermedad.models';
+import { Ciudad } from '../../models/ciudad.models';
 @Component({
   selector: 'app-partida-list',
   standalone: true,
@@ -18,14 +20,60 @@ export class PartidaListComponent implements OnInit {
   constructor(private gameService:SavePartidaService, private router:Router){
 
   }
-
-  // se pierden datos en esta funcion
   ngOnInit(): void {
+    this.loadGames();
+  }
+  
+  cargarPartida(p:Partida){
+    this.gameService.partida = p;
+    console.log("Datos de partida cargada: ", p);
+    this.router.navigate(['newGame']);
+  }
+
+  loadGames(){
     this.gameService.getPartidaList().subscribe({
       next: (partidas: PartidaI[]) => {
-        this.partidas = partidas.map((partidaI) =>
-          new Partida(partidaI.turno, partidaI.jugadas, partidaI.listCiudades, partidaI.listEnfermedades, partidaI.listaPersonajes, partidaI.id)
-      ); // Los datos ya están completamente mapeados
+        this.partidas = partidas.map((partidaI) => {
+          // Mapea las ciudades a instancias de la clase Ciudad
+          const ciudades = partidaI.listCiudades.map(ciudadData => 
+            new Ciudad(ciudadData.nombre, 
+                       ciudadData.listCiudadesColindandes, 
+                       ciudadData.centroInvestigacion,
+                       ciudadData.listPersonajes,
+                       ciudadData.coordenadasX,
+                       ciudadData.coordenadasY,
+                       ciudadData.eVerde,
+                       ciudadData.eRojo,
+                       ciudadData.eAzul,
+                       ciudadData.eAmarillo)
+          );
+  
+          // Mapea los personajes a instancias de la clase Personaje
+          const personajes = partidaI.listaPersonajes.map(personajeData =>
+            new Personaje(personajeData.id, 
+                          personajeData.name, 
+                          personajeData.specialSkill, 
+                          personajeData.movido,  
+                          personajeData.turnoComienzo, 
+                          personajeData.enAccion)
+          );
+  
+          // Mapea las enfermedades a instancias de la clase Enfermedad
+          const enfermedades = partidaI.listEnfermedades.map(enfermedadData =>
+            new Enfermedad(enfermedadData.name, 
+                           enfermedadData.turnosParaCurar, 
+                           enfermedadData.infeccionAColindandes)
+          );
+  
+          // Crea una nueva instancia de Partida con los datos mapeados
+          return new Partida(partidaI.turno, 
+                             partidaI.jugadas, 
+                             ciudades, 
+                             enfermedades, 
+                             personajes, 
+                             partidaI.id);
+        });
+  
         console.log('Partidas cargadas:', this.partidas);
         console.log('Primera partida:', this.partidas[0]);
       },
@@ -33,12 +81,6 @@ export class PartidaListComponent implements OnInit {
         console.error('Error al cargar las partidas:', err);
       },
     });
-  }
-
-  cargarPartida(p:Partida){
-    this.gameService.partida = p;
-    console.log("Datos de partida cargada: ", p);
-    this.router.navigate(['newGame']);
   }
   
 }

@@ -6,15 +6,15 @@ export interface PartidaI{
     id:number;
     turno:number;
     jugadas:number;
-    listCiudades:any[];
-    listaPersonajes:any[];
-    listEnfermedades:any[];
+    listCiudades:Ciudad[];
+    listaPersonajes:Personaje[];
+    listEnfermedades:Enfermedad[];
 }
 
 export interface CiudadI{
     nombre:string;
     listCiudadesColindandes:string[];
-    listPersonajes:any[];
+    listPersonajes:Personaje[];
     centroInvestigacion:boolean;
     coordenadasX:number;
     coordenadasY:number;
