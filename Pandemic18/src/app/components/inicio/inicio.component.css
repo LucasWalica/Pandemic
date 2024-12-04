@@ -39,11 +39,11 @@
 } .intro:hover{background: linear-gradient(to right,  #66339900,#9e3ae0,#66339900); transition-duration: 2s;}
 .intro{width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
 .jugar{background-color: #0077ff;}
-.introJugar{border: 5px solid rgb(0, 174, 255);} /*.introJugar:hover{background-color:#00aeff; color: black;}*/
-.RankingG{background-color: #05aa21;}
-.introRG{border: 5px solid #0ddb2f; } /*.introRG:hover{background-color:#0ddb2f; color: black;}*/
-.RankingL{background-color: #dbd800;}
-.introRL{border: 5px solid #eeee0b;} /*.introRL:hover{background-color:#eeee0b; color: black;}*/
+.introJugar{border: 5px solid #00aeff;} /*.introJugar:hover{background-color:#00aeff; color: black;}*/
+.RankingG{background-color: #0077ff;}
+.introRG{border: 5px solid #00aeff; } /*.introRG:hover{background-color:#0ddb2f; color: black;}*/
+.RankingL{background-color: #0077ff;}
+.introRL{border: 5px solid #00aeff;} /*.introRL:hover{background-color:#eeee0b; color: black;}*/
 .retroceder{background-color: #cf0e1e;}
 .retrocediendo{border: 5px solid red;} /*.retrocediendo:hover{background-color:red; color: black;}*/
 .slider-thumb::before {

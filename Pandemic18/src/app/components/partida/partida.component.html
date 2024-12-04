@@ -2,11 +2,11 @@
    
 
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
-    <div class="grid grid-cols-1 xl:grid-cols-5 m-2 rounded-md p-2 select-none">
+    <div class="grid m-2 h-full w-full rounded-md p-2 select-none">
         
                 
         <!--div de datos de la ciudad-->
-        <div class="z-20  p-2">
+        <div class="z-20  p-2 absolute left-1">
             <div class=" rounded-md p-2 border-emerald-300 border-2">
                 <div class="grid grid-cols-4 rounded-md text-center gap-1">
                     <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md">
@@ -31,7 +31,7 @@
                 </button>
             </div>
             @if (ciudadSeleccionada.nombre) {
-<                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
+                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
                     <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
                     <div class="grid grid-cols-2 text-center">
                         <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
@@ -64,7 +64,7 @@
 
 
 <!--Contenedor del mapa-->
-        <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
+        <div class="z-10 map-container  relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
             (mousedown)="onMouseDown($event)"
             (mousemove)="onMouseMove($event)"
@@ -91,7 +91,7 @@
                 <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
                     <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover unselectable" draggable="false" (dragstart)="false;">
                      @for (ciudad of partida.listCiudades; track ciudad) {
-                           <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2" 
+                           <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2 select-none" 
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}"
@@ -132,7 +132,7 @@
 
 
         <!--datos partida-->
-        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2">
+        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2 absolute right-5">
             <!--Actualizaciones del turno y mas data-->
             <div class="grid grid-cols-2 text-center border-2 border-emerald-950 rounded-sm m-1 p-2">
                 <div>

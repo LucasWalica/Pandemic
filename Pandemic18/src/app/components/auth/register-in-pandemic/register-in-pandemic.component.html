@@ -1,9 +1,9 @@
 <div class="fondo">
     <div class="cuadroInicio lg:w-96 lg:text-2xl sm:w-64 sm:text-sm">
-        <form [formGroup]="this.registrationForm" (ngSubmit)="enviar($event)" class="log-in">
+        <form [formGroup]="this.registrationForm" (ngSubmit)="enviar($event)" class="log-in shadow-lg shadow-black">
             <div class="Nick">
                 <p>Nombre de usuario</p>
-                <input formControlName="nickName" type="text" class="username" name="username" placeholder="Ingrese su usuario"><br><br>
+                <input formControlName="nickName" type="text" class="username p-1" name="username" placeholder="Ingrese su usuario"><br><br>
             </div>
             @if (!this.registrationForm.valid && this.registrationForm.get('nickName')?.touched) {
                 @if (this.registrationForm.get('nickName')?.errors?.['required']) {
@@ -16,7 +16,7 @@
             }
             <div class="Nick">
                 <p>email</p>
-                <input formControlName="email" type="email" class="email" name="email" placeholder="ingrese su correo"><br><br>
+                <input formControlName="email" type="email" class="email p-1" name="email" placeholder="ingrese su correo"><br><br>
             </div>
             @if (!this.registrationForm.valid && this.registrationForm.get('email')?.touched) {
                 @if (this.registrationForm.get('email')?.errors?.['required']) {
@@ -27,7 +27,7 @@
             }
             <div class="contraseña">
                 <p>Contraseña</p>
-                <input formControlName="password" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                <input formControlName="password" type="password" class="password p-1" name="password" placeholder="Ingrese su contraseña"><br><br>
             </div>
             @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
                 @if (this.registrationForm.get('password')?.errors?.['required']) {
@@ -40,7 +40,7 @@
             }
             <div class="contraseña">
                 <p>Repetir Contraseña</p>
-                <input formControlName="password2" type="password" class="password" name="password" placeholder="Ingrese su contraseña"><br><br>
+                <input formControlName="password2" type="password" class="password p-1" name="password" placeholder="Ingrese su contraseña"><br><br>
             </div>
             @if (!this.registrationForm.valid && this.registrationForm.get('password')?.touched) {
                 @if (this.registrationForm.get('password')?.errors?.['required']) {
@@ -56,7 +56,7 @@
                     <div class="text-center pl-2 pr-2 p-1 rounded-md border-2 border-red-950 bg-red-900 text-red-50"> Las contraseñas no coinciden</div>
                 }
             }
-            <button type="submit" class="enter" >
+            <button type="submit" class="enter mb-2" >
                 Registrar
             </button>
         </form>
