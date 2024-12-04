@@ -26,6 +26,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
   listPersonajes:Personaje[] = listaPersonas;
+  listaCiudadesBusqueda:Ciudad[] = todasLasCiudades;
   personajeSeleccionado:Personaje = {} as Personaje;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
   zoomLevel: number = 1;       
@@ -70,7 +71,17 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   }
 
 
-  
+  actualizarBusqueda(){
+    this.listaCiudadesBusqueda = [] as Ciudad[];
+    const searchBar = (document.querySelector('.searchCity') as HTMLInputElement)?.value?.toLowerCase() || '';
+    for(let i=0; i<todasLasCiudades.length; i++){
+      if(todasLasCiudades[i].nombre.toLowerCase().includes(searchBar)){
+        this.listaCiudadesBusqueda.push(todasLasCiudades[i]);
+      } 
+    }
+    
+    
+  }
 
   guardarPartida(){
     this.savePartidaService.guardarPartida(this.partida);
@@ -166,9 +177,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     }
   }
   
-
-
-  
   // metodos para dispositivos moviles : 
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
@@ -183,7 +191,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
       this.initialDistance = this.getDistance(event.touches[0], event.touches[1]);
     }
   }
-
 
   // movil
   @HostListener('touchmove', ['$event'])
@@ -221,4 +228,3 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     this.opcionesDesp = !this.opcionesDesp;
   }
 }
-

@@ -36,6 +36,7 @@ export class ProfileDataService implements OnInit{
     this.loadProfileFromStorage();
   }
 
+  // cargar perfil desde base de datos
   chargeProfile() {
     const token = this.authService.getToken();
     if (!token) {
@@ -76,7 +77,6 @@ export class ProfileDataService implements OnInit{
     );
   }  
 
-
   // maneja el local storage del perfil
   saveProfileToStorage(){
     localStorage.setItem("profile", JSON.stringify({
@@ -93,7 +93,6 @@ export class ProfileDataService implements OnInit{
       this.profile = new Profile(profileObject.name, profileObject.profilePic, profileObject.puntuacion);
      }
   }
-
 
   // maneja el local storage del perfil 
   saveProfile(p:Profile){

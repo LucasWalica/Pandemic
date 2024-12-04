@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative flex justify-center content-center m-0">
    
 
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
@@ -24,14 +24,14 @@
                 </div>
                 <div class="text-center text-emerald-300">Vacunas</div>
             </div>
-            <div>
+            <div class="flex flex-col justify-center content-center">
                 <button (click)="mostrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                    hover:pl-6 hover:pr-6 duration-150">
+                hover:bg-emerald-400 hover:text-emerald-950 duration-150">
                     Ciudades
                 </button>
             </div>
             @if (ciudadSeleccionada.nombre) {
-                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
+<                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
                     <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
                     <div class="grid grid-cols-2 text-center">
                         <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
@@ -63,8 +63,6 @@
 
 
 
-
-       
 <!--Contenedor del mapa-->
         <div class="z-10 map-container grid-cols-3 relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
@@ -148,10 +146,10 @@
             <!--datos personajes-->
             <div *ngIf="opcionesDesp==true">
                 <div class="text-center border-2 border-emerald-700 rounded-md">
-                    <div class="grid grid-cols-2">
+                    <div class="grid md:grid-cols-4 xl:grid-cols-2">
                         @for (personaje of listPersonajes; track personaje) {
-                                    <div>
-                                        <div class="flex flex-row">
+                                    <div class="flex flex-col">
+                                        <div class="flex flex-row justify-center">
                                             <div class="flex justify-center" [ngClass]="{
                                                     'especialista':personaje.name === 'Especialista en Cuarentenas',
                                                     'medico' : personaje.name === 'Médico',
@@ -163,7 +161,6 @@
                                              hover:text-emerald-300 duration-150">
                                                 {{personaje.name}}
                                             </button>
-                                            <div></div>
                                         </div>
                                         <div class="h-8">{{personaje.ciudadEnLaQueEsta.nombre}}</div>
                                     </div>
@@ -189,36 +186,52 @@
     <!-- ciudades mas infectadas -->
      @if (this.showCiudadesMasInfectadas) {
         <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
-            <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-            hover:pl-6 hover:pr-6 duration-150">Cerrar</button>
+            <div class="grid grid-cols-2">
+                <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                hover:pl-6 hover:pr-6 duration-150">Cerrar</button>
+                                
+                <div class="border-2 border-emerald-950 text-emerald-950 bg-emerald-600 rounded-md flex justify-center content-center m-2">
+                    <div class="flex justify-center content-center">
+                        <input class="searchCity" placeholder="Buscar una ciudad específica">
+                        <button (click)="actualizarBusqueda()" class="border-2 border-emerald-200 text-emerald-200 rounded-md hover:text-emerald-950 hover:border-emerald-950">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
             <div class="overflow-y-auto h-80 w-full text-center grid grid-cols-2 gap-4">
                 @for (ciudad of this.partida.listCiudades; track ciudad) {
-                    <button (click)="showData(ciudad); cerrarCiudadesMasInfectadas()"
-                    class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                        hover:pl-6 hover:pr-6 duration-150">
-                        <div class="flex flex-col text-center">
-                            <div>
-                                {{ciudad.nombre}}     
-                            </div>
-                            <div class="grid grid-cols-4">
-                                <div class="border-2 border-yellow-950 text-yellow-950 bg-yellow-600 rounded-md">
-                                   {{ciudad.eAmarillo}}
+                    @for (c of this.listaCiudadesBusqueda; track c) {
+                        @if(ciudad.nombre === c.nombre){
+                            <button (click)="showData(ciudad); cerrarCiudadesMasInfectadas()"
+                            class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                                hover:pl-6 hover:pr-6 duration-150">
+                                <div class="flex flex-col text-center">
+                                    <div>
+                                        {{ciudad.nombre}}     
+                                    </div>
+                                    <div class="grid grid-cols-4">
+                                        <div class="border-2 border-yellow-950 text-yellow-950 bg-yellow-600 rounded-md">
+                                        {{ciudad.eAmarillo}}
+                                        </div>
+                                        <div class="border-2 border-blue-950 text-blue-950 bg-blue-600 rounded-md">
+                                            {{ciudad.eAzul}}
+                                        </div>
+                                        <div class="border-2 border-red-950 text-red-950 bg-red-600 rounded-md">
+                                            {{ciudad.eRojo}}
+                                        </div>
+                                        <div class="border-2 border-green-950 text-green-950 bg-green-600 rounded-md">
+                                            {{ciudad.eVerde}}
+                                        </div>
+                                    </div>
+                                    <div>    
+                                    Nivel de enfermedad total: {{ciudad.calcularNivelEnfermedad()}}
+                                    </div>
                                 </div>
-                                <div class="border-2 border-blue-950 text-blue-950 bg-blue-600 rounded-md">
-                                    {{ciudad.eAzul}}
-                                </div>
-                                <div class="border-2 border-red-950 text-red-950 bg-red-600 rounded-md">
-                                    {{ciudad.eRojo}}
-                                </div>
-                                <div class="border-2 border-green-950 text-green-950 bg-green-600 rounded-md">
-                                    {{ciudad.eVerde}}
-                                </div>
-                            </div>
-                            <div>    
-                               Nivel de enfermedad total: {{ciudad.calcularNivelEnfermedad()}}
-                            </div>
-                        </div>
-                    </button>
+                            </button>
+                        }
+                    }
                 }
             </div>
         </div>
@@ -280,32 +293,35 @@
                     <h1 class="m-2">
                         {{personajeSeleccionado.specialSkill}}
                     </h1> 
-                    <br><br>
-                    <div class="grid grid-cols-4 text-center">
-                        @if (!personajeSeleccionado.enAccion) {
+                    <br><br>    
+                        <div>
+                    
+                    @if (!personajeSeleccionado.enAccion && !personajeSeleccionado.movido) {
+                            <div class="grid grid-cols-4 text-center">
 
-                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('verde'), this.partida)"
-                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                                curar e verde
-                            </button>
-                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('azul'), this.partida)"
-                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                                curar e azul
-                            </button>
-                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('roja'), this.partida)"
-                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                                curar e roja
-                            </button>
-                            <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('amarilla'), this.partida)"
-                            class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
-                                curar e amarilla
-                            </button>
-                        } @else if (this.personajeSeleccionado.enAccion) {
-                            <h1 class="border-2 rounded-md border-emerald-950 text-2xl">
-                                El personaje está estudiando una enfermedad
-                            </h1>
+                                <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('verde'), this.partida)"
+                                class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                    curar e verde
+                                </button>
+                                <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('azul'), this.partida)"
+                                class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                    curar e azul
+                                </button>
+                                <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('roja'), this.partida)"
+                                class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                    curar e roja
+                                </button>
+                                <button (click)="this.personajeSeleccionado.investigar(getEnfermedadByName('amarilla'), this.partida)"
+                                class="border-2 rounded-md pl-2 pr-2 p-1 bg-emerald-800 text-lime-300 border-red-950 hover:bg-red-700 duration-150">
+                                    curar e amarilla
+                                </button>
+                            </div>
+                        }@else{
+                            <div class="text-xl text-center border-2 border-emerald-900 rounded-md m-2">
+                                El Investigador está buscando una cura
+                            </div>
                         }
-                    </div>
+                        </div>
                 </div>
             }
             <div>
