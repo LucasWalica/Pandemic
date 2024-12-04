@@ -2,7 +2,7 @@
    
 
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
-    <div class="grid grid-cols-1 xl:grid-cols-5 m-2 rounded-md p-2 select-none">
+    <div class="grid grid-cols-5 xl:grid-cols-5 m-2 rounded-md p-2 select-none">
         
                 
         <!--div de datos de la ciudad-->
@@ -30,9 +30,16 @@
                     Ciudades
                 </button>
             </div>
+            <!--Ciudad Seleccionada-->
             @if (ciudadSeleccionada.nombre) {
-<                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
-                    <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
+                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
+                    <div class="flex flex-row justify-around">
+                        <h1 class="text-center text-xl">{{ciudadSeleccionada.nombre}}</h1>
+                        <div (click)="removeSelectedCity()" class="border-2 border-red-950 text-center text-xl text-red-950 
+                            bg-red-500 rounded-md p-2 hover:bg-red-950 duration-100 hover:text-red-600">
+                            X
+                        </div>
+                    </div>
                     <div class="grid grid-cols-2 text-center">
                         <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
                             Chinosis: {{ciudadSeleccionada.eAmarillo}}
@@ -95,28 +102,30 @@
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}"
-                            [ngClass]="{
-                                'especialista':ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Especialista en Cuarentenas',
-                                'medico' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Médico',
-                                'constructor' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Constructor',
-                                'investigado' : ciudad.listPersonajes &&  ciudad.listPersonajes[0]?.name === 'Investigador' 
-                            }">
-                            </div>
-                            
+                            ></div>
+                            <div class="absolute ml-2" [ngClass]="{
+                                'especialista':ciudad.listPersonajes.length > 0  && ciudad.listPersonajes[0]?.name === 'Especialista en Cuarentenas',
+                                'medico' : ciudad.listPersonajes.length > 0 && ciudad.listPersonajes[0]?.name === 'Médico',
+                                'constructor' : ciudad.listPersonajes.length > 0 && ciudad.listPersonajes[0]?.name === 'Constructor',
+                                'investigado' : ciudad.listPersonajes.length > 0 &&  ciudad.listPersonajes[0]?.name === 'Investigador' 
+                            }" [ngStyle]="{
+                                'left.px': (ciudad.coordenadasX * scalingFactorX),
+                                'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                </div>
                             <div class="striped-div bg-red-600" *ngIf="ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde && ciudad.eRojo>0"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
                             </div>
                             <div class="striped-div bg-blue-700" *ngIf="ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo && ciudad.eAzul>0"
                                 [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="striped-div bg-green-600" *ngIf="ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo && ciudad.eVerde>0"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
                             </div>
                             <div class="striped-div bg-yellow-600" *ngIf="ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul && ciudad.eAmarillo>0"
                                 [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="striped-div bg-white" *ngIf="!(ciudad.eRojo === 0 || ciudad.eAzul === 0 || ciudad.eAmarillo === 0 || ciudad.eVerde === 0) && (!(ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde) || !(ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo) || !(ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo) || !(ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul))"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
@@ -352,6 +361,3 @@
         </div>
     }
 </div>
-
-
-

@@ -146,6 +146,10 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   showData(ciudad: Ciudad) {
     this.ciudadSeleccionada = ciudad;
   }
+  removeSelectedCity(){
+    this.ciudadSeleccionada = {} as Ciudad;
+    this.cdRef.detectChanges();
+  }
 // usabilidad
   onZoom(event: WheelEvent) {
     event.preventDefault();  
