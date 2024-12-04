@@ -35,8 +35,8 @@
                 <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
                     <div class="flex flex-row justify-around">
                         <h1 class="text-center text-xl">{{ciudadSeleccionada.nombre}}</h1>
-                        <div (click)="removeSelectedCity()" class="border-2 border-red-950 text-center text-xl text-red-950 
-                            bg-red-500 rounded-md p-2 hover:bg-red-950 duration-100 hover:text-red-600">
+                        <div (click)="removeSelectedCity()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                        hover:pl-6 hover:pr-6 duration-150">
                             X
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                 </div>
                 <!--acciones-->
                 <div class="flex self-center items-center text-center justify-center">
-                    <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    <button (click)="pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
                     hover:pl-6 hover:pr-6 duration-150">
                         Pasar turno
                     </button>
@@ -195,9 +195,8 @@
     <!-- ciudades mas infectadas -->
      @if (this.showCiudadesMasInfectadas) {
         <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
-            <div class="grid grid-cols-2">
-                <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                hover:pl-6 hover:pr-6 duration-150">Cerrar</button>
+            <div class="flex flex-row justify-around">
+                
                                 
                 <div class="border-2 border-emerald-950 text-emerald-950 bg-emerald-600 rounded-md flex justify-center content-center m-2">
                     <div class="flex justify-center content-center">
@@ -207,6 +206,9 @@
                         </button>
                     </div>
                 </div>
+
+                <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                hover:pl-6 hover:pr-6 duration-150">X</button>
 
             </div>
             <div class="overflow-y-auto h-80 w-full text-center grid grid-cols-2 gap-4">
