@@ -25,23 +25,48 @@
 </section>
 
 
-<div class="border-2 border-emerald-950 rounded-md p-10 bg-emerald-400 flex justify-center item-center">
-   @for (partida of this.partidas; track partida) {
-    <div class="border-2 text-center p-2 rounded-md">
-        <h1 class="text-2xl">Partida</h1>
-        <div class="flex flex-col">
-            <div>Turnos {{partida.counterTurnos}}</div>
-            <div class="col-span-3">
-                Infeccion total {{partida.infeccionTotal()}}
-            </div>
-        </div>
-        <div class="flex justify-center">
-            <button (click)="cargarPartida(partida)" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+
+<div>
+    <div class="grid grid-cols-3 text-center m-2 text-2xl rounded-md">
+       
+        <a (click)="goToInicio()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
             bg-emerald-950 text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6
             duration-150 cursor-pointer hover:bg-emerald-200 
-            hover:text-emerald-950 md:ml-4 md:mr-4">Cargar esta partida</button>
-        </div>
+            hover:text-emerald-950 md:ml-4 md:mr-4">Inicio</a>
+        <a (click)="goToProfile()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+            bg-emerald-950 text-emerald-100 shadow-sm 
+            shadow-black hover:pr-6 hover:pl-6
+            duration-150 cursor-pointer hover:bg-emerald-200 
+            hover:text-emerald-950 md:ml-4 md:mr-4">Perfil</a>
+        <a (click)="goLogout()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+            bg-emerald-950 text-emerald-100 shadow-sm 
+            shadow-black hover:pr-6 hover:pl-6
+            duration-150 cursor-pointer hover:bg-emerald-200 
+            hover:text-emerald-950 md:ml-4 md:mr-4">Logout</a>
     </div>
-   }
+    <div class="border-2 border-emerald-950 rounded-md p-10 bg-emerald-400 flex justify-center item-center">
+        @if(this.partidas.length > 0){
+            @for (partida of this.partidas; track partida) {
+                <div class="border-2 text-center p-2 rounded-md">
+                    <h1 class="text-2xl">Partida</h1>
+                    <div class="flex flex-col">
+                        <div>Turnos {{partida.counterTurnos}}</div>
+                        <div class="col-span-3">
+                            Infeccion total {{partida.infeccionTotal()}}
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button (click)="cargarPartida(partida)" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
+                        bg-emerald-950 text-emerald-100 shadow-sm 
+                        shadow-black hover:pr-6 hover:pl-6
+                        duration-150 cursor-pointer hover:bg-emerald-200 
+                        hover:text-emerald-950 md:ml-4 md:mr-4">Cargar esta partida</button>
+                    </div>
+                </div>
+            }
+        }@else {
+            <h1 class="text-2xl">No hay partidas guardadas</h1>
+        }
+    </div>
 </div>

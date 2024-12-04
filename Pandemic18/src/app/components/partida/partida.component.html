@@ -2,8 +2,7 @@
    
 
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
-    <div class="grid m-2 h-full w-full rounded-md p-2 select-none">
-        
+    <div class="grid m-2 h-full w-full rounded-md p-2 select-none">        
                 
         <!--div de datos de la ciudad-->
         <div class="z-20  p-2 absolute left-1">
@@ -30,9 +29,16 @@
                     Ciudades
                 </button>
             </div>
+            <!--Ciudad Seleccionada-->
             @if (ciudadSeleccionada.nombre) {
                 <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
-                    <h1 class="text-center">{{ciudadSeleccionada.nombre}}</h1>
+                    <div class="flex flex-row justify-around">
+                        <h1 class="text-center text-xl">{{ciudadSeleccionada.nombre}}</h1>
+                        <div (click)="removeSelectedCity()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                        hover:pl-6 hover:pr-6 duration-150">
+                            X
+                        </div>
+                    </div>
                     <div class="grid grid-cols-2 text-center">
                         <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
                             Chinosis: {{ciudadSeleccionada.eAmarillo}}
@@ -95,28 +101,30 @@
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}"
-                            [ngClass]="{
-                                'especialista':ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Especialista en Cuarentenas',
-                                'medico' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Médico',
-                                'constructor' : ciudad.listPersonajes && ciudad.listPersonajes[0]?.name === 'Constructor',
-                                'investigado' : ciudad.listPersonajes &&  ciudad.listPersonajes[0]?.name === 'Investigador' 
-                            }">
-                            </div>
-                            
+                            ></div>
+                            <div class="absolute ml-2" [ngClass]="{
+                                'especialista':ciudad.listPersonajes.length > 0  && ciudad.listPersonajes[0]?.name === 'Especialista en Cuarentenas',
+                                'medico' : ciudad.listPersonajes.length > 0 && ciudad.listPersonajes[0]?.name === 'Médico',
+                                'constructor' : ciudad.listPersonajes.length > 0 && ciudad.listPersonajes[0]?.name === 'Constructor',
+                                'investigado' : ciudad.listPersonajes.length > 0 &&  ciudad.listPersonajes[0]?.name === 'Investigador' 
+                            }" [ngStyle]="{
+                                'left.px': (ciudad.coordenadasX * scalingFactorX),
+                                'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                </div>
                             <div class="striped-div bg-red-600" *ngIf="ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde && ciudad.eRojo>0"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
                             </div>
                             <div class="striped-div bg-blue-700" *ngIf="ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo && ciudad.eAzul>0"
                                 [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="striped-div bg-green-600" *ngIf="ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo && ciudad.eVerde>0"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}">
                             </div>
                             <div class="striped-div bg-yellow-600" *ngIf="ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul && ciudad.eAmarillo>0"
                                 [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="striped-div bg-white" *ngIf="!(ciudad.eRojo === 0 || ciudad.eAzul === 0 || ciudad.eAmarillo === 0 || ciudad.eVerde === 0) && (!(ciudad.eRojo>ciudad.eAmarillo && ciudad.eRojo>ciudad.eAzul && ciudad.eRojo>ciudad.eVerde) || !(ciudad.eAzul>ciudad.eRojo && ciudad.eAzul>ciudad.eVerde && ciudad.eAzul>ciudad.eAmarillo) || !(ciudad.eVerde>ciudad.eAmarillo && ciudad.eVerde>ciudad.eAzul && ciudad.eVerde>ciudad.eRojo) || !(ciudad.eAmarillo>ciudad.eRojo && ciudad.eAmarillo>ciudad.eVerde && ciudad.eAmarillo>ciudad.eAzul))"
-                            [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
+                                [ngStyle]="{'left.px': (ciudad.coordenadasX * scalingFactorX),'top.px': (ciudad.coordenadasY * scalingFactorY)}"> 
                             </div>
                             <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
@@ -169,7 +177,7 @@
                 </div>
                 <!--acciones-->
                 <div class="flex self-center items-center text-center justify-center">
-                    <button (click)="partida.pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
+                    <button (click)="pasarTurno()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
                     hover:pl-6 hover:pr-6 duration-150">
                         Pasar turno
                     </button>
@@ -186,9 +194,8 @@
     <!-- ciudades mas infectadas -->
      @if (this.showCiudadesMasInfectadas) {
         <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
-            <div class="grid grid-cols-2">
-                <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-                hover:pl-6 hover:pr-6 duration-150">Cerrar</button>
+            <div class="flex flex-row justify-around">
+                
                                 
                 <div class="border-2 border-emerald-950 text-emerald-950 bg-emerald-600 rounded-md flex justify-center content-center m-2">
                     <div class="flex justify-center content-center">
@@ -198,6 +205,9 @@
                         </button>
                     </div>
                 </div>
+
+                <button (click)="cerrarCiudadesMasInfectadas()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                hover:pl-6 hover:pr-6 duration-150">X</button>
 
             </div>
             <div class="overflow-y-auto h-80 w-full text-center grid grid-cols-2 gap-4">
@@ -352,6 +362,3 @@
         </div>
     }
 </div>
-
-
-

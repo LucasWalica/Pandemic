@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SavePartidaService } from '../../services/save-partida.service';
 import { Partida } from '../../models/partida.models';
 import { PartidaI } from '../../models/interfaces.interface';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Personaje } from '../../models/personaje.model';
 import { Enfermedad } from '../../models/enfermedad.models';
 import { Ciudad } from '../../models/ciudad.models';
+import { AuthServiceService } from '../../services/auth-service.service';
 @Component({
   selector: 'app-partida-list',
   standalone: true,
@@ -17,7 +18,7 @@ export class PartidaListComponent implements OnInit {
 
 
   partidas:Partida[] = [] as Partida[];
-  constructor(private gameService:SavePartidaService, private router:Router){
+  constructor(private gameService:SavePartidaService, private router:Router, private authService:AuthServiceService){
 
   }
   ngOnInit(): void {
@@ -49,13 +50,17 @@ export class PartidaListComponent implements OnInit {
           );
   
           // Mapea los personajes a instancias de la clase Personaje
-          const personajes = partidaI.listaPersonajes.map(personajeData =>
-            new Personaje(personajeData.id, 
-                          personajeData.name, 
-                          personajeData.specialSkill, 
-                          personajeData.movido,  
-                          personajeData.turnoComienzo, 
-                          personajeData.enAccion)
+          const personajes = partidaI.listaPersonajes.map(personajeData =>{
+
+            let p = new Personaje(personajeData.id, 
+              personajeData.name, 
+              personajeData.specialSkill, 
+              personajeData.movido,  
+              personajeData.turnoComienzo, 
+              personajeData.enAccion);
+             p.ciudadEnLaQueEsta = personajeData.ciudadEnLaQueEsta;  
+             return p;
+            }
           );
   
           // Mapea las enfermedades a instancias de la clase Enfermedad
@@ -81,6 +86,19 @@ export class PartidaListComponent implements OnInit {
         console.error('Error al cargar las partidas:', err);
       },
     });
+  }
+
+  goToProfile(){
+    this.router.navigate(['profile']);
+  }
+
+  goToInicio(){
+    this.router.navigate(['home'])
+  }
+
+  goLogout(){
+    this.authService.logout();
+    this.router.navigate([''])
   }
   
 }

@@ -8,7 +8,8 @@ import { Enfermedad, listEnfermedades } from '../../models/enfermedad.models';
 import { SavePartidaService } from '../../services/save-partida.service';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
-
+import { Profile } from '../profileModule/models/profile.models';
+import { ProfileDataService } from '../profileModule/services/profile-data.service';
 @Component({
   selector: 'app-partida',
   standalone: true,
@@ -19,6 +20,8 @@ import { Router } from '@angular/router';
 export class PartidaComponent implements AfterViewInit, OnInit {
   
 
+  profile:Profile = {} as Profile;
+  enfermedadDioPuntosPor0:string[] = listEnfermedades.map(name => name.name);
   partida: Partida = new Partida(0, 4, todasLasCiudades, listEnfermedades, listaPersonas);
   scalingFactorX: number = 1;
   scalingFactorY: number = 1;
@@ -48,7 +51,8 @@ export class PartidaComponent implements AfterViewInit, OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService,private router:Router) {
+    private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService,private router:Router,
+    private profileService:ProfileDataService) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
   
@@ -58,6 +62,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
       this.partida = this.savePartidaService.partida;
       console.log("partida: ",this.partida);
     }
+    this.profile = this.profileService.getProfile();
   }
   // se calcula el tamaño de pantalla para posicionar las ciudades
   ngAfterViewInit(): void {
@@ -68,6 +73,21 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     if(!this.authService.userIsAuthenticated()){
       this.router.navigate(['']);
     }  
+  }
+
+
+  // mejorar si hace falta =)
+  pasarTurno(){
+    this.partida.pasarTurno();
+    for(let i=0; i<this.partida.listEnfermedades.length; i++){
+      let enf = this.partida.listEnfermedades[i];
+      if(enf.turnosParaCurar===0){
+        // aumentan puntos jugador
+        this.profile.puntuacion+=20;
+        // elimina el elemento por el nombre
+        this.enfermedadDioPuntosPor0.filter(enfNombre => enfNombre!==enf.name);
+      }
+    }
   }
 
 
@@ -145,6 +165,10 @@ export class PartidaComponent implements AfterViewInit, OnInit {
 // usabilidad
   showData(ciudad: Ciudad) {
     this.ciudadSeleccionada = ciudad;
+  }
+  removeSelectedCity(){
+    this.ciudadSeleccionada = {} as Ciudad;
+    this.cdRef.detectChanges();
   }
 // usabilidad
   onZoom(event: WheelEvent) {
