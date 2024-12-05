@@ -63,7 +63,7 @@
                 <div class="wrapper"  [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px,' + offsetY + 'px)'}">
                     <img src="/mapa/mapa_mundo.png" class="w-full h-full object-cover unselectable" draggable="false" (dragstart)="false;">
                      @for (ciudad of partida.listCiudades; track ciudad) {
-                           <div (click)="showData(ciudad)" class="cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2 select-none" 
+                           <div (click)="showData(ciudad)" class="z-30 cursor-pointer absolute bg-blue-500 text-white rounded-full p-1 border-2 select-none" 
                             [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}"

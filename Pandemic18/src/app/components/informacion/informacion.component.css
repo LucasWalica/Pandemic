@@ -1,33 +1,5 @@
-.panelinfo{
-  border: black solid 5px;
-  position: absolute;
-  transform: translate(-50%);
-  left: 50%;
-  background-color: #851010ab;
-  height: 50%;
-  margin-top: 10%;
-  margin-bottom: 10%;
-}
 
-.striped-div {
-  width: 75px; /* Ancho del div */
-  height: 75px; /* Altura del div */
-  background: repeating-linear-gradient(
-    -45deg, /* Ángulo de las líneas */
-    #ac3333, /* Color 1 */
-    #ac3333 10%, /* Final del Color 1 */
-    #30ac45 10%, /* Inicio del Color 2 */
-    #30ac45 20%, /* Final del Color 2 */
-    #346bb3 20%, /* Inicio del Color 3 */
-    #346bb3 30%, /* Final del Color 3 */
-    #acaa33 30%, /* Inicio del Color 4 */
-    #acaa33 40% /* Final del Color 4 */
-  );
-  border-radius: 100%;
-  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0) 70%);
-  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0) 70%);
-
-}
+ 
 
 
 
