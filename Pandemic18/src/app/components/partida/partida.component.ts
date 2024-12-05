@@ -28,7 +28,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
-  listPersonajes:Personaje[] = listaPersonas;
   listaCiudadesBusqueda:Ciudad[] = todasLasCiudades;
   personajeSeleccionado:Personaje = {} as Personaje;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
@@ -47,7 +46,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   cargado:boolean = false;
   //desplegable de las opciones
   opcionesDesp:boolean = false;
-
 
 
   constructor(
@@ -77,6 +75,8 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   }
 
 
+
+
   // mejorar si hace falta =)
   pasarTurno(){
     this.partida.pasarTurno();
@@ -91,7 +91,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     }
     this.opcionesDesp = false;
   }
-
+  
 
   actualizarBusqueda(){
     this.listaCiudadesBusqueda = [] as Ciudad[];

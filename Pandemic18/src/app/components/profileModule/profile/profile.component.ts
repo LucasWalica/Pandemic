@@ -14,9 +14,9 @@ import { AuthServiceService } from '../../../services/auth-service.service';
 export class ProfileComponent implements OnInit {
   
   constructor(private router:Router, private profileData:ProfileDataService, private authService:AuthServiceService){}
+
   profile:Profile = {} as Profile;
   profilePics:profilePic[] = {} as profilePic[];
-
   isVisible:boolean = false;
 
   ngOnInit(): void {
@@ -68,5 +68,4 @@ export class ProfileComponent implements OnInit {
     return true;
   
   }
-
 }
