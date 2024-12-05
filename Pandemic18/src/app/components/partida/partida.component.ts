@@ -89,6 +89,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
         this.enfermedadDioPuntosPor0.filter(enfNombre => enfNombre!==enf.name);
       }
     }
+    this.opcionesDesp = false;
   }
 
 
@@ -138,6 +139,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     this.personajeSeleccionado = char;
     this.ciudadPersonajeSeleccionado = c;
     this.showCharacterActionUI=true;
+    this.opcionesDesp = false;
   }
   // cerrar ui 
   closeUI(){

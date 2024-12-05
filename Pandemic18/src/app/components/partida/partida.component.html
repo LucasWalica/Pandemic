@@ -7,19 +7,19 @@
                 
         <!--div de datos de la ciudad-->
         <div class="z-20  p-2 absolute left-1">
-            <div class=" rounded-md p-2 border-emerald-300 border-2">
+            <div class=" rounded-md p-2 border-emerald-300 border-2 text-center">
 
                 <div class="grid grid-cols-4 rounded-md text-center gap-1">
-                    <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md">
-                        &nbsp;  {{getEnfermedadByName('azul')?.turnosParaCurar}}
+                    <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md p-2">
+                        {{getEnfermedadByName('azul')?.turnosParaCurar}}
                     </div>
-                    <div class="bg-red-400 text-red-950 border-red-950 rounded-md text-md">
-                        &nbsp;  {{getEnfermedadByName('roja')?.turnosParaCurar}}
+                    <div class="bg-red-400 text-red-950 border-red-950 rounded-md text-md p-2">
+                        {{getEnfermedadByName('roja')?.turnosParaCurar}}
                     </div>
-                    <div class="bg-yellow-400 text-yellow-950 border-yellow-950 rounded-md text-md">
+                    <div class="bg-yellow-400 text-yellow-950 border-yellow-950 rounded-md text-md p-2">
                         {{getEnfermedadByName('amarilla')?.turnosParaCurar}}
                     </div>
-                    <div class="bg-green-400 text-green-950 border-green-950 rounded-md text-md">
+                    <div class="bg-green-400 text-green-950 border-green-950 rounded-md text-md p-2">
                         {{getEnfermedadByName('verde')?.turnosParaCurar}}
                     </div>
                 </div>
@@ -31,43 +31,6 @@
                     Ciudades
                 </button>
             </div>
-            <!--Ciudad Seleccionada-->
-            @if (ciudadSeleccionada.nombre) {
-                <div class="p-1 border-2 rounded-md border-emerald-300 bg-emerald-600">
-                    <div class="flex flex-row justify-around">
-                        <h1 class="text-center text-xl">{{ciudadSeleccionada.nombre}}</h1>
-                        <div (click)="removeSelectedCity()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
-                        hover:pl-6 hover:pr-6 duration-150">
-                            X
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 text-center">
-                        <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
-                            Chinosis: {{ciudadSeleccionada.eAmarillo}}
-                        </div>
-                        <div class="border-2 border-green-500 bg-green-700 text-green-200 rounded-md p-1 text-sm">
-                            Veganitis: {{ciudadSeleccionada.eVerde}}
-                        </div>
-                        <div class="border-2 border-red-500 bg-red-700 text-red-200 rounded-md p-1 text-sm">
-                            Gastroindio: {{ciudadSeleccionada.eRojo}}
-                        </div>
-                        <div class="border-2 border-blue-500 bg-blue-700 text-blue-200 rounded-md p-1 text-sm">
-                            Polinoma: {{ciudadSeleccionada.eAzul}}
-                        </div>
-                    </div>
-                    <div>
-                        <h1 class="text-center">Ciudades colindantes:</h1>
-                        <div class="grid grid-cols-2 gap-1 justify-center text-center">
-                            @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
-                                <div class="border-2 rounded-md ">
-                                    {{ciudad}}
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            }
         </div>
 
 
@@ -143,22 +106,27 @@
 
 
         <!--datos partida-->
-        <div class="z-20 border-2 rounded-md border-emerald-300 bg-emerald-600 p-2 absolute right-5">
+        <div class="z-20 border-2 sm:text-sm md:text-base rounded-md border-emerald-300 bg-emerald-600 p-2 absolute right-5">
             <!--Actualizaciones del turno y mas data-->
-            <div class="grid grid-cols-2 text-center border-2 border-emerald-950 rounded-sm m-1 p-2">
-                <div>
+            <div class="grid grid-cols-1 xl:grid-cols-2 text-center m-1 p-2">
+                <div class="border-2 border-emerald-200 p-2 rounded-md">
                     Jugadas restantes: {{partida.jugadas}}
                 </div>
-                <div>
+                <div class="border-2 border-emerald-200 p-2 rounded-md">
                     Turno número: {{partida.counterTurnos}}
                 </div>
             </div>
-            <div class="grid text-center border-2 border-emerald-950 rounded-md m-1 p-1" (click)="desplegarOpciones()">↡</div>
+            <div class="grid text-center border-2 border-emerald-950 rounded-md m-1 p-1 hover:bg-emerald-400 hover:text-emerald-950 duration-75" 
+                (click)="desplegarOpciones()">
+                ↡
+            </div>
             <!--datos personajes-->
 
+
+            <!-- acceso a acciones con personajes y acciones de partida-->
             <div *ngIf="opcionesDesp==true">
                 <div class="text-center border-2 border-emerald-700 rounded-md">
-                    <div class="grid md:grid-cols-4 xl:grid-cols-2">
+                    <div class="grid grid-cols-4 xl:grid-cols-2">
                         @for (personaje of listPersonajes; track personaje) {
                                     <div class="flex flex-col">
                                         <div class="flex flex-row justify-center">
@@ -194,6 +162,44 @@
                 </div>
             </div>
         </div>
+
+        <!--Ciudad Seleccionada se-->
+        @if (ciudadSeleccionada.nombre) {
+            <div class="p-1 z-50 border-2 rounded-md border-emerald-300 bg-emerald-600 absolute">
+                <div class="flex flex-row justify-around">
+                    <h1 class="text-center text-xl">{{ciudadSeleccionada.nombre}}</h1>
+                    <div (click)="removeSelectedCity()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                        X
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 text-center">
+                    <div class="border-2 border-yellow-500 bg-yellow-700 text-yellow-200 rounded-md p-1 text-sm">
+                        Chinosis: {{ciudadSeleccionada.eAmarillo}}
+                    </div>
+                    <div class="border-2 border-green-500 bg-green-700 text-green-200 rounded-md p-1 text-sm">
+                        Veganitis: {{ciudadSeleccionada.eVerde}}
+                    </div>
+                    <div class="border-2 border-red-500 bg-red-700 text-red-200 rounded-md p-1 text-sm">
+                        Gastroindio: {{ciudadSeleccionada.eRojo}}
+                    </div>
+                    <div class="border-2 border-blue-500 bg-blue-700 text-blue-200 rounded-md p-1 text-sm">
+                        Polinoma: {{ciudadSeleccionada.eAzul}}
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-center">Ciudades colindantes:</h1>
+                    <div class="grid grid-cols-2 gap-1 justify-center text-center">
+                        @for (ciudad of ciudadSeleccionada.listCiudadesColindandes; track ciudad) {
+                            <div class="border-2 rounded-md ">
+                                {{ciudad}}
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 
 
@@ -255,7 +261,7 @@
 
     <!--Acciones con personajes -->
     @if (this.showCharacterActionUI) {
-        <div class="flex flex-col items-center absolute z-20 top-10 w-1/2 h-96 ml-10 mr-10 bg-emerald-100 border-2 border-emerald-950 rounded-md">
+        <div class="flex flex-col sm:text-sm md:text-sm items-center absolute z-20 p-1 bg-emerald-100 border-2 border-emerald-950 rounded-md">
             <h1 class="text-2xl">{{personajeSeleccionado.name}}</h1>
             <div [ngClass]="{
                 'especialista':personajeSeleccionado.name === 'Especialista en Cuarentenas',
@@ -267,7 +273,7 @@
                 <h1 class="m-2">
                     {{personajeSeleccionado.specialSkill}}
                     <br><br>
-                    Actualmente está anulando la expansión de las enfermedades en {{this.ciudadPersonajeSeleccionado.nombre}} y sus colindantes
+                    Anula la expansión de las enfermedades en {{this.ciudadPersonajeSeleccionado.nombre}} y sus colindantes
                 </h1> 
             }
             @else if (personajeSeleccionado.id===2) {
