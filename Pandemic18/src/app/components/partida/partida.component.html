@@ -34,7 +34,6 @@
         </div>
 
 
-
 <!--Contenedor del mapa-->
         <div class="z-10 map-container  relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
@@ -102,8 +101,7 @@
                             </div>
                             }   
                 </div>
-            </div>
-
+        </div>
 
         <!--datos partida-->
         <div class="z-20 border-2 sm:text-sm md:text-base rounded-md border-emerald-300 bg-emerald-600 p-2 absolute right-5">
@@ -127,7 +125,7 @@
             <div *ngIf="opcionesDesp==true">
                 <div class="text-center border-2 border-emerald-700 rounded-md">
                     <div class="grid grid-cols-4 xl:grid-cols-2">
-                        @for (personaje of listPersonajes; track personaje) {
+                        @for (personaje of partida.listaPersonajes; track personaje) {
                                     <div class="flex flex-col">
                                         <div class="flex flex-row justify-center">
                                             <div class="flex justify-center" [ngClass]="{

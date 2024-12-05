@@ -28,7 +28,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   originalWidth = 850;  
   originalHeight = 1550; 
   ciudadSeleccionada: Ciudad = {} as Ciudad;
-  listPersonajes:Personaje[] = listaPersonas;
   listaCiudadesBusqueda:Ciudad[] = todasLasCiudades;
   personajeSeleccionado:Personaje = {} as Personaje;
   ciudadPersonajeSeleccionado:Ciudad = {} as Ciudad;
