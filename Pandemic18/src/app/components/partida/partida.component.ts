@@ -48,7 +48,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   opcionesDesp:boolean = false;
 
 
-
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdRef: ChangeDetectorRef, private savePartidaService:SavePartidaService, private authService:AuthServiceService,private router:Router,
@@ -76,6 +75,8 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   }
 
 
+
+
   // mejorar si hace falta =)
   pasarTurno(){
     this.partida.pasarTurno();
@@ -90,7 +91,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     }
     this.opcionesDesp = false;
   }
-
+  
 
   actualizarBusqueda(){
     this.listaCiudadesBusqueda = [] as Ciudad[];
