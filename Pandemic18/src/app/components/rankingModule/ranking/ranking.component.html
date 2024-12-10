@@ -4,17 +4,17 @@
     <div class="grid grid-cols-3 text-center m-2 text-2xl rounded-md">
        
         <a (click)="goToInicio()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
-            bg-[#07c9c9] text-emerald-100 shadow-sm 
+            bg-[#388bff] text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Inicio</a>
         <a (click)="goToProfile()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
-            bg-[#07c9c9] text-emerald-100 shadow-sm 
+            bg-[#388bff] text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Perfil</a>
         <a (click)="goLogout()" class="border-2 border-emerald-950 pl-4 pr-4 rounded-md p-2 
-            bg-[#07c9c9] text-emerald-100 shadow-sm 
+            bg-[#388bff] text-emerald-100 shadow-sm 
             shadow-black hover:pr-6 hover:pl-6
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Logout</a>
@@ -24,10 +24,10 @@
         <div class="md:w-1/2 pt-24">
             @for (profile of this.profiles; track profile) {
                 <div class="flex flex-row border-2 rounded-md 
-                border-emerald-500 bg-emerald-950 text-emerald-300 
-                m-2 p-2 justify-center shadow-sm shadow-emerald-400">
+                border-[#388bff] bg-[#00afff] text-emerald-100 
+                m-2 p-2 justify-center shadow-sm shadow-[#388bff]">
                     <div class="grid grid-cols-3 gap-2 m-0 w-96">
-                        <img class="rounded-md border-2 border-emerald-500" src="{{profile.profilePic}}" height="64" width="64p"/>
+                        <img class="rounded-md border-2 border-[#388bff]" src="{{profile.profilePic}}" height="64" width="64p"/>
                         <h1 class="text-2xl self-center">{{profile.name}}</h1>
                         <div class="grid grid-col-1 self-center">
                             <div>Score: {{profile.puntuacion}}</div>

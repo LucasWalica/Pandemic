@@ -36,7 +36,7 @@
   font-size: 150%;
   user-select: none;
   cursor: pointer;
-} .intro:hover{background: linear-gradient(to right,  #66339900,#6ee799,#66339900); transition-duration: 2s;}
+} .intro:hover{background: linear-gradient(to right,  #66339900,#00e5e4,#66339900); transition-duration: 2s;}
 .intro{width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
 .jugar{background-color: #388bff;}
 .introJugar{border: 5px solid #00cdff;} /*.introJugar:hover{background-color:#00aeff; color: black;}*/
