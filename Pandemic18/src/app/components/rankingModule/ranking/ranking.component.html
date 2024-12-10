@@ -1,5 +1,4 @@
 <div class="fondo">
-    <section class="relative">
     <h1 class="text-center text-3xl">Ranking</h1>
     <!--nav-->
     <div class="grid grid-cols-3 text-center m-2 text-2xl rounded-md">
@@ -20,8 +19,9 @@
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Logout</a>
     </div>
+    <section class="relative">
     <div class="flex justify-center">
-        <div class="md:w-1/2">
+        <div class="md:w-1/2 pt-24">
             @for (profile of this.profiles; track profile) {
                 <div class="flex flex-row border-2 rounded-md 
                 border-emerald-500 bg-emerald-950 text-emerald-300 
