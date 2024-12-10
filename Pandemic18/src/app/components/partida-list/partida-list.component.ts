@@ -7,10 +7,11 @@ import { Personaje } from '../../models/personaje.model';
 import { Enfermedad } from '../../models/enfermedad.models';
 import { Ciudad } from '../../models/ciudad.models';
 import { AuthServiceService } from '../../services/auth-service.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-partida-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './partida-list.component.html',
   styleUrl: './partida-list.component.css'
 })

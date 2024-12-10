@@ -45,15 +45,30 @@
             duration-150 cursor-pointer hover:bg-emerald-200 
             hover:text-emerald-950 md:ml-4 md:mr-4">Logout</a>
     </div>
-    <div class="border-2 border-emerald-950 rounded-md p-10 bg-emerald-400 flex justify-center item-center">
+    <div class="flex justify-center">
         @if(this.partidas.length > 0){
+            <div class="flex flex-col gap-2 rounded-md w-1/1 md:w-2/4 backdrop-blur-md">
             @for (partida of this.partidas; track partida) {
                 <div class="border-2 text-center p-2 rounded-md">
-                    <h1 class="text-2xl">Partida</h1>
+                    <div class="flex justify-center">
+                        <h1 class="text-2xl bg-emerald-900 text-emerald-300 w-2/4 rounded-md">Partida</h1>
+                    </div>
                     <div class="flex flex-col">
                         <div>Turnos {{partida.counterTurnos}}</div>
                         <div class="col-span-3">
                             Infeccion total {{partida.infeccionTotal()}}
+                        </div>
+                        <div class="flex flex-row gap-4 justify-center">
+                            @for (enf of partida.listEnfermedades; track enf) {
+                                <div class="border-2 p-2 rounded-md m-2 w-20 h-10 content-center" [ngClass]="{
+                                    'border-emerald-900 bg-emerald-700 text-emerald-200':enf.name === 'verde',
+                                    'border-yellow-900 bg-yellow-700 text-yellow-200' : enf.name === 'amarilla',
+                                    'border-blue-900 bg-blue-700 text-blue-200' : enf.name === 'azul',
+                                    'border-red-900 bg-red-700 text-red-200' : enf.name === 'roja' 
+                                }">
+                                    <div>{{enf.turnosParaCurar}} hp</div>
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="flex justify-center">
@@ -65,6 +80,7 @@
                     </div>
                 </div>
             }
+            </div>
         }@else {
             <h1 class="text-2xl">No hay partidas guardadas</h1>
         }
