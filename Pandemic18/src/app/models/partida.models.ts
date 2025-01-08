@@ -44,6 +44,13 @@ export class Partida{
         this.jugadas=4;
         // los personajes se vuelven movibles a menos que esten realizando una accion larga
         for(var ciudad of this.listCiudades){
+
+            // expansion enfermedades 
+            for(let enfermedad of this.listEnfermedades){
+                enfermedad.transmitirse(ciudad, this);
+            }
+
+
             for(var personaje of ciudad.listPersonajes){
                 personaje.movido=false;
                 if(personaje.id===3 && personaje.enAccion){
@@ -56,6 +63,7 @@ export class Partida{
             }
         }
         this.contagiarRandom();
+        
         // ordenar ciudades segun rango de infeccion
         this.listCiudades.sort((ciudadA, ciudadB) => {
             const nivelEnfermedadA = ciudadA.calcularNivelEnfermedad();

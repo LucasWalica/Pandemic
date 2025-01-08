@@ -59,7 +59,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   ngOnInit(){
     if(this.savePartidaService.partida.id > 0){ 
       this.partida = this.savePartidaService.partida;
-      console.log("partida: ",this.partida);
+      console.log("partida: ",this.partida.listaPersonajes);
     }
     this.profile = this.profileService.getProfile();
   }
@@ -73,8 +73,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
       this.router.navigate(['']);
     }  
   }
-
-
 
 
   // mejorar si hace falta =)

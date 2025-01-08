@@ -118,4 +118,3 @@ export const listEnfermedades:Enfermedad[] = [
     new eAzul("azul", 200, 1),
     new eRojo("roja", 100, 2)
 ];
-
