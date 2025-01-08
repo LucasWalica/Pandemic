@@ -102,11 +102,11 @@ export class eAzul extends Enfermedad{
     }
     override transmitirse(cInicio: Ciudad, partida:Partida): void {
         if(!cInicio.especialistaEnCuarentenasEstaPresente()){
-            if(cInicio.eAmarillo==4){
+            if(cInicio.eAzul==4){
                 var ciudad:Ciudad = this.getRandomCiudad(cInicio, partida);
                 ciudad.eAzul+=1;
-            }else if(cInicio.eAmarillo>=1 && cInicio.eAmarillo<4){
-                cInicio.eAmarillo+=1
+            }else if(cInicio.eAzul>=1 && cInicio.eAzul<4){
+                cInicio.eAzul+=1
             }
         }
     }
