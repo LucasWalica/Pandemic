@@ -72,6 +72,7 @@
                 count++;
             }
         }
+        
         aniadiPersonaje(p:Personaje){
             this.listPersonajes.push(p);
         }

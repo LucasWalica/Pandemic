@@ -8,7 +8,7 @@ export class Personaje{
     name:string; 
     specialSkill:string;
     movido:boolean=false;
-    ciudadEnLaQueEsta:Ciudad = {} as Ciudad;
+    ciudadEnLaQueEsta:Ciudad|null = {} as Ciudad;
     turnoComienzo:number=0;
     enAccion:boolean = false;
 
@@ -113,7 +113,7 @@ export class Investigador extends Personaje{
     constructor(id:number, name:string, specialSkill:string, movido:boolean, turnoComienzo:number,enAccion:boolean){
         super(id, name, specialSkill, movido, turnoComienzo, enAccion);
     }
-    override investigar(e:Enfermedad, p:Partida){
+    override investigar(e:Enfermedad, p:Partida){   
         if(!this.movido && e.turnosParaCurar>0){
             var c:Ciudad|null=this.getCiudadActual(p);
             if(c?.centroInvestigacion===true){

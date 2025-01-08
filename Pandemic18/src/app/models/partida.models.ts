@@ -27,6 +27,7 @@ export class Partida{
     setId(id:number){
         this.id=id;
     }
+    
     moverPersonaje(cInicio:Ciudad, cFinal:Ciudad, p:Personaje){
         if(cInicio.communicateWith(cFinal) && this.jugadas>0){
             cInicio.quitarPersonaje(p);

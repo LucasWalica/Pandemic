@@ -19,9 +19,8 @@ export class PartidaListComponent implements OnInit {
 
 
   partidas:Partida[] = [] as Partida[];
-  constructor(private gameService:SavePartidaService, private router:Router, private authService:AuthServiceService){
-
-  }
+  constructor(private gameService:SavePartidaService, private router:Router, private authService:AuthServiceService){}
+  
   ngOnInit(): void {
     this.loadGames();
   }
@@ -32,6 +31,7 @@ export class PartidaListComponent implements OnInit {
     this.router.navigate(['newGame']);
   }
 
+ 
   loadGames(){
     this.gameService.getPartidaList().subscribe({
       next: (partidas: PartidaI[]) => {
@@ -53,13 +53,14 @@ export class PartidaListComponent implements OnInit {
           // Mapea los personajes a instancias de la clase Personaje
           const personajes = partidaI.listaPersonajes.map(personajeData =>{
 
-            let p = new Personaje(personajeData.id, 
+            let p = new Personaje(
+              personajeData.id, 
               personajeData.name, 
               personajeData.specialSkill, 
               personajeData.movido,  
               personajeData.turnoComienzo, 
-              personajeData.enAccion);
-             p.ciudadEnLaQueEsta = personajeData.ciudadEnLaQueEsta;  
+              personajeData.enAccion)
+              p.ciudadEnLaQueEsta = personajeData.ciudadEnLaQueEsta
              return p;
             }
           );
@@ -79,9 +80,7 @@ export class PartidaListComponent implements OnInit {
                              personajes, 
                              partidaI.id);
         });
-  
         console.log('Partidas cargadas:', this.partidas);
-        console.log('Primera partida:', this.partidas[0]);
       },
       error: (err) => {
         console.error('Error al cargar las partidas:', err);
@@ -100,6 +99,5 @@ export class PartidaListComponent implements OnInit {
   goLogout(){
     this.authService.logout();
     this.router.navigate([''])
-  }
-  
+  } 
 }
