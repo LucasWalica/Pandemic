@@ -8,7 +8,7 @@ export class Personaje{
     name:string; 
     specialSkill:string;
     movido:boolean=false;
-    ciudadEnLaQueEsta:Ciudad|null = {} as Ciudad;
+    ciudadEnLaQueEsta:Ciudad = {} as Ciudad;
     turnoComienzo:number=0;
     enAccion:boolean = false;
 
