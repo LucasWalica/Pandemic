@@ -3,7 +3,7 @@ import { SavePartidaService } from '../../services/save-partida.service';
 import { Partida } from '../../models/partida.models';
 import { PartidaI } from '../../models/interfaces.interface';
 import { Router } from '@angular/router';
-import { Personaje } from '../../models/personaje.model';
+import { EspecialistaEnCuarentena, Personaje, Medico, BobElConstructor, Investigador } from '../../models/personaje.model';
 import { Enfermedad } from '../../models/enfermedad.models';
 import { Ciudad } from '../../models/ciudad.models';
 import { AuthServiceService } from '../../services/auth-service.service';
@@ -80,6 +80,19 @@ export class PartidaListComponent implements OnInit {
                              personajes, 
                              partidaI.id);
         });
+        for(let partida of this.partidas){
+          for(let personaje of partida.listaPersonajes){
+            if(personaje.id===1){
+              personaje = new EspecialistaEnCuarentena(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
+            } else if(personaje.id===2){
+              personaje = new Medico(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
+            } else if(personaje.id===3){
+              personaje = new BobElConstructor(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
+            } else if(personaje.id===4){
+              personaje = new Investigador(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
+            }
+          }
+        }
         console.log('Partidas cargadas:', this.partidas);
       },
       error: (err) => {
