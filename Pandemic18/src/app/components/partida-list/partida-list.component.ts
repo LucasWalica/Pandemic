@@ -60,7 +60,7 @@ export class PartidaListComponent implements OnInit {
               personajeData.movido,  
               personajeData.turnoComienzo, 
               personajeData.enAccion)
-              p.ciudadEnLaQueEsta = personajeData.ciudadEnLaQueEsta
+              p.ciudadEnLaQueEsta.nombre = personajeData.ciudadEnLaQueEsta.nombre
              return p;
             }
           );

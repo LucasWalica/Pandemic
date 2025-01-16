@@ -1,7 +1,7 @@
 import { Ciudad } from "./ciudad.models";
 import { listaPersonas, Personaje, EspecialistaEnCuarentena, Medico, Investigador, BobElConstructor } from "./personaje.model";
 import { Enfermedad, eAmarilla, eAzul, eRojo, eVerde } from "./enfermedad.models";
-
+import { todasLasCiudades } from "./ciudad.models";
 
 
 export class Partida{
@@ -22,6 +22,8 @@ export class Partida{
         this.id = id;
         if(this.id===0){
             this.asignarPersonajes();
+        }else{
+            this.asignarPersonajePartidaCargada();
         }
     }
     setId(id:number){
@@ -153,6 +155,13 @@ export class Partida{
 
         }
     }
+    asignarPersonajePartidaCargada():void{
+        for(let i=0; i<listaPersonas.length; i++){
+            let ciudadName:string = this.listaPersonajes[i].ciudadEnLaQueEsta.nombre
+            let ciudad:Ciudad = this.getCiudadByName(ciudadName);
+            this.listaPersonajes[i].ciudadEnLaQueEsta = ciudad;
+        }
+    }
 
     infeccionTotal(){
         let infeccion = 0;
@@ -161,5 +170,15 @@ export class Partida{
             infeccion+=c.eAmarillo +  c.eAzul + c.eRojo + c.eVerde;
         }
         return infeccion;
+    }
+
+    getCiudadByName(cName:string):Ciudad{
+        for(let i=0; i<todasLasCiudades.length; i++){
+            if(cName===todasLasCiudades[i].nombre){
+                return todasLasCiudades[i];
+            }
+        }
+        // nunca se dara este caso
+        return todasLasCiudades[0];
     }
 }
