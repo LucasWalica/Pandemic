@@ -47,6 +47,9 @@ export class PartidaComponent implements AfterViewInit, OnInit {
   //desplegable de las opciones
   opcionesDesp:boolean = false;
 
+  // variable provisional  para no gaanr automatioo
+  turnoPasado = false;
+
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -88,6 +91,7 @@ export class PartidaComponent implements AfterViewInit, OnInit {
       }
     }
     this.opcionesDesp = false;
+    this.turnoPasado=true;
   }
   
 
@@ -251,5 +255,10 @@ export class PartidaComponent implements AfterViewInit, OnInit {
 
   desplegarOpciones(){
     this.opcionesDesp = !this.opcionesDesp;
+  }
+
+
+  goToHome(){
+    this.router.navigate(['home'])
   }
 }

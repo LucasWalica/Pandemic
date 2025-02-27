@@ -8,6 +8,7 @@ import { Enfermedad } from '../../models/enfermedad.models';
 import { Ciudad } from '../../models/ciudad.models';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { CommonModule } from '@angular/common';
+import { listaPersonas } from '../../models/personaje.model';
 @Component({
   selector: 'app-partida-list',
   standalone: true,
@@ -52,17 +53,24 @@ export class PartidaListComponent implements OnInit {
   
           // Mapea los personajes a instancias de la clase Personaje
           const personajes = partidaI.listaPersonajes.map(personajeData =>{
+                let p: Personaje;
 
-            let p = new Personaje(
-              personajeData.id, 
-              personajeData.name, 
-              personajeData.specialSkill, 
-              personajeData.movido,  
-              personajeData.turnoComienzo, 
-              personajeData.enAccion)
-              p.ciudadEnLaQueEsta.nombre = personajeData.ciudadEnLaQueEsta.nombre
-             return p;
+                p = this.crearPersonajeDesdeDatos(personajeData)
+
+                const ciudadCorrespondiente = ciudades.find(c => c.nombre === personajeData.ciudadEnLaQueEsta.nombre);
+                p.ciudadEnLaQueEsta = ciudadCorrespondiente ? ciudadCorrespondiente : new Ciudad("", [], false, [], 0, 0, 0, 0, 0, 0);;
+              
+              
+                const personajeBase = listaPersonas.find(per => per.id === personajeData.id);
+
+                if (personajeBase) {
+                    Object.setPrototypeOf(p, Object.getPrototypeOf(personajeBase));
+                } else {
+                    console.warn(`Personaje con id ${personajeData.id} no encontrado en listaPersonas.`);
+                }
+              return p;
             }
+            
           );
   
           // Mapea las enfermedades a instancias de la clase Enfermedad
@@ -80,19 +88,7 @@ export class PartidaListComponent implements OnInit {
                              personajes, 
                              partidaI.id);
         });
-        for(let partida of this.partidas){
-          for(let personaje of partida.listaPersonajes){
-            if(personaje.id===1){
-              personaje = new EspecialistaEnCuarentena(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
-            } else if(personaje.id===2){
-              personaje = new Medico(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
-            } else if(personaje.id===3){
-              personaje = new BobElConstructor(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
-            } else if(personaje.id===4){
-              personaje = new Investigador(personaje.id, personaje.name, personaje.specialSkill, personaje.movido, personaje.turnoComienzo, personaje.enAccion);
-            }
-          }
-        }
+  
         console.log('Partidas cargadas:', this.partidas);
       },
       error: (err) => {
@@ -113,4 +109,36 @@ export class PartidaListComponent implements OnInit {
     this.authService.logout();
     this.router.navigate([''])
   } 
+
+
+  crearPersonajeDesdeDatos(personajeData: any): Personaje {
+    switch (personajeData.id) {
+        case 1:
+            return new EspecialistaEnCuarentena(
+                personajeData.id, personajeData.name, personajeData.specialSkill,
+                personajeData.movido, personajeData.turnoComienzo, personajeData.enAccion
+            );
+        case 2:
+            return new Medico(
+                personajeData.id, personajeData.name, personajeData.specialSkill,
+                personajeData.movido, personajeData.turnoComienzo, personajeData.enAccion
+            );
+        case 3:
+            return new BobElConstructor(
+                personajeData.id, personajeData.name, personajeData.specialSkill,
+                personajeData.movido, personajeData.turnoComienzo, personajeData.enAccion
+            );
+        case 4:
+            return new Investigador(
+                personajeData.id, personajeData.name, personajeData.specialSkill,
+                personajeData.movido, personajeData.turnoComienzo, personajeData.enAccion
+            );
+        default:
+            return new Personaje(
+                personajeData.id, personajeData.name, personajeData.specialSkill,
+                personajeData.movido, personajeData.turnoComienzo, personajeData.enAccion
+            );
+    }
+}
+
 }

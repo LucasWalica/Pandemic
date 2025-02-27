@@ -11,6 +11,7 @@ export class Partida{
     listCiudades:Ciudad[];
     listaPersonajes:Personaje[];
     listEnfermedades:Enfermedad[];
+    enfermedadesCount:number = 0;
     id:number = 0;
 
     constructor(counterTurnos:number, jugadas:number, listCiudades:Ciudad[], listEnfermedades:Enfermedad[], listaPersonajes:Personaje[],id:number=0){
@@ -45,6 +46,7 @@ export class Partida{
     pasarTurno(){        
         this.counterTurnos+=1;
         this.jugadas=4;
+       
         // los personajes se vuelven movibles a menos que esten realizando una accion larga
         for(var ciudad of this.listCiudades){
 
@@ -73,9 +75,25 @@ export class Partida{
             const nivelEnfermedadB = ciudadB.calcularNivelEnfermedad();
             return nivelEnfermedadB - nivelEnfermedadA; 
         });
+
+         // modificar enfermedadesCount 
+         this.enfermedadesCountModify();
+        
+
     }
 
-    // testear
+    enfermedadesCountModify(){
+        let enfermedadesCount = 0;
+        for(var ciudad of this.listCiudades){
+            enfermedadesCount += ciudad.eAmarillo
+            enfermedadesCount += ciudad.eAzul
+            enfermedadesCount += ciudad.eRojo
+            enfermedadesCount += ciudad.eVerde
+        }
+        this.enfermedadesCount = enfermedadesCount;
+    }
+
+    // works
     contagiarRandom(){
         var enfermedades = [1, 2, 3, 4];
         var gravedadInfeccion = 1;

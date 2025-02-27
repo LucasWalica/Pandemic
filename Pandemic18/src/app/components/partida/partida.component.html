@@ -154,9 +154,12 @@
                         Pasar turno
                     </button>
                     <button (click)="guardarPartida()" class="border-2 border-emerald-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-emerald-800 text-emerald-200 shadow-md shadow-black 
-
                     hover:pl-6 hover:pr-6 duration-150">
                         Guardar Partida
+                    </button>
+                    <button (click)="goToHome()" class="border-2 border-red-950 rouded-md pl-4 pr-4 p-2 rounded-md m-2 bg-red-800 text-red-200 shadow-md shadow-black 
+                    hover:pl-6 hover:pr-6 duration-150">
+                        Salir
                     </button>
                 </div>
             </div>
@@ -371,6 +374,48 @@
                 </button>
             </div>
         </div>
+    }
+
+
+
+    <!--Partida perdida-->
+    @if (this.partida.enfermedadesCount>=150) {
+        <div class="flex flex-col w-full h-5/6 sm:h-4/6 md:h-3/4 lg:h-2/4 xl:h-1/4 
+        sm:text-sm md:text-sm items-center absolute z-20 bg-red-950 text-red-600 border-2 border-red-950 mt-28 rounded-md">
+        <h1 class="text-4xl border-2 border-red-400 rounded-md p-2 m-2">
+            Partida Perdida 
+        </h1>
+        <div class="flex flex-col w-ful text-xl justify-center text-center">
+            <h2 class="text-xl">Datos de la Partda:</h2>
+            <h2 class="m-4">Total de enfermedad: {{this.partida.enfermedadesCount}}</h2>
+        </div>
+        <div class="flex flex-row">
+            <button (click)="goToHome()"
+                class="border-2 border-red-950 bg-red-600 text-red-950 p-2 pl-4 pr-4
+                text-xl rounded-md hover:bg-red-900 hover:text-red-500">
+                Salir
+            </button>
+        </div>
+    </div>
+    }
+    <!--Partida ganada-->
+    @if (this.partida.enfermedadesCount===0 && this.partida.counterTurnos>1 && turnoPasado) {
+        <div class="flex flex-col w-full h-5/6 sm:h-4/6 md:h-3/4 lg:h-2/4 xl:h-1/4 
+        sm:text-sm md:text-sm items-center absolute z-20 bg-emerald-950 text-emerald-600 border-2 border-emerald-950 mt-28 rounded-md">
+        <h1 class="text-4xl border-2 border-emerald-400 rounded-md p-2 m-2">
+            Partida Ganada 
+        </h1>
+        <div class="flex flex-col w-ful text-xl justify-center text-center">
+            <h2 class="text-xl">Felicidades por ganar la partida!!</h2>
+        </div>
+        <div class="flex flex-row m-4">
+            <button (click)="goToHome()"
+                class="border-2 border-emerald-950 bg-emerald-600 text-emerald-950 p-2 pl-4 pr-4
+                text-xl rounded-md hover:bg-emerald-900 hover:text-emerald-500">
+                Salir
+            </button>
+        </div>
+    </div>
     }
 
 </div>
