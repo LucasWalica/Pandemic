@@ -103,8 +103,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
         this.listaCiudadesBusqueda.push(todasLasCiudades[i]);
       } 
     }
-    
-    
   }
 
   guardarPartida(){
@@ -160,9 +158,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     let enfermedad:Enfermedad|undefined =  this.partida.listEnfermedades.find(enf=>enf.name===name);
     return enfermedad;
   }
-
-
-
   getCiudad(nombre: string): Ciudad | undefined {
     return this.partida.listCiudades.find(c => c.nombre === nombre);
   }
@@ -189,7 +184,6 @@ export class PartidaComponent implements AfterViewInit, OnInit {
     }
     this.startX = event.clientX - this.offsetX;
     this.startY = event.clientY - this.offsetY;
-
   }
   // usabilidad
   onMouseMove(event: MouseEvent) {

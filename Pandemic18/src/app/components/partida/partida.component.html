@@ -2,11 +2,9 @@
 <div class="relative flex justify-center content-center m-0">
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
     <div class="grid m-2 h-full w-full rounded-md p-2 select-none">        
-                
         <!--div de datos de la ciudad-->
         <div class="z-20  p-2 absolute left-1">
             <div class=" rounded-md p-2 border-emerald-300 border-2 text-center">
-
                 <div class="grid grid-cols-4 rounded-md text-center gap-1">
                     <div class="bg-blue-400 text-blue-950 border-blue-950 rounded-md text-md p-2">
                         {{getEnfermedadByName('azul')?.turnosParaCurar}}
@@ -30,16 +28,12 @@
                 </button>
             </div>
         </div>
-
-
 <!--Contenedor del mapa-->
         <div class="z-10 map-container  relative w-full h-full col-span-3" 
             (wheel)="onZoom($event)" 
             (mousedown)="onMouseDown($event)"
             (mousemove)="onMouseMove($event)"
             (mouseup)="onMouseUp()">
-            
-            
             <!--lineas de conexion-->
             <svg class="absolute inset-0 w-full h-full pointer-events-none"
             [ngStyle]="{'transform': 'scale(' + zoomLevel + ') translate(' + offsetX + 'px, ' + offsetY + 'px)'}">

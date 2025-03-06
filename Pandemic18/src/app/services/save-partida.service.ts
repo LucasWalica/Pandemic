@@ -1,10 +1,11 @@
 import { Injectable} from '@angular/core';
 import { Partida } from '../models/partida.models';
-import { PartidaI } from '../models/interfaces.interface';
+import { Personaje } from '../models/personaje.model';
 import { AuthServiceService } from './auth-service.service';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Enfermedad } from '../models/enfermedad.models';
+import { Ciudad } from '../models/ciudad.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,6 @@ export class SavePartidaService {
   constructor(private authService:AuthServiceService, private http:HttpClient) {
    
    }  
-
-
 
     //needed to get user ID before calling this method (reEscribir)
   guardarPartida(partida:Partida) {
@@ -81,74 +80,78 @@ export class SavePartidaService {
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
   }
-
-  getPartidaList(): Observable<PartidaI[]> {
+  getPartidaList(): Observable<Partida[]> {
     const token = this.authService.getToken(); 
     const headers = {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     };
-
+  
     return this.http.get<any[]>('http://127.0.0.1:8000/api/partidas/', { headers }).pipe(
       map((data: any[]) =>
-        data.map(partida => ({
-          id:Number(partida.id),
-          turno: Number(partida.turno),
-          jugadas: partida.jugadas || 4,
-          listCiudades: partida.ciudades.map((ciudad: any) => ({
-            nombre: ciudad.name,
-            listCiudadesColindandes: ciudad.listCiudadesColindantes
-              ? ciudad.listCiudadesColindantes.map((colindante: any) => colindante.name)
-              : [],
-              listPersonajes: partida.personajes
-          .filter((personaje: any) => personaje.ciudadEnLaQueEsta?.name === ciudad.name)  // Verificar si el personaje está en la ciudad
-          .map((personaje: any) => ({
-            id: personaje.id,
-            name: personaje.name,
-            specialSkill: personaje.specialSkill,
-            movido: personaje.movido === 1, 
-            ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
-              ? {
-                  nombre: personaje.ciudadEnLaQueEsta.name,
-                  coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
-                  coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
-                  centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
-                }
-              : null,
-            turnoComienzo: personaje.turno_comienzo,
-            enAccion: personaje.enAccion === 1,  
-          })),
-            centroInvestigacion: ciudad.centroInvestigacion === 1,
-            coordenadasX: ciudad.coordenadasX,
-            coordenadasY: ciudad.coordenadasY,
-            eVerde: ciudad.eVerde,
-            eRojo: ciudad.eRoja,
-            eAzul: ciudad.eAzul,
-            eAmarillo: ciudad.eAmarilla,
-          })),
-          listaPersonajes: partida.personajes.map((personaje: any) => ({
-            id: personaje.id,
-            name: personaje.name,
-            specialSkill: personaje.specialSkill,
-            movido: personaje.movido === 1, 
-            ciudadEnLaQueEsta: personaje.ciudadEnLaQueEsta
-              ? {
-                  nombre: personaje.ciudadEnLaQueEsta.name,
-                  coordenadasX: personaje.ciudadEnLaQueEsta.coordenadasX,
-                  coordenadasY: personaje.ciudadEnLaQueEsta.coordenadasY,
-                  centroInvestigacion: personaje.ciudadEnLaQueEsta.centro_investigacion === 1,
-                }
-              : null,
-            turnoComienzo: personaje.turno_comienzo,
-            enAccion: personaje.enAccion === 1,  
-          })),          
-          listEnfermedades: partida.enfermedades.map((enfermedad: any) => ({
-            name: enfermedad.name,
-            turnosParaCurar: enfermedad.turnosParaCurar,
-            infeccionAColindandes: enfermedad.infeccionAColindandes,
-          })),
-        }))
+        data.map(partida => {
+          // Crear ciudades
+          const ciudades = partida.ciudades.map((ciudad: any) => new Ciudad(
+            ciudad.name,
+            ciudad.listCiudadesColindantes ? ciudad.listCiudadesColindantes.map((colindante: any) => colindante.name) : [],
+            ciudad.centroInvestigacion === 1,
+            [], // Se llenará luego con los personajes correctos
+            ciudad.coordenadasX,
+            ciudad.coordenadasY,
+            ciudad.eVerde,
+            ciudad.eRoja,
+            ciudad.eAzul,
+            ciudad.eAmarilla
+          ));
+  
+          // Crear personajes y asignarlos a ciudades
+          const personajes = partida.personajes.map((personaje: any) => {
+            const ciudad = ciudades.find((c: Ciudad) => c.nombre === personaje.ciudadEnLaQueEsta?.name) 
+                           || new Ciudad("", [], false, [], 0, 0, 0, 0, 0, 0); // Si no existe la ciudad, crear una vacía
+            
+            // Crear personaje
+            const p = new Personaje(
+              personaje.id,
+              personaje.name,
+              personaje.specialSkill,
+              personaje.movido === 1,
+              personaje.turno_comienzo,
+              personaje.enAccion
+            );
+  
+            p.ciudadEnLaQueEsta = ciudad;
+  
+            // Asegurar que `listPersonajes` de la ciudad no sea `undefined`
+            if (!ciudad.listPersonajes) {
+              ciudad.listPersonajes = [];
+            }
+            ciudad.listPersonajes.push(p);
+  
+            // ⬇️ Asegurar que el prototipo del personaje esté correctamente asignado
+            Object.setPrototypeOf(p, Personaje.prototype);  // Restablecer el prototipo de la clase Personaje
+            
+            return p;
+          });
+  
+          // Crear enfermedades
+          const enfermedades = partida.enfermedades.map((enfermedad: any) => new Enfermedad(
+            enfermedad.name,
+            enfermedad.turnosParaCurar,
+            enfermedad.infeccionAColindandes
+          ));
+  
+          // Retornar la instancia completa de la partida
+          return new Partida(
+            partida.turno,
+            partida.jugadas || 4,
+            ciudades,
+            enfermedades,
+            personajes,
+            partida.id
+          );
+        })
       )
     );
   }
+  
 }
