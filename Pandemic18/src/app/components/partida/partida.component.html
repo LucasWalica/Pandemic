@@ -1,9 +1,6 @@
 
 <div class="relative flex justify-center content-center m-0">
-   
-
     <!--main container (en tamaño movil solo se podria mostrar de lado, es decir horizontalmente)-->
-
     <div class="grid m-2 h-full w-full rounded-md p-2 select-none">        
                 
         <!--div de datos de la ciudad-->
@@ -95,7 +92,6 @@
                             <div class="flex flex-col justify-center mt-1 text-sm absolute text-white rounded-full p-2 text-center"  [ngStyle]="{
                                 'left.px': (ciudad.coordenadasX * scalingFactorX),
                                 'top.px': (ciudad.coordenadasY * scalingFactorY)}">
-                                
                                 <div>
                                     {{ciudad.nombre}}
                                 </div>
@@ -318,8 +314,7 @@
                         {{personajeSeleccionado.specialSkill}}
                     </h1> 
                     <br><br>    
-                        <div>
-                    
+                        <div>               
                     @if (!personajeSeleccionado.enAccion && !personajeSeleccionado.movido) {
                             <div class="grid grid-cols-4 text-center">
 
@@ -375,9 +370,6 @@
             </div>
         </div>
     }
-
-
-
     <!--Partida perdida-->
     @if (this.partida.enfermedadesCount>=150) {
         <div class="flex flex-col w-full h-5/6 sm:h-4/6 md:h-3/4 lg:h-2/4 xl:h-1/4 
