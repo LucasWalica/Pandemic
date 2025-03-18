@@ -165,11 +165,13 @@ export class Partida{
         }
     }
     // metodo llamado al iniciar una partida para asignar personajes de forma aleatoria en las ciudades
+    
     asignarPersonajes():void{
         for(let i=0; i<listaPersonas.length; i++){
             let c: Ciudad = this.listCiudades[Math.floor(Math.random()*this.listCiudades.length)]
             c.listPersonajes.push(listaPersonas[i]);
             listaPersonas[i].ciudadEnLaQueEsta = c;
+            
 
         }
     }
